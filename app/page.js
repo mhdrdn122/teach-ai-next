@@ -1,16 +1,14 @@
 "use client"
 import React, {  useRef, useState } from "react";
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // استيراد ملف CSS الخاص بالمكتبة
-import { ToastContainer } from 'react-toastify'; // لاستضافة الـ Toasts
+import 'react-toastify/dist/ReactToastify.css'; 
+import { ToastContainer } from 'react-toastify'; 
 import { recognizeVoice } from "./services/voiceRecognition";
 import { getQuestionIdFromGemini, checkAnswerFromGemini } from "./services/geminiService";
 import { questions } from "./data/questions";
 import QuestionImage from "./components/QuestionImage";
 import RecordButton from "./components/RecordButton";
 import { speakArabicText } from "./services/speechUtils";
-// import facts from '../public/assets/Sound/facts.mp3'
-// import erorr from '../public/assets/Sound/erorr.mp3'
 import {  showSuccessConfetti, showFailureConfetti } from "./services/confettiUtils";
 
 

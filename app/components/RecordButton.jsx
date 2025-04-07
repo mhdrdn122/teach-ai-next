@@ -11,6 +11,7 @@ const RecordButton = ({ onMouseDown, onMouseUp, text, active, disabled }) => {
       onTouchStart={onMouseDown}
       onTouchEnd={onMouseUp}
       className={`record-btn ${active ? "active" : ""}`}
+      style={{ userSelect: 'none' }}
       disabled={text === "🎙️ تسجيل السؤال" ? false : disabled === " " ? true : false}
     >
       {text}
