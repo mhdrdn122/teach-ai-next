@@ -5,18 +5,30 @@ body{
 }
 .app-container {
   text-align: center;
-  padding: 20px;
   background-color: #f4f4f4;
   color: #333;
   height: 100vh;
 }
 
+.app-container h1{
+  margin: 0 ; 
+  padding: 20px;
+}
 .image-gallery {
   display: flex;
   justify-content: center;
   gap: 20px;
   margin-bottom: 20px;
   flex-wrap: wrap;
+}
+.img{
+  background-color: #dbdbdb;
+  width: 50%;
+  border-radius: 15px;
+  padding: 10px;
+}
+.img img , .img video{
+  border-radius: 15px;
 }
 
 .question-image {

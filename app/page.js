@@ -99,17 +99,19 @@ const startRecordingAnswer = async () => {
     <>
       <div className={`app-container ${recording ? "recording" : ""}`}>
       <h1>نظام التعرف على الأسئلة</h1>
-      <div className="image-gallery">
+      <div className="image-gallery" style={{minHeight:"350px"}}>
 
+        <div className="img">
+            <QuestionImage key={questionResult.id } src={questionResult.src.length > 10 ? questionResult.src : "" } alt={questionResult.question} highlighted={detectedQuestionId === questionResult.id} />
 
-<QuestionImage key={questionResult.id } src={questionResult.src.length > 10 ? questionResult.src : "" } alt={questionResult.question} highlighted={detectedQuestionId === questionResult.id} />
+        </div>
 
       </div>
       <div className="button-container">
         <RecordButton onMouseDown={startRecordingQuestion} onMouseUp={() => setRecording(false)} text="🎙️ تسجيل السؤال" active={recording} />
         <RecordButton onMouseDown={startRecordingAnswer} onMouseUp={() => setRecording(false)} text="🎤 تسجيل الإجابة" active={recording} disabled={disable} />
       </div>
-      {loading ? <p className="status-text">جاري معالجة السؤال...</p> : <p className="status-text"> {questionResult.question} </p> }
+      {loading ? <p className="status-text">...جاري معالجة السؤال</p> : <p className="status-text"> {questionResult.question} </p> }
 
       {userAnswer && <p>الإجابة: {userAnswer} - النتيجة: {answerResult == "صحيحة" ? 'صحيحة' : 'خاطئة'}</p>}
 

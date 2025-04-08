@@ -312,12 +312,12 @@ export const questions = [
     id: 45,
     question: "عدد فراشي الأسنان 3 وعدد الأطفال 3 نلاحظ أن عدد الأطفال يساوي عدد فراشي الأسنان",
     answer: " ",
-    src: "/assets/images/Unit_2/lesson7/22.Png",
+    src: "/assets/images/Unit_2/lesson7/22.png",
   },
   {
     id: 46,
     question: "أجب بنعم أو لا هل عدد حبات الموز يساوي عدد حبات التفاح؟ ",
-    answer: " ",
+    answer: " نعم ",
     src: "/assets/images/Unit_2/lesson7/123.png",
   },
   ];
