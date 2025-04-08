@@ -35,6 +35,8 @@ const App = () => {
   const startRecordingQuestion = async () => {
     setRecording(true);
     setQuestionResult({id:0 , src:"" , question : "" , answer : ""})
+    setUserAnswer("")
+
     try {
       setLoading(true);
       const voiceText = await recognizeVoice();
