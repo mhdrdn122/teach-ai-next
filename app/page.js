@@ -22,6 +22,9 @@ const App = () => {
 
   const [recording, setRecording] = useState(false);
   const [loading, setLoading] = useState(false);
+console.log(userAnswer)
+console.log(answerResult)
+console.log(questionResult)
 
 
   const successSound = useRef(null);
@@ -31,6 +34,7 @@ const App = () => {
 
   const startRecordingQuestion = async () => {
     setRecording(true);
+    setQuestionResult({id:0 , src:"" , question : "" , answer : ""})
     try {
       setLoading(true);
       const voiceText = await recognizeVoice();
@@ -55,6 +59,7 @@ const App = () => {
 
 const startRecordingAnswer = async () => {
   setRecording(true);
+  setUserAnswer("")
   try {
     const answerText = await recognizeVoice();
     const question = questions.find((q) => q.id === detectedQuestionId);
@@ -104,7 +109,7 @@ const startRecordingAnswer = async () => {
       </div>
       {loading ? <p className="status-text">جاري معالجة السؤال...</p> : <p className="status-text"> {questionResult.question} </p> }
 
-      {userAnswer && <p>الإجابة: {userAnswer} - النتيجة: {answerResult ? 'صحيحة' : 'خاطئة'}</p>}
+      {userAnswer && <p>الإجابة: {userAnswer} - النتيجة: {answerResult == "صحيحة" ? 'صحيحة' : 'خاطئة'}</p>}
 
     </div>
 
