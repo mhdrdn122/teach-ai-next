@@ -5,7 +5,7 @@ export const recognizeVoice = () => {
     const recognition = new (window.SpeechRecognition ||
       window.webkitSpeechRecognition)();
     recognition.lang = "ar-SA";
-    recognition.continuous = false;
+    recognition.continuous = true;
     recognition.interimResults = false;
 
     // Handle the result when voice recognition succeeds

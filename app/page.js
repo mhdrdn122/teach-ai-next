@@ -22,9 +22,9 @@ const App = () => {
 
   const [recording, setRecording] = useState(false);
   const [loading, setLoading] = useState(false);
-console.log(userAnswer)
-console.log(answerResult)
-console.log(questionResult)
+// console.log(userAnswer)
+// console.log(answerResult)
+// console.log(questionResult)
 
 
   const successSound = useRef(null);
