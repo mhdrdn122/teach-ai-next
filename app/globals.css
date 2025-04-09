@@ -29,6 +29,7 @@ body{
 }
 .img img , .img video{
   border-radius: 15px;
+  width: 100% !important;
 }
 
 .question-image {

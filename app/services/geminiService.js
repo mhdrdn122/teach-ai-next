@@ -11,7 +11,9 @@ export const getQuestionIdFromGemini = async (questions, voiceText) => {
   const prompt = `لدي قائمة من الأسئلة مرقمة من 1 إلى ${questions.length} كما يلي:\n\n` +
     questions.map(q => `${q.id}- ${q.question}`).join("\n") +
     `\n\nالمستخدم قال الجملة التالية بصوته: \n"${voiceText}"\n\n` +
-    `استنادًا إلى القائمة أعلاه، حدد فقط رقم السؤال الذي يطابق ما قاله المستخدم بدون إضافة أي نص آخر.`;
+    `استنادًا إلى القائمة أعلاه، حدد فقط رقم السؤال الذي يطابق ما قاله المستخدم بدون إضافة أي نص آخر.
+    
+    و اذا لم يكن السؤال موجود اعد الرقم 35`;
 
   try {
     const result = await model.generateContent(prompt);

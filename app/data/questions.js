@@ -96,7 +96,7 @@ export const questions = [
     id: 8,
     question: "ما هو العدد الظاهر على الشاشة واحد أو اثنان؟",
     answer: "اثنان",
-    src: "/assets/images/Unit_2/lesson1/number2.png",
+    src: "/assets/images/Unit_2/lesson1/number2.jpg",
   },
   {
     id: 9,
@@ -190,8 +190,8 @@ export const questions = [
   },
   {
     id: 24,
-    question: "كم كتاب يوجد على الطاولة؟",
-    answer: " لا شيء أو لا يوجد   ",
+    question: "هل يوجد كتاب على الطاولة؟",
+    answer: " لا أو لا يوجد   ",
     src: "/assets/images/Unit_2/lesson5/-5841544741542545397_120.jpg",
   },
   {
@@ -253,6 +253,12 @@ export const questions = [
     question: "كيف يكتب العدد اثنان؟",
     answer: " ",
     src: "/assets/images/Unit_2/lesson1/tow.mp4",
+  },
+  {
+    id: 35,
+    question: "لا يوجد مطابقة للسؤال حاول مجدداً  ",
+    answer: " ",
+    src: "/assets/images/not.gif",
   },
   {
     id: 36,
