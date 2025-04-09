@@ -84,7 +84,7 @@ export const questions = [
     id: 6,
     question: "ما هو العدد الظاهر على الشاشة اثنان أو واحد؟",
     answer: "واحد",
-    src: "/assets/images/Unit_2/lesson1/one.mp4",
+    src: "/assets/images/Unit_2/lesson1/number1.png",
   },
   {
     id: 7,
@@ -96,7 +96,7 @@ export const questions = [
     id: 8,
     question: "ما هو العدد الظاهر على الشاشة واحد أو اثنان؟",
     answer: "اثنان",
-    src: "/assets/images/Unit_2/lesson1/tow.mp4",
+    src: "/assets/images/Unit_2/lesson1/number2.png",
   },
   {
     id: 9,
@@ -108,7 +108,7 @@ export const questions = [
     id: 10,
     question: "ما هو العدد الظاهر على الشاشة ثلاثة أو واحد؟",
     answer: "ثلاثة ",
-    src: "/assets/images/Unit_2/lesson2/three.mp4",
+    src: "/assets/images/Unit_2/lesson2/number3.png",
   },
   {
     id: 11,
@@ -120,7 +120,7 @@ export const questions = [
     id: 12,
     question: "ما هو العدد الظاهر على الشاشة أربعة أو ثلاثة؟",
     answer: " اربعة ",
-    src: "/assets/images/Unit_2/lesson2/foure.mp4",
+    src: "/assets/images/Unit_2/lesson2/number4.png",
   },
   {
     id: 13,
@@ -132,7 +132,7 @@ export const questions = [
     id: 14,
     question: "ما هو العدد الظاهر على الشاشة خمسة أو واحد؟",
     answer: "خمسة ",
-    src: "/assets/images/Unit_2/lesson3/five.mp4",
+    src: "/assets/images/Unit_2/lesson3/number5.png",
   },
   {
     id: 15,
@@ -144,7 +144,7 @@ export const questions = [
     id: 16,
     question: "ما هو العدد الظاهر على الشاشة اثنان أو ستة؟",
     answer: "ستة ",
-    src: "/assets/images/Unit_2/lesson3/six.mp4",
+    src: "/assets/images/Unit_2/lesson3/number6.png",
   },
   {
     id: 17,
@@ -156,7 +156,7 @@ export const questions = [
     id: 18,
     question: "ما هو العدد الظاهر على الشاشة واحد أو سبعة؟",
     answer: "سبعة ",
-    src: "/assets/images/Unit_2/lesson4/sevne.mp4",
+    src: "/assets/images/Unit_2/lesson4/number7.png",
   },
   {
     id: 19,
@@ -168,7 +168,7 @@ export const questions = [
     id: 20,
     question: "ما هو العدد الظاهر على الشاشة سبعة أو ثمانية؟",
     answer: "ثمانية ",
-    src: "/assets/images/Unit_2/lesson4/eight.mp4",
+    src: "/assets/images/Unit_2/lesson4/number8.png",
   },
   {
     id: 21,
@@ -180,7 +180,7 @@ export const questions = [
     id: 22,
     question: "ما هو العدد الظاهر على الشاشة ثلاثة أو تسعة؟",
     answer: "تسعة ",
-    src: "/assets/images/Unit_2/lesson4/nine.mp4",
+    src: "/assets/images/Unit_2/lesson4/number9.png",
   },
   {
     id: 23,
@@ -204,7 +204,7 @@ export const questions = [
     id: 26,
     question: "لاحظ الصورة التالية ثم اختر أيهما أصغر الفناجين أو العصافير",
     answer: "  العصافير  ",
-    src: "/assets/images/Unit_2/lesson7/Untitled.png",
+    src: "/assets/images/Unit_2/lesson6/Untitled.png",
   },
   {
     id: 27,
@@ -300,24 +300,24 @@ export const questions = [
     id: 43,
     question: "هيا بنا نتعرف على شكل العدد 0 ",
     answer: " ",
-    src: "/assets/images/Unit_2/lesson5/zero.mp4",
+    src: "/assets/images/Unit_2/lesson5/number0.png",
   },
   {
     id: 44,
     question: "عدد الأرانب يساوي 4 أما الجزرات عددها 5 نلاحظ أن عدد الجزرات يزيد عن عدد الأرانب ب (1)",
     answer: " ",
-    src: "/assets/images/Unit_2/lesson6/22.png",
+    src: "/assets/images/Unit_2/lesson6/13.png",
   },
   {
     id: 45,
-    question: "عدد فراشي الأسنان 3 وعدد الأطفال 3 نلاحظ أن عدد الأطفال يساوي عدد فراشي الأسنان ",
+    question: "عدد فراشي الأسنان 3 وعدد الأطفال 3 نلاحظ أن عدد الأطفال يساوي عدد فراشي الأسنان",
     answer: " ",
-    src: "/assets/images/Unit_2/lesson6/3.png",
+    src: "/assets/images/Unit_2/lesson7/22.png",
   },
   {
     id: 46,
     question: "أجب بنعم أو لا هل عدد حبات الموز يساوي عدد حبات التفاح؟ ",
-    answer: " ",
-    src: "/assets/images/Unit_2/lesson7/bananaa and apple2.png",
+    answer: " نعم ",
+    src: "/assets/images/Unit_2/lesson7/123.png",
   },
   ];
