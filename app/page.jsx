@@ -37,7 +37,7 @@ const App = () => {
 
   const successSound = useRef(null);
   const failureSound = useRef(null);
-  const questionAudio = useRef(null); // 🎧 صوت السؤال
+  const questionAudio = useRef(null); 
 
   const startRecordingQuestion = async () => {
     setRecording(true);
@@ -56,7 +56,7 @@ const App = () => {
       setQuestionResult(questionText);
       setLoadingQuestion(false);
 
-      // تشغيل صوت السؤال
+      
       if (questionAudio.current && questionText.questionVoice) {
         questionAudio.current.src = questionText.questionVoice;
         questionAudio.current.play();
@@ -71,6 +71,8 @@ const App = () => {
   const startRecordingAnswer = async () => {
     setRecording(true);
     setUserAnswer("");
+    setAnswerResult(null);
+    toast.dismiss(); 
     setLoadingAnswer(true);
     try {
       const answerText = await recognizeVoice();
@@ -78,7 +80,7 @@ const App = () => {
       const isCorrect = await checkAnswerFromGemini(question, answerText);
       setUserAnswer(answerText);
       speakArabicText(answerText);
-
+  
       setAnswerResult(isCorrect);
       setLoadingAnswer(false);
       if (isCorrect === "صحيحة") {
@@ -98,10 +100,12 @@ const App = () => {
       }
     } catch (error) {
       setLoadingAnswer(false);
+      toast.error("لم يتم التعرف على الصوت، حاول مرة أخرى 🎧");
       console.error("خطأ في التسجيل:", error);
     }
     setRecording(false);
   };
+  
 
   return (
     <>
