@@ -48,30 +48,36 @@ export const questions = [
   {
     id: 1,
     question: "اختر اللون المناسب وضعه في الفراغ ليشكل نمط لوني صحيح؟",
+    questionVoice: "/assets/Sound/First Term/Unit1/Lesson1/q1.flac",
     answer: "أزرق",
     src: "/assets/images/Unit_1/lesson1/color.png",
   },
   {
     id: 2,
     question: "ما هو الشكل المناسب للفراغ التالي ليكون نمطاً صحيحاً",
+    
+    questionVoice: "/assets/Sound/First Term/Unit1/Lesson1/q2.flac",
     answer: "وردة",
     src: "/assets/images/Unit_1/lesson1/tree and flower.png",
   },
   {
     id: 3,
     question: "ما هي الفاكهة المناسبة للفراغ لتشكل نمطاً ثلاثياً",
+    questionVoice: "/assets/Sound/First Term/Unit1/Lesson2/q3.flac",
     answer: "برتقالة",
     src: "/assets/images/Unit_1/lesson2/Untitled.png",
   },
   {
     id: 4,
     question: "ماهي وسيلة النقل المناسبة لتشكل نمطاً ثلاثياً",
+    questionVoice: "/assets/Sound/First Term/Unit1/Lesson2/q4.flac",
     answer: "قطار",
     src: "/assets/images/Unit_1/lesson2/car and bike.png",
   },
   {
     id: 5,
     question: "كم فيل يوجد في الصورة ",
+    questionVoice: "/assets/Sound/First Term/Unit2/Lesson1/q5.flac",
     answer: "واحد",
     src: "/assets/images/Unit_2/lesson1/eleghant.jpg",
   },
@@ -278,7 +284,7 @@ export const questions = [
   },
   {
     id: 39,
-    question: "? كيف يكتب العدد 6 ",
+    question: "  كيف يكتب العدد 6 ?",
     answer: " ",
     src: "/assets/images/Unit_2/lesson3/six.mp4",
   },

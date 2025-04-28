@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
@@ -27,6 +27,7 @@ const App = () => {
     id: 0,
     src: "",
     question: "",
+    questionVoice: "",
     answer: "",
   });
 
@@ -34,16 +35,13 @@ const App = () => {
   const [loadingQuestion, setLoadingQuestion] = useState(false);
   const [loadingAnswer, setLoadingAnswer] = useState(false);
 
-  // console.log(userAnswer)
-  // console.log(answerResult)
-  // console.log(questionResult)
-
   const successSound = useRef(null);
   const failureSound = useRef(null);
+  const questionAudio = useRef(null); 
 
   const startRecordingQuestion = async () => {
     setRecording(true);
-    setQuestionResult({ id: 0, src: "", question: "", answer: "" });
+    setQuestionResult({ id: 0, src: "", question: "", questionVoice: "", answer: "" });
     setUserAnswer("");
 
     try {
@@ -51,14 +49,18 @@ const App = () => {
       const voiceText = await recognizeVoice();
       const questionId = await getQuestionIdFromGemini(questions, voiceText);
       setDetectedQuestionId(questionId);
-      const questionText = questions.filter((q) => q.id == questionId);
-      setDisable(questionText[0].answer);
-      console.log(questionText[0]);
+      const questionText = questions.find((q) => q.id == questionId);
+      setDisable(questionText.answer);
+      console.log(questionText);
 
-      setQuestionResult(questionText[0]);
-
+      setQuestionResult(questionText);
       setLoadingQuestion(false);
-      speakArabicText(questionText[0].question);
+
+      
+      if (questionAudio.current && questionText.questionVoice) {
+        questionAudio.current.src = questionText.questionVoice;
+        questionAudio.current.play();
+      }
     } catch (error) {
       console.error("خطأ في التسجيل:", error);
       setLoadingQuestion(false);
@@ -69,6 +71,8 @@ const App = () => {
   const startRecordingAnswer = async () => {
     setRecording(true);
     setUserAnswer("");
+    setAnswerResult(null);
+    toast.dismiss(); 
     setLoadingAnswer(true);
     try {
       const answerText = await recognizeVoice();
@@ -76,7 +80,7 @@ const App = () => {
       const isCorrect = await checkAnswerFromGemini(question, answerText);
       setUserAnswer(answerText);
       speakArabicText(answerText);
-
+  
       setAnswerResult(isCorrect);
       setLoadingAnswer(false);
       if (isCorrect === "صحيحة") {
@@ -96,10 +100,13 @@ const App = () => {
       }
     } catch (error) {
       setLoadingAnswer(false);
+      toast.error("لم يتم التعرف على الصوت، حاول مرة أخرى 🎧");
       console.error("خطأ في التسجيل:", error);
     }
     setRecording(false);
   };
+  
+
   return (
     <>
       <div className={`app-container ${recording ? "recording" : ""}`}>
@@ -132,18 +139,18 @@ const App = () => {
         {loadingQuestion ? (
           <p className="status-text">
             <span>
-            <PuffLoader
-              color="#1a9de6"
-              cssOverride={{}}
-              loading
-              size={30}
-              speedMultiplier={3}
-            />
+              <PuffLoader
+                color="#1a9de6"
+                cssOverride={{}}
+                loading
+                size={30}
+                speedMultiplier={3}
+              />
             </span>
             ...جاري معالجة السؤال
           </p>
         ) : (
-          <p className="status-text"> {questionResult.question} </p>
+          <p className="status-text">{questionResult.question}</p>
         )}
 
         {!loadingAnswer ? (
@@ -158,29 +165,22 @@ const App = () => {
         ) : (
           <p className="status-text">
             <span>
-            <PuffLoader
-              color="#1a9de6"
-              cssOverride={{}}
-              loading
-              size={30}
-              speedMultiplier={3}
-            />
+              <PuffLoader
+                color="#1a9de6"
+                cssOverride={{}}
+                loading
+                size={30}
+                speedMultiplier={3}
+              />
             </span>
             جاري التحقق من الاجابة
           </p>
         )}
       </div>
 
-      <audio
-        ref={successSound}
-        src={"/assets/Sound/facts.mp3"}
-        preload="auto"
-      />
-      <audio
-        ref={failureSound}
-        src={"/assets/Sound/erorr.mp3"}
-        preload="auto"
-      />
+      <audio ref={successSound} src={"/assets/Sound/facts.mp3"} preload="auto" />
+      <audio ref={failureSound} src={"/assets/Sound/erorr.mp3"} preload="auto" />
+      <audio ref={questionAudio} preload="auto" /> {/* مشغل صوت السؤال */}
 
       <ToastContainer />
     </>
