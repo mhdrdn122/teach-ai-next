@@ -8,13 +8,11 @@
 // import bananaa_and_apple from "../../public/assets/images/Unit_1/lesson2/Untitled.png";
 // import clock_and_glasess from "../../public/assets/images/Unit_1/lesson2/نظارة وساعة.png";
 
-
 // import eleghant from "../../public/assets/images/Unit_2/lesson1/eleghant.jpg";
 // import number1 from "../../public/assets/images/Unit_2/lesson1/one.mp4";
 
 // import number2 from "../../public/assets/images/Unit_2/lesson1/tow.mp4";
 // import ghazal1 from "../../public/assets/images/Unit_2/lesson1/ghazal1.webp";
-
 
 // import chicken from "../../public/assets/images/Unit_2/lesson2/3.png";
 // import birds from "../../public/assets/images/Unit_2/lesson2/4.png";
@@ -38,7 +36,6 @@
 // import number0 from "../../public/assets/images/Unit_2/lesson5/number0.png";
 // import empty_plate from "../../public/assets/images/Unit_2/lesson5/empty_plate.png";
 
-
 // import bengone_and_gazal from "../../public/assets/images/Unit_2/lesson6/12.png";
 // import rabbit_and_corret from "../../public/assets/images/Unit_2/lesson6/13.png";
 // import birds_and_kaps from "../../public/assets/images/Unit_2/lesson6/Untitled.png";
@@ -46,8 +43,6 @@
 // import flower_and_ball from "../../public/assets/images/Unit_2/lesson7/0000000000.png";
 // import bananaa_and_apple2 from "../../public/assets/images/Unit_2/lesson7/123.png";
 // import boy_and_tothbrach from "../../public/assets/images/Unit_2/lesson7/22.png";
-
-
 
 export const questions = [
   {
@@ -220,7 +215,8 @@ export const questions = [
   },
   {
     id: 29,
-    question: " لاحظ النمط اللوني الثنائي التالي أزرق- أحمر- أزرق- أحمر- أزرق- أحمر",
+    question:
+      " لاحظ النمط اللوني الثنائي التالي أزرق- أحمر- أزرق- أحمر- أزرق- أحمر",
     answer: " ",
     src: "/assets/images/Unit_1/lesson1/pattern.png",
   },
@@ -232,13 +228,15 @@ export const questions = [
   },
   {
     id: 31,
-    question: "لاحظ النمط اللوني الثلاثي التالي: اصفر – احمر – اخضر – اصفر – احمر- اخضر ",
+    question:
+      "لاحظ النمط اللوني الثلاثي التالي: اصفر – احمر – اخضر – اصفر – احمر- اخضر ",
     answer: " ",
     src: "/assets/images/Unit_1/lesson2/styles 3.png",
   },
   {
     id: 32,
-    question: " لاحظ النمط الشكلي الثلاثي التالي: ساعة – قبعة – نظارة – ساعة – قبعة – نظارة ",
+    question:
+      " لاحظ النمط الشكلي الثلاثي التالي: ساعة – قبعة – نظارة – ساعة – قبعة – نظارة ",
     answer: " ",
     src: "/assets/images/Unit_1/lesson2/نظارة وساعة.png",
   },
@@ -310,13 +308,15 @@ export const questions = [
   },
   {
     id: 44,
-    question: "عدد الأرانب يساوي 4 أما الجزرات عددها 5 نلاحظ أن عدد الجزرات يزيد عن عدد الأرانب ب (1)",
+    question:
+      "عدد الأرانب يساوي 4 أما الجزرات عددها 5 نلاحظ أن عدد الجزرات يزيد عن عدد الأرانب ب (1)",
     answer: " ",
     src: "/assets/images/Unit_2/lesson6/13.png",
   },
   {
     id: 45,
-    question: "عدد فراشي الأسنان 3 وعدد الأطفال 3 نلاحظ أن عدد الأطفال يساوي عدد فراشي الأسنان",
+    question:
+      "عدد فراشي الأسنان 3 وعدد الأطفال 3 نلاحظ أن عدد الأطفال يساوي عدد فراشي الأسنان",
     answer: " ",
     src: "/assets/images/Unit_2/lesson7/22.png",
   },
@@ -326,4 +326,58 @@ export const questions = [
     answer: " نعم ",
     src: "/assets/images/Unit_2/lesson7/123.png",
   },
-  ];
+  {
+    id: 47,
+    question: "تعلم: 2 و2 = 4 ",
+    answer: " ",
+    src: "/assets/images/Unit_3/lesson1/2+2=4.png",
+  },
+  {
+    id: 48,
+    question: "(4)مكونات العدد",
+    answer: " ",
+    src: "/assets/images/Unit_3/lesson1/4.png",
+  },
+  {
+    id: 49,
+    question: "تعلم: 2 و3 = 5",
+    answer: " ",
+    src: "/assets/images/Unit_3/lesson1/2 3.png",
+  },
+  {
+    id: 50,
+    question: "(5)مكونات العدد",
+    answer: " ",
+    src: "/assets/images/Unit_3/lesson1/5.png",
+  },
+  {
+    id: 51,
+    question: "(4)المثال الأول: لاحظ الصورة واذكر المكون الصحيح للعدد",
+    answer: "3و1",
+    src: "/assets/images/Unit_3/lesson1/3.1.4_split.png",
+  },
+  {
+    id: 52,
+    question: "(4)المثال الثاني: لاحظ الصورة واذكر المكون الصحيح للعدد",
+    answer: "4و0",
+    src: "/assets/images/Unit_3/lesson1/3.1.4_split2.png",
+  },
+  {
+    id: 53,
+    question: "(5)المثال الأول: لاحظ الصورة واذكر المكون الصحيح للعدد",
+    answer: "3و2",
+    src: "/assets/images/Unit_3/lesson1/3.1.4_split.png",
+  },
+  {
+    id: 54,
+    question: "(5)المثال الثاني: لاحظ الصورة واذكر المكون الصحيح للعدد",
+    answer: "1و4",
+    src: "/assets/images/Unit_3/lesson1/3.1.4_split2.png",
+  },
+  {
+    id: 55,
+    question: "(4)لاحظ الصورة واختر عددين للحصول على أحد مكونات العدد",
+    answer: "0و4",
+    src: "/assets/images/Unit_3/lesson1/3.1.4_split3.png",
+  },
+];
