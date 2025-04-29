@@ -12,9 +12,9 @@ const QuestionMedia = ({ src, alt, highlighted }) => {
     if (extension === "mp4" && videoRef.current) {
       videoRef.current.play();
     }
-  }, [extension]); 
+  }, [extension]);
 
-  
+
 
   return (
     <>
@@ -24,18 +24,26 @@ const QuestionMedia = ({ src, alt, highlighted }) => {
           src={src}
           alt={alt}
           className={`question-media ${highlighted ? "highlight" : ""}`}
-          controls={false} 
-          autoPlay 
+          controls={false}
+          autoPlay
           loop={false}
-          style={{maxWidth: "300px" , borderRadius: "10px"}} 
+          style={{
+            aspectRatio: '16 / 9',
+            maxWidth: "800px",
+            borderRadius: "10px"
+          }}
         />
       ) : (
-        
+
         <img
           src={src}
           alt={alt}
           className={`question-media ${highlighted ? "highlight" : ""}`}
-          style={{maxWidth: "300px"}} 
+          style={{
+            aspectRatio: '16 / 9',
+            maxWidth: "800px"
+          }}
+
 
         />
       )}
