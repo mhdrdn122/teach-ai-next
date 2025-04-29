@@ -55,7 +55,7 @@ export const questions = [
   {
     id: 2,
     question: "ما هو الشكل المناسب للفراغ التالي ليكون نمطاً صحيحاً",
-    
+
     questionVoice: "/assets/Sound/First Term/Unit1/Lesson1/q2.flac",
     answer: "وردة",
     src: "/assets/images/Unit_1/lesson1/tree and flower.png",
@@ -359,13 +359,13 @@ export const questions = [
   {
     id: 51,
     question: "(4)المثال الأول: لاحظ الصورة واذكر المكون الصحيح للعدد",
-    answer: "3و1",
+    answer: "ثلاثة و واحد",
     src: "/assets/images/Unit_3/lesson1/51.png",
   },
   {
     id: 52,
     question: "(4)المثال الثاني: لاحظ الصورة واذكر المكون الصحيح للعدد",
-    answer: "4و0",
+    answer: "اربعة و صفر",
     src: "/assets/images/Unit_3/lesson1/52.png",
   },
   {
@@ -383,7 +383,7 @@ export const questions = [
   {
     id: 55,
     question: "(4)لاحظ الصورة واختر عددين للحصول على أحد مكونات العدد",
-    answer: "0و4",
+    answer: "صفر و اربعة",
     src: "/assets/images/Unit_3/lesson1/55.png",
   },
 ];
