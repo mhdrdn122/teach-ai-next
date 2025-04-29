@@ -19,17 +19,13 @@ import {
 import { PuffLoader } from "react-spinners";
 
 const App = () => {
+  const dataSchema = { id: 0, src: "", question: "", questionVoice: "", answer: "" }
+
   const [detectedQuestionId, setDetectedQuestionId] = useState(null);
   const [disable, setDisable] = useState(" ");
   const [userAnswer, setUserAnswer] = useState(null);
   const [answerResult, setAnswerResult] = useState(null);
-  const [questionResult, setQuestionResult] = useState({
-    id: 0,
-    src: "",
-    question: "",
-    questionVoice: "",
-    answer: "",
-  });
+  const [questionResult, setQuestionResult] = useState(dataSchema);
 
   const [recording, setRecording] = useState(false);
   const [loadingQuestion, setLoadingQuestion] = useState(false);
@@ -37,13 +33,13 @@ const App = () => {
 
   const successSound = useRef(null);
   const failureSound = useRef(null);
-  const questionAudio = useRef(null); 
+  const questionAudio = useRef(null);
 
   const startRecordingQuestion = async () => {
     setRecording(true);
-    setQuestionResult({ id: 0, src: "", question: "", questionVoice: "", answer: "" });
+    setQuestionResult(dataSchema);
     setUserAnswer("");
-
+    // speakArabicText()
     try {
       setLoadingQuestion(true);
       const voiceText = await recognizeVoice();
@@ -53,10 +49,17 @@ const App = () => {
       setDisable(questionText.answer);
       console.log(questionText);
 
+      // console.log(questionText.answer, "questionText")
+      // speakArabicText(questionText.answer);
+      // speakArabicText("  تم التعرف على السؤال  ");
+      console.log("before questionText", questionText.question);
+      speakArabicText(questionText.question);
+      console.log(questionText.answer, "after questionText")
+
       setQuestionResult(questionText);
       setLoadingQuestion(false);
 
-      
+
       if (questionAudio.current && questionText.questionVoice) {
         questionAudio.current.src = questionText.questionVoice;
         questionAudio.current.play();
@@ -72,15 +75,18 @@ const App = () => {
     setRecording(true);
     setUserAnswer("");
     setAnswerResult(null);
-    toast.dismiss(); 
+    toast.dismiss();
     setLoadingAnswer(true);
     try {
       const answerText = await recognizeVoice();
       const question = questions.find((q) => q.id === detectedQuestionId);
       const isCorrect = await checkAnswerFromGemini(question, answerText);
       setUserAnswer(answerText);
-      speakArabicText(answerText);
-  
+
+      //TODO: edited by hsn
+      // console.log(questionResult,"speakArabicText")
+      // speakArabicText(answerText);
+
       setAnswerResult(isCorrect);
       setLoadingAnswer(false);
       if (isCorrect === "صحيحة") {
@@ -105,7 +111,7 @@ const App = () => {
     }
     setRecording(false);
   };
-  
+
 
   return (
     <>
