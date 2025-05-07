@@ -28,7 +28,7 @@ const QuestionMedia = ({ src, alt, highlighted }) => {
           autoPlay
           loop={false}
           style={{
-            aspectRatio: '16 / 9',
+            aspectRatio: '1',
             maxWidth: "800px",
             borderRadius: "10px"
           }}
@@ -40,8 +40,8 @@ const QuestionMedia = ({ src, alt, highlighted }) => {
           alt={alt}
           className={`question-media ${highlighted ? "highlight" : ""}`}
           style={{
-            aspectRatio: '16 / 9',
-            maxWidth: "800px"
+            aspectRatio: '4 / 3',
+            maxWidth: "600px"
           }}
 
 

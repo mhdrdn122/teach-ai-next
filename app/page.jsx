@@ -4,12 +4,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { recognizeVoice } from "./services/voiceRecognition";
-import {
-  getQuestionIdFromGemini,
-  checkAnswerFromGemini,
-} from "./services/geminiService";
+import { getQuestionIdFromGemini, checkAnswerFromGemini } from "./services/geminiService";
+import { getQuestionIdFromAi } from "./services/AiService";
 import { questions } from "./data/questions";
-import QuestionImage from "./components/QuestionImage";
+import QuestionImage from "./components/QuestionImage"; ``
 import RecordButton from "./components/RecordButton";
 import { speakArabicText } from "./services/speechUtils";
 import {
@@ -19,6 +17,8 @@ import {
 import { PuffLoader } from "react-spinners";
 
 const App = () => {
+  // console.log(process.env.NEXT_PUBLIC_TOGETHER_API_KEY);
+
   const dataSchema = { id: 0, src: "", question: "", questionVoice: "", answer: "" }
 
   const [detectedQuestionId, setDetectedQuestionId] = useState(null);
@@ -39,19 +39,17 @@ const App = () => {
     setRecording(true);
     setQuestionResult(dataSchema);
     setUserAnswer("");
-    // speakArabicText()
     try {
       setLoadingQuestion(true);
       const voiceText = await recognizeVoice();
       const questionId = await getQuestionIdFromGemini(questions, voiceText);
+      // const questionId = await getQuestionIdFromAi(questions, voiceText);
+      // console.log(`answer is questionId2  : ${questionId2}`)
       setDetectedQuestionId(questionId);
       const questionText = questions.find((q) => q.id == questionId);
       setDisable(questionText.answer);
       console.log(questionText);
 
-      // console.log(questionText.answer, "questionText")
-      // speakArabicText(questionText.answer);
-      // speakArabicText("  تم التعرف على السؤال  ");
       console.log("before questionText", questionText.question);
       speakArabicText(questionText.question);
       console.log(questionText.answer, "after questionText")
@@ -112,21 +110,10 @@ const App = () => {
     setRecording(false);
   };
 
-
   return (
     <>
       <div className={`app-container ${recording ? "recording" : ""}`}>
         <h1>نظام التعرف على الأسئلة</h1>
-        <div className="image-gallery" style={{ minHeight: "350px" }}>
-          <div className="img">
-            <QuestionImage
-              key={questionResult.id}
-              src={questionResult.src.length > 10 ? questionResult.src : ""}
-              alt={questionResult.question}
-              highlighted={detectedQuestionId === questionResult.id}
-            />
-          </div>
-        </div>
         <div className="button-container">
           <RecordButton
             onMouseDown={startRecordingQuestion}
@@ -142,6 +129,20 @@ const App = () => {
             disabled={disable}
           />
         </div>
+        <div className="image-gallery" style={{
+          minHeight: "400x",
+          minWidth: "400px"
+        }}>
+          <div className="img">
+            <QuestionImage
+              key={questionResult.id}
+              src={questionResult.src.length > 10 ? questionResult.src : ""}
+              alt={questionResult.question}
+              highlighted={detectedQuestionId === questionResult.id}
+            />
+          </div>
+        </div>
+
         {loadingQuestion ? (
           <p className="status-text">
             <span>
