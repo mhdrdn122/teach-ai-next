@@ -19,7 +19,9 @@ import { PuffLoader } from "react-spinners";
 const App = () => {
   // console.log(process.env.NEXT_PUBLIC_TOGETHER_API_KEY);
 
-  const dataSchema = { id: 0, src: "", question: "", questionVoice: "", answer: "" }
+  const dataSchema = {
+    id: 0, src: "", question: "", questionVoice: "", answer: "", chapter: '', lesson: '',
+  }
 
   const [detectedQuestionId, setDetectedQuestionId] = useState(null);
   const [disable, setDisable] = useState(" ");
@@ -47,6 +49,7 @@ const App = () => {
       // console.log(`answer is questionId2  : ${questionId2}`)
       setDetectedQuestionId(questionId);
       const questionText = questions.find((q) => q.id == questionId);
+
       setDisable(questionText.answer);
       console.log(questionText);
 
@@ -111,9 +114,12 @@ const App = () => {
   };
 
   return (
-    <>
+    <div >
       <div className={`app-container ${recording ? "recording" : ""}`}>
         <h1>نظام التعرف على الأسئلة</h1>
+        <h4>الوحدة : {questionResult.chapter}</h4>
+        <h4>الدرس : {questionResult.lesson}</h4>
+        {/* <p>{`الوحدة : ${questionResult.chapter}    -    الدرس : ${questionResult.lesson}`}</p> */}
         <div className="button-container">
           <RecordButton
             onMouseDown={startRecordingQuestion}
@@ -190,7 +196,7 @@ const App = () => {
       <audio ref={questionAudio} preload="auto" /> {/* مشغل صوت السؤال */}
 
       <ToastContainer />
-    </>
+    </div>
   );
 };
 
