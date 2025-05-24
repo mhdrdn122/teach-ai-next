@@ -118,7 +118,7 @@ const App = () => {
       <div className={`app-container ${recording ? "recording" : ""}`}>
         <h1>نظام التعرف على الأسئلة</h1>
         <h4>الوحدة : {questionResult.chapter}</h4>
-        <h4>الدرس : {questionResult.lesson}</h4>
+        {/* <h4>الدرس : {questionResult.lesson}</h4> */}
         {/* <p>{`الوحدة : ${questionResult.chapter}    -    الدرس : ${questionResult.lesson}`}</p> */}
         <div className="button-container">
           <RecordButton
