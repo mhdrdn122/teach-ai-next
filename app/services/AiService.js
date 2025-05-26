@@ -1,6 +1,7 @@
 import Together from "together-ai";
 
 const apiKey = process.env.NEXT_PUBLIC_TOGETHER_API_KEY;
+
 const together = new Together({ apiKey: apiKey }); // auth defaults to process.env.TOGETHER_API_KEY
 
 // const response = await together.chat.completions.create({

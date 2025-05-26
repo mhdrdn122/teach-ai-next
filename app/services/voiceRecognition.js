@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 // Function to recognize voice input and return the detected text
 export const recognizeVoice = () => {
   return new Promise((resolve, reject) => {
@@ -15,9 +17,11 @@ export const recognizeVoice = () => {
         resolve(voiceText); // Return the detected text
       } else {
         reject("الصوت غير واضح");
-      alert(" الصوت غير واضح ")
+      toast("error","الصوت غير واضح ")
 
       }
+      console.log(voiceText)
+
     };
 
     // Stop recognition when the mouse is released
@@ -30,7 +34,7 @@ export const recognizeVoice = () => {
     // Handle any recognition errors
     recognition.onerror = (event) => {
       reject(`خطأ في التعرف على الصوت: ${event.error}`);
-      alert("خطأ في التعرف على الصوت")
+      toast("error","خطأ في التعرف على الصوت")
     };
 
     // Start voice recognition
