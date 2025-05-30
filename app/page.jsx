@@ -76,7 +76,7 @@ const App = () => {
     setRecording(true);
     setUserAnswer("");
     setAnswerResult(null);
-    toast.dismiss();
+    // toast.dismiss();
     setLoadingAnswer(true);
     try {
       const answerText = await recognizeVoice();
