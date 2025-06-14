@@ -1,49 +1,13 @@
-// import color from "../../public/assets/images/Unit_1/lesson1/color.png";
-// import tree_and_flower from "../../public/assets/images/Unit_1/lesson1/tree and flower.png";
-// import pattern from "../../public/assets/images/Unit_1/lesson1/pattern.png";
-// import sun_and_moon from "../../public/assets/images/Unit_1/lesson1/sun and moon.png";
+// export const questions = [
 
-// import car_and_bike from "../../public/assets/images/Unit_1/lesson2/car and bike.png";
-// import styles3 from "../../public/assets/images/Unit_1/lesson2/styles 3.png";
-// import bananaa_and_apple from "../../public/assets/images/Unit_1/lesson2/Untitled.png";
-// import clock_and_glasess from "../../public/assets/images/Unit_1/lesson2/نظارة وساعة.png";
-
-// import eleghant from "../../public/assets/images/Unit_2/lesson1/eleghant.jpg";
-// import number1 from "../../public/assets/images/Unit_2/lesson1/one.mp4";
-
-// import number2 from "../../public/assets/images/Unit_2/lesson1/tow.mp4";
-// import ghazal1 from "../../public/assets/images/Unit_2/lesson1/ghazal1.webp";
-
-// import chicken from "../../public/assets/images/Unit_2/lesson2/3.png";
-// import birds from "../../public/assets/images/Unit_2/lesson2/4.png";
-// import number3 from "../../public/assets/images/Unit_2/lesson2/three.mp4";
-// import number4 from "../../public/assets/images/Unit_2/lesson2/foure.mp4";
-
-// import bingone from "../../public/assets/images/Unit_2/lesson3/5q.png";
-// import dolghin from "../../public/assets/images/Unit_2/lesson3/6.png";
-// import number5 from "../../public/assets/images/Unit_2/lesson3/five.mp4";
-// import number6 from "../../public/assets/images/Unit_2/lesson3/six.mp4";
-
-// import bensels from "../../public/assets/images/Unit_2/lesson4/7.png";
-// import kaps from "../../public/assets/images/Unit_2/lesson4/8.png";
-// import books from "../../public/assets/images/Unit_2/lesson4/9.png";
-// import number7 from "../../public/assets/images/Unit_2/lesson4/sevne.mp4";
-// import number8 from "../../public/assets/images/Unit_2/lesson4/eight.mp4";
-// import number9 from "../../public/assets/images/Unit_2/lesson4/nine.mp4";
-
-// import table_book from "../../public/assets/images/Unit_2/lesson5/table_book.png";
-// import table from "../../public/assets/images/Unit_2/lesson5/-5841544741542545397_120.jpg";
-// import number0 from "../../public/assets/images/Unit_2/lesson5/number0.png";
-// import empty_plate from "../../public/assets/images/Unit_2/lesson5/empty_plate.png";
-
-// import bengone_and_gazal from "../../public/assets/images/Unit_2/lesson6/12.png";
-// import rabbit_and_corret from "../../public/assets/images/Unit_2/lesson6/13.png";
-// import birds_and_kaps from "../../public/assets/images/Unit_2/lesson6/Untitled.png";
-
-// import flower_and_ball from "../../public/assets/images/Unit_2/lesson7/0000000000.png";
-// import bananaa_and_apple2 from "../../public/assets/images/Unit_2/lesson7/123.png";
-// import boy_and_tothbrach from "../../public/assets/images/Unit_2/lesson7/22.png";
-
+//  {
+//     id: 195,
+//     question: "  تعلم المثال التالي ، اثنان زائد اثنان يساوي أربعة ",
+//     answer: " ",
+//     src: "/assets/images/Unit_6/lesson2/195.png",
+//     chapter: "السادسة",
+//     lesson: "الثاني",
+//   },]
 export const questions = [
   {
     id: 1,
@@ -797,7 +761,7 @@ export const questions = [
   {
     id: 133,
     question: " المثال الثاني: اجمع ما يلي  ",
-    answer: "عشرة ",
+    answer: "10 ",
     src: "/assets/images/Unit_5/lesson1/133.png",
     chapter: "الخامسة",
     lesson: "الأول",
@@ -821,7 +785,7 @@ export const questions = [
   {
     id: 136,
     question: "   غرس يوسف خمسة غرسات، ثم غرس أربعة غرسات كم غرسة غرس يوسف؟",
-    answer: "تسعة ",
+    answer: "تسع غرسات ",
     src: "/assets/images/Unit_5/lesson1/136.png",
     chapter: "الخامسة",
     lesson: "الأول",
@@ -1253,7 +1217,7 @@ export const questions = [
     id: 189,
     question:
       " المثال الأول: لاحظ عبارة الجمع الأولى ثم عبر عن العبارة التبديلية لها ",
-    answer: "ثلاثة زائد اثنان يساوي خمسة  ",
+    answer: "3 + 2 = 5 ",
     src: "/assets/images/Unit_6/lesson1/189.png",
     chapter: "السادسة",
     lesson: "الأول",
@@ -1262,7 +1226,7 @@ export const questions = [
     id: 190,
     question:
       " المثال الثاني: لاحظ عبارة الجمع الأولى ثم عبر عن العبارة التبديلية لها ",
-    answer: "خمسة زائد اثنان يساوي سبعة ",
+    answer: "5 + 2 = 7",
     src: "/assets/images/Unit_6/lesson1/190.png",
     chapter: "السادسة",
     lesson: "الأول",
@@ -1304,7 +1268,7 @@ export const questions = [
   },
   {
     id: 195,
-    question: " تعلم، اثنان زائد اثنان يساوي أربعة ",
+    question: "  تعلم المثال التالي ، اثنان زائد اثنان يساوي أربعة ",
     answer: " ",
     src: "/assets/images/Unit_6/lesson2/195.png",
     chapter: "السادسة",
