@@ -3,10 +3,14 @@ import { toast } from "react-toastify";
 import { recognizeVoice } from "../services/voiceRecognition";
 import { checkAnswerFromGemini } from "../services/geminiService";
 import { questions } from "../data/questions";
-import { showSuccessConfetti, showFailureConfetti } from "../services/confettiUtils";
+import {
+  showSuccessConfetti,
+  showFailureConfetti,
+} from "../services/confettiUtils";
 
 const useAnswerRecording = (detectedQuestionId) => {
   const [userAnswer, setUserAnswer] = useState(null);
+  const [correctAnswer, setCorrectAnswer] = useState(null);
   const [answerResult, setAnswerResult] = useState(null);
   const [loadingAnswer, setLoadingAnswer] = useState(false);
   const [recording, setRecording] = useState(false);
@@ -14,11 +18,17 @@ const useAnswerRecording = (detectedQuestionId) => {
   const startRecordingAnswer = async (successSoundRef, failureSoundRef) => {
     setRecording(true);
     setUserAnswer("");
+    setCorrectAnswer("");
     setAnswerResult(null);
     setLoadingAnswer(true);
+
     try {
       const answerText = await recognizeVoice();
       const question = questions.find((q) => q.id === detectedQuestionId);
+      const realCorrectAnswer = questions.find(
+        (q) => q.id === detectedQuestionId
+      ).answer;
+      setCorrectAnswer(realCorrectAnswer);
       const isCorrect = await checkAnswerFromGemini(question, answerText);
       setUserAnswer(answerText);
       setAnswerResult(isCorrect);
@@ -52,6 +62,7 @@ const useAnswerRecording = (detectedQuestionId) => {
     answerResult,
     loadingAnswer,
     recording,
+    correctAnswer,
     startRecordingAnswer,
   };
 };

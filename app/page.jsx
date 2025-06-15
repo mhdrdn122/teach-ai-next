@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { CircularProgress, Box, Typography } from "@mui/material";
+import { CircularProgress, Box, Typography, Stack, Chip } from "@mui/material";
 import useQuestionRecording from "./hooks/useQuestionRecording";
 import useAnswerRecording from "./hooks/useAnswerRecording";
 import useAudio from "./hooks/useAudio";
@@ -28,10 +28,49 @@ const App = () => {
     loadingAnswer,
     recording: answerRecording,
     startRecordingAnswer,
-  } = useAnswerRecording(detectedQuestionId);
+    correctAnswer } = useAnswerRecording(detectedQuestionId);
   const { chapterDetails, getBackgroundColor } = useContext(ChapterApi);
 
   const recording = questionRecording || answerRecording;
+
+
+  let result;
+
+  if (loadingAnswer) {
+    result = (
+      <Typography className="text-lg text-gray-800 flex justify-center items-center gap-4 font-medium">
+        <CircularProgress size={30} sx={{ color: "#1a9de6" }} />
+        جاري التحقق من الإجابة
+      </Typography>
+    );
+  } else if (userAnswer) {
+    result = (
+      <Stack direction="row-reverse" spacing={2}  >
+        {/* الإجابة: {userAnswer} */}
+        <Chip label={`الإجابة: ${userAnswer}`} color="primary"
+          sx={{
+            fontSize: 20,
+            padding: 4
+          }} />
+        <Chip
+          sx={{
+            fontSize: 20,
+            padding: 4
+          }} label={`النتيجة: ${answerResult}`} color={answerResult === "صحيحة" ? "success" : "error"} size="larg" />
+        <Chip
+          sx={{
+            fontSize: 20,
+            padding: 4
+          }} label={`الإجابة الصحيحة: ${correctAnswer}`} color="success" size="larg" />
+      </Stack >
+    );
+  } else if (answerRecording) {
+    result = " ";
+  } else {
+    result = " ";
+
+  }
+
 
   return (
     <Box>
@@ -54,13 +93,13 @@ const App = () => {
         <Box className="flex justify-center gap-4 mb-4 flex-wrap">
           <RecordButton
             onMouseDown={() => startRecordingQuestion(questionAudio)}
-            onMouseUp={() => {}}
+            onMouseUp={() => { }}
             text="🎙️ تسجيل السؤال"
             active={recording}
           />
           <RecordButton
             onMouseDown={() => startRecordingAnswer(successSound, failureSound)}
-            onMouseUp={() => {}}
+            onMouseUp={() => { }}
             text="🎤 تسجيل الإجابة"
             active={recording}
             disabled={disable}
@@ -79,30 +118,24 @@ const App = () => {
         </Box>
 
         {loadingQuestion ? (
-          <Typography className="text-lg text-gray-800 flex justify-center items-center gap-4 font-medium">
+          <Typography className="text-lg text-gray-800 flex justify-center items-center gap-4 font-medium"
+            sx={{
+              fontSize: 15,
+              padding: 2
+            }}>
             <CircularProgress size={30} sx={{ color: "#1a9de6" }} />
             ...جاري معالجة السؤال
           </Typography>
         ) : (
-          <Typography className="text-lg text-gray-800 font-medium">
+          <Typography className="text-lg text-gray-800 font-medium" sx={{
+            fontSize: 20,
+            padding: 2
+          }}>
             {questionResult.question}
           </Typography>
         )}
 
-        {!loadingAnswer ? (
-          userAnswer ? (
-            <Typography className="font-medium">
-              الإجابة: {userAnswer} - النتيجة: {answerResult === "صحيحة" ? "صحيحة" : "خاطئة"}
-            </Typography>
-          ) : (
-            " "
-          )
-        ) : (
-          <Typography className="text-lg text-gray-800 flex justify-center items-center gap-4 font-medium">
-            <CircularProgress size={30} sx={{ color: "#1a9de6" }} />
-            جاري التحقق من الإجابة
-          </Typography>
-        )}
+        {result}
       </Box>
 
       <audio ref={successSound} src="/assets/Sound/facts.mp3" preload="auto" />
