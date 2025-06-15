@@ -1,10 +1,11 @@
+"use client";
+
 import React, { useRef, useEffect } from "react";
+import { Box } from "@mui/material";
 
 const QuestionMedia = ({ src, alt, highlighted }) => {
   const videoRef = useRef(null);
   let parts = src.split("/");
-  // console.log(parts);
-
   let lastElement = parts[parts.length - 1];
   let extension = lastElement ? lastElement.split(".")[1]?.toLowerCase() : "";
 
@@ -15,36 +16,36 @@ const QuestionMedia = ({ src, alt, highlighted }) => {
   }, [extension]);
 
 
+  const commonMediaClasses = `
+    rounded-2xl 
+    w-full 
+    shadow-md 
+    transition-all 
+    duration-300 
+    ease-in-out
+    ${highlighted ? "grayscale-0 border-green-500 border-4 block" : "grayscale border-none hidden"}
+  `;
 
   return (
     <>
       {extension === "mp4" ? (
-        <video
+        <Box
+          component="video"
           ref={videoRef}
           src={src}
           alt={alt}
-          className={`question-media ${highlighted ? "highlight" : ""}`}
           controls={false}
           autoPlay
           loop={false}
-          style={{
-            aspectRatio: '1',
-            maxWidth: "800px",
-            borderRadius: "10px"
-          }}
+          className={`${commonMediaClasses} aspect-square max-w-[800px]`} 
         />
       ) : (
-
-        <img
+        <Box
+          component="img"
           src={src}
           alt={alt}
-          className={`question-media ${highlighted ? "highlight" : ""}`}
-          style={{
-            aspectRatio: '4 / 3',
-            maxWidth: "600px"
-          }}
-
-
+          sx={{margin:"0 auto"}}
+          className={`${commonMediaClasses} aspect-[4/3] m-auto max-w-[600px]`} 
         />
       )}
     </>

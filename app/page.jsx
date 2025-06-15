@@ -1,202 +1,116 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
+import React, { useEffect, useContext } from "react";
 import { ToastContainer } from "react-toastify";
-import { recognizeVoice } from "./services/voiceRecognition";
-import { getQuestionIdFromGemini, checkAnswerFromGemini } from "./services/geminiService";
-import { getQuestionIdFromAi } from "./services/AiService";
-import { questions } from "./data/questions";
-import QuestionImage from "./components/QuestionImage"; ``
+import "react-toastify/dist/ReactToastify.css";
+import { CircularProgress, Box, Typography } from "@mui/material";
+import useQuestionRecording from "./hooks/useQuestionRecording";
+import useAnswerRecording from "./hooks/useAnswerRecording";
+import useAudio from "./hooks/useAudio";
 import RecordButton from "./components/RecordButton";
-import { speakArabicText } from "./services/speechUtils";
-import {
-  showSuccessConfetti,
-  showFailureConfetti,
-} from "./services/confettiUtils";
-import { PuffLoader } from "react-spinners";
+import QuestionMedia from "./components/QuestionImage";
+import ChapterComponent from "./components/ChapterComponent";
+import { ChapterApi } from "./Context/ChapterContext";
 
 const App = () => {
-  // console.log(process.env.NEXT_PUBLIC_TOGETHER_API_KEY);
+  const { successSound, failureSound, questionAudio } = useAudio();
+  const {
+    detectedQuestionId,
+    questionResult,
+    loadingQuestion,
+    recording: questionRecording,
+    disable,
+    startRecordingQuestion,
+  } = useQuestionRecording();
+  const {
+    userAnswer,
+    answerResult,
+    loadingAnswer,
+    recording: answerRecording,
+    startRecordingAnswer,
+  } = useAnswerRecording(detectedQuestionId);
+  const { chapterDetails, getBackgroundColor } = useContext(ChapterApi);
 
-  const dataSchema = {
-    id: 0, src: "", question: "", questionVoice: "", answer: "", chapter: '', lesson: '',
-  }
-
-  const [detectedQuestionId, setDetectedQuestionId] = useState(null);
-  const [disable, setDisable] = useState(" ");
-  const [userAnswer, setUserAnswer] = useState(null);
-  const [answerResult, setAnswerResult] = useState(null);
-  const [questionResult, setQuestionResult] = useState(dataSchema);
-
-  const [recording, setRecording] = useState(false);
-  const [loadingQuestion, setLoadingQuestion] = useState(false);
-  const [loadingAnswer, setLoadingAnswer] = useState(false);
-
-  const successSound = useRef(null);
-  const failureSound = useRef(null);
-  const questionAudio = useRef(null);
-
-  const startRecordingQuestion = async () => {
-    setRecording(true);
-    setQuestionResult(dataSchema);
-    setUserAnswer("");
-    try {
-      setLoadingQuestion(true);
-      const voiceText = await recognizeVoice();
-      const questionId = await getQuestionIdFromGemini(questions, voiceText);
-      // const questionId = await getQuestionIdFromAi(questions, voiceText);
-      // console.log(`answer is questionId2  : ${questionId2}`)
-      setDetectedQuestionId(questionId);
-      const questionText = questions.find((q) => q.id == questionId);
-
-      setDisable(questionText.answer);
-      console.log(questionText);
-
-      console.log("before questionText", questionText.question);
-      speakArabicText(questionText.question);
-      console.log(questionText.answer, "after questionText")
-
-      setQuestionResult(questionText);
-      setLoadingQuestion(false);
-
-
-      if (questionAudio.current && questionText.questionVoice) {
-        questionAudio.current.src = questionText.questionVoice;
-        questionAudio.current.play();
-      }
-    } catch (error) {
-      console.error("خطأ في التسجيل:", error);
-      setLoadingQuestion(false);
-    }
-    setRecording(false);
-  };
-
-  const startRecordingAnswer = async () => {
-    setRecording(true);
-    setUserAnswer("");
-    setAnswerResult(null);
-    // toast.dismiss();
-    setLoadingAnswer(true);
-    try {
-      const answerText = await recognizeVoice();
-      const question = questions.find((q) => q.id === detectedQuestionId);
-      const isCorrect = await checkAnswerFromGemini(question, answerText);
-      setUserAnswer(answerText);
-
-      //TODO: edited by hsn
-      // console.log(questionResult,"speakArabicText")
-      // speakArabicText(answerText);
-
-      setAnswerResult(isCorrect);
-      setLoadingAnswer(false);
-      if (isCorrect === "صحيحة") {
-        toast.success("إجابة صحيحة! 🎉");
-        if (successSound.current) {
-          successSound.current.currentTime = 0;
-          successSound.current.play();
-        }
-        showSuccessConfetti();
-      } else {
-        toast.error("إجابة خاطئة! 😞");
-        if (failureSound.current) {
-          failureSound.current.currentTime = 0;
-          failureSound.current.play();
-        }
-        showFailureConfetti();
-      }
-    } catch (error) {
-      setLoadingAnswer(false);
-      toast.error("لم يتم التعرف على الصوت، حاول مرة أخرى 🎧");
-      console.error("خطأ في التسجيل:", error);
-    }
-    setRecording(false);
-  };
+  const recording = questionRecording || answerRecording;
 
   return (
-    <div >
-      <div className={`app-container ${recording ? "recording" : ""}`}>
-        <h1>نظام التعرف على الأسئلة</h1>
-        <h4>الوحدة : {questionResult.chapter}</h4>
-        {/* <h4>الدرس : {questionResult.lesson}</h4> */}
-        {/* <p>{`الوحدة : ${questionResult.chapter}    -    الدرس : ${questionResult.lesson}`}</p> */}
-        <div className="button-container">
+    <Box>
+      <Box
+        className="text-center text-gray-800 min-h-screen flex flex-col items-center justify-start py-4 space-y-4 transition-colors duration-500"
+        style={{ backgroundColor: getBackgroundColor() }}
+      >
+        <Typography variant="h4" component="h1" className="m-0 py-2 font-bold text-gray-900">
+          نظام التعرف على الأسئلة
+        </Typography>
+
+        <ChapterComponent />
+
+        {chapterDetails && (
+          <Typography variant="h6" component="h4" className="text-gray-700">
+            الوحدة: {chapterDetails.name}
+          </Typography>
+        )}
+
+        <Box className="flex justify-center gap-4 mb-4 flex-wrap">
           <RecordButton
-            onMouseDown={startRecordingQuestion}
-            onMouseUp={() => setRecording(false)}
+            onMouseDown={() => startRecordingQuestion(questionAudio)}
+            onMouseUp={() => {}}
             text="🎙️ تسجيل السؤال"
             active={recording}
           />
           <RecordButton
-            onMouseDown={startRecordingAnswer}
-            onMouseUp={() => setRecording(false)}
+            onMouseDown={() => startRecordingAnswer(successSound, failureSound)}
+            onMouseUp={() => {}}
             text="🎤 تسجيل الإجابة"
             active={recording}
             disabled={disable}
           />
-        </div>
-        <div className="image-gallery" style={{
-          minHeight: "400x",
-          minWidth: "400px"
-        }}>
-          <div className="img">
-            <QuestionImage
+        </Box>
+
+        <Box className="min-h-[400px] min-w-[400px] flex justify-center items-center w-full max-w-2xl">
+          <Box className="bg-gray-300 w-full min-h-[300px] rounded-2xl p-2.5 flex items-center justify-center">
+            <QuestionMedia
               key={questionResult.id}
               src={questionResult.src.length > 10 ? questionResult.src : ""}
               alt={questionResult.question}
               highlighted={detectedQuestionId === questionResult.id}
             />
-          </div>
-        </div>
+          </Box>
+        </Box>
 
         {loadingQuestion ? (
-          <p className="status-text">
-            <span>
-              <PuffLoader
-                color="#1a9de6"
-                cssOverride={{}}
-                loading
-                size={30}
-                speedMultiplier={3}
-              />
-            </span>
+          <Typography className="text-lg text-gray-800 flex justify-center items-center gap-4 font-medium">
+            <CircularProgress size={30} sx={{ color: "#1a9de6" }} />
             ...جاري معالجة السؤال
-          </p>
+          </Typography>
         ) : (
-          <p className="status-text">{questionResult.question}</p>
+          <Typography className="text-lg text-gray-800 font-medium">
+            {questionResult.question}
+          </Typography>
         )}
 
         {!loadingAnswer ? (
           userAnswer ? (
-            <p>
-              الإجابة: {userAnswer} - النتيجة:{" "}
-              {answerResult == "صحيحة" ? "صحيحة" : "خاطئة"}
-            </p>
+            <Typography className="font-medium">
+              الإجابة: {userAnswer} - النتيجة: {answerResult === "صحيحة" ? "صحيحة" : "خاطئة"}
+            </Typography>
           ) : (
             " "
           )
         ) : (
-          <p className="status-text">
-            <span>
-              <PuffLoader
-                color="#1a9de6"
-                cssOverride={{}}
-                loading
-                size={30}
-                speedMultiplier={3}
-              />
-            </span>
-            جاري التحقق من الاجابة
-          </p>
+          <Typography className="text-lg text-gray-800 flex justify-center items-center gap-4 font-medium">
+            <CircularProgress size={30} sx={{ color: "#1a9de6" }} />
+            جاري التحقق من الإجابة
+          </Typography>
         )}
-      </div>
+      </Box>
 
-      <audio ref={successSound} src={"/assets/Sound/facts.mp3"} preload="auto" />
-      <audio ref={failureSound} src={"/assets/Sound/erorr.mp3"} preload="auto" />
-      <audio ref={questionAudio} preload="auto" /> {/* مشغل صوت السؤال */}
+      <audio ref={successSound} src="/assets/Sound/facts.mp3" preload="auto" />
+      <audio ref={failureSound} src="/assets/Sound/erorr.mp3" preload="auto" />
+      <audio ref={questionAudio} preload="auto" />
 
       <ToastContainer />
-    </div>
+    </Box>
   );
 };
 

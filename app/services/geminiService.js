@@ -1,79 +1,85 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY || "AIzaSyDx55LPyLCaKNrdfBwC-QmJCVpMQDvMu0Y");
+const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY || "AIzaSyDx55LPyLCaKNrdfBwC-QmJCVpMQDvMu0Y" );
 const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 /**
- * Sends a list of predefined questions along with the user's spoken text to Gemini.
- * Gemini returns only the ID of the matching question.
+ * Identifies the question ID from a list of questions based on the user's spoken text.
+ * @param {Array} questions - List of question objects with id and question properties.
+ * @param {string} voiceText - The user's spoken text in Arabic.
+ * @returns {number} The ID of the matching question or 35 if no match is found.
  */
 export const getQuestionIdFromGemini = async (questions, voiceText) => {
   const prompt = `
-أنت خبير في تحليل النصوص العربية ومطابقتها بدقة. لديك قائمة من الأسئلة المرقمة من 1 إلى ${questions.length} كما يلي:
+You are an expert in Arabic text analysis and matching. You are provided with a list of numbered questions from 1 to ${questions.length} as follows:
 
 ${questions.map(q => `${q.id}- ${q.question}`).join("\n")}
 
-المستخدم قال الجملة التالية بصوته: "${voiceText}"
+The user has spoken the following sentence in Arabic: "${voiceText}"
 
-مهمتك هي تحديد رقم السؤال الذي يطابق جملة المستخدم بدقة عالية. اتبع هذه التعليمات بدقة:
-1. قارن جملة المستخدم مع كل سؤال في القائمة، مع التركيز على المعنى الأساسي والكلمات الرئيسية.
-2. تجاهل الاختلافات البسيطة في الصياغة (مثل إضافة كلمات مثل "ما" أو "كيف" أو اختلاف ترتيب الكلمات) طالما أن المعنى مطابق.
-3. إذا كانت جملة المستخدم تحتوي على أخطاء طفيفة (مثل أخطاء نطق أو تحويل صوتي)، حاول استنتاج السؤال الصحيح بناءً على التشابه.
-4. إذا لم يتطابق أي سؤال مع جملة المستخدم، أعد الرقم 35.
-5. أعد **رقم السؤال فقط** (مثل "47") بدون أي نص إضافي أو علامات ترقيم.
+Your task is to identify the ID of the question that matches the user's spoken sentence with high accuracy. Follow these instructions strictly:
+1. Compare the user's sentence with each question in the list, focusing on the core meaning and key words.
+2. Ignore minor phrasing differences (e.g., additional words like "ما" or "كيف", or variations in word order) as long as the meaning is equivalent.
+3. Account for potential speech-to-text errors (e.g., mispronunciations or transcription inaccuracies) by inferring the intended question based on semantic similarity.
+4. Handle linguistic variations, such as Arabic dialects or informal phrasing, by focusing on the closest semantic match.
+5. For questions with similar phrasing but distinct meanings (e.g., "2 and 2 is 4" explaining the components of the number 4, vs. "2 + 2 = 4" explaining the addition operation), ensure precise differentiation based on context and intent.
+6. If no question matches the user's sentence, return the number 35.
+7. Return **only the question ID** (e.g., "47") as a plain number, without additional text, punctuation, or spaces.
+8. If the input is ambiguous or unclear, prioritize the most likely match based on semantic similarity, or return 35 if no reasonable match is found.
 
-مثال:
-- إذا قال المستخدم: "ما هو اسمك؟" والسؤال في القائمة هو "ما اسمك؟"، أعد الرقم المقابل (مثل "1").
-- إذا قال المستخدم: "شو اسمك؟"، استنتج أن المعنى مشابه لـ "ما اسمك؟" وأعد نفس الرقم.
-- إذا قال المستخدم: "ما هي عاصمة فرنسا؟" ولا يوجد تطابق، أعد "35".
-ايضا هناك فرق بين السؤال مثلا 2 و 2 = 4
-و السؤال 
-2 + 2 = 4 
-فأول يشرح مكونات العدد اربعة و ثاني يشرح عملية الجمع 
-لا تخطأ في مثل هذه الاسئلة 
+Examples:
+- User says: "ما هو اسمك؟", Question in list: "ما اسمك؟" → Return "1".
+- User says: "شو اسمك؟" → Infer it matches "ما اسمك؟" and return "1".
+- User says: "ما هي عاصمة فرنسا؟", No match in list → Return "35".
+- User says: "إثنان وإثنان يساوي أربعة" → Differentiate from "إثنان زائد إثنان يساوي أربعة" and return the correct ID based on context.
 `;
 
   try {
     const result = await model.generateContent(prompt);
     const answer = result.response.text().trim();
     const questionId = parseInt(answer, 10);
-    return isNaN(questionId) ? 35 : questionId; // Return 35 if parsing fails
+    return isNaN(questionId) ? 35 : questionId;
   } catch (error) {
-    console.error("خطأ في استدعاء Gemini:", error);
-    return 35; // Return 35 on error
+    console.error("Error calling Gemini for question ID:", error);
+    return 35;
   }
 };
 
 /**
- * Sends the detected question and the user's answer to check if the answer is correct.
+ * Checks if the user's answer is correct for a given question.
+ * @param {Object} question - The question object with question and answer properties.
+ * @param {string} answerText - The user's answer text in Arabic.
+ * @returns {string} "صحيحة" if the answer is correct, "خاطئة" otherwise.
  */
 export const checkAnswerFromGemini = async (question, answerText) => {
   const prompt = `
-أنت خبير في تقييم الإجابات باللغة العربية بدقة عالية. لديك السؤال التالي: "${question.question}"
-والإجابة الصحيحة هي: "${question.answer}"
+You are an expert in evaluating Arabic answers with high accuracy. You are provided with the following question: "${question.question}"
+The correct answer is: "${question.answer}"
 
-المستخدم قدم الإجابة التالية: "${answerText}"
+The user provided the following answer: "${answerText}"
 
-مهمتك هي تحديد ما إذا كانت إجابة المستخدم صحيحة أم خاطئة. اتبع هذه التعليمات بدقة:
-1. قارن إجابة المستخدم مع الإجابة الصحيحة، مع مراعاة المعنى والسياق.
-2. إذا كانت الإجابة الصحيحة رقمًا (مثل "2")، اقبل الإجابة كنص (مثل "اثنان" أو "الثاني" أو "رقم اثنين") أو كرقم ("2") طالما أنها تعبر عن نفس القيمة.
-3. تجاهل الاختلافات البسيطة في الصياغة (مثل إضافة كلمات مثل "الجواب" أو اختلاف ترتيب الكلمات) إذا كان المعنى مطابقًا.
-4. إذا كانت إجابة المستخدم تحتوي على أخطاء طفيفة (مثل أخطاء نطق أو تحويل صوتي)، حاول استنتاج المعنى بناءً على التشابه.
-5. إذا كانت الإجابة الصحيحة نصًا طويلًا، تحقق مما إذا كانت إجابة المستخدم تحتوي على الكلمات الرئيسية أو المعنى الأساسي.
-6. أعد **كلمة واحدة فقط**: "صحيحة" إذا كانت الإجابة صحيحة، أو "خاطئة" إذا كانت خاطئة.
+Your task is to determine whether the user's answer is correct or incorrect. Follow these instructions strictly:
+1. Compare the user's answer with the correct answer, considering meaning and context.
+2. If the correct answer is a number (e.g., "2"), accept the answer as text (e.g., "اثنان", "الثاني", "رقم اثنين") or as a number ("2") as long as it represents the same value.
+3. Ignore minor phrasing differences (e.g., additional words like "الجواب" or variations in word order) if the meaning is equivalent.
+4. Account for potential speech-to-text errors (e.g., mispronunciations or transcription inaccuracies) by inferring the intended meaning based on semantic similarity.
+5. Handle linguistic variations, such as Arabic dialects or informal phrasing, by focusing on the closest semantic match.
+6. If the correct answer is a long text, check if the user's answer contains the key words or core meaning.
+7. Return **exactly one word**: "صحيحة" if the answer is correct, or "خاطئة" if incorrect.
+8. If the input is ambiguous or unclear, prioritize the most likely match based on semantic similarity, or return "خاطئة" if no reasonable match is found.
 
-أمثلة:
-- السؤال: "كم عدد الكواكب في المجموعة الشمسية؟"، الإجابة الصحيحة: "8"، إجابة المستخدم: "ثمانية" → أعد "صحيحة".
-- السؤال: "ما هي عاصمة فرنسا؟"، الإجابة الصحيحة: "باريس"، إجابة المستخدم: "مدينة باريس" → أعد "صحيحة".
-- السؤال: "ما هو 2 + 2؟"، الإجابة الصحيحة: "4"، إجابة المستخدم: "خمسة" → أعد "خاطئة".
+Examples:
+- Question: "كم عدد الكواكب في المجموعة الشمسية؟", Correct answer: "8", User answer: "ثمانية" → Return "صحيحة".
+- Question: "ما هي عاصمة فرنسا؟", Correct answer: "باريس", User answer: "مدينة باريس" → Return "صحيحة".
+- Question: "ما هو 2 + 2؟", Correct answer: "4", User answer: "خمسة" → Return "خاطئة".
 `;
 
   try {
     const result = await model.generateContent(prompt);
     const reply = result.response.text().trim();
-    return reply === "صحيحة" ? "صحيحة" : "خاطئة"; // Ensure only "صحيحة" or "خاطئة" is returned
+    return reply === "صحيحة" ? "صحيحة" : "خاطئة";
   } catch (error) {
-    console.error("خطأ في استدعاء Gemini للتحقق من الإجابة:", error);
-    return "خاطئة"; // Default to "خاطئة" on error
+    console.error("Error calling Gemini for answer verification:", error);
+    return "خاطئة";
   }
 };
