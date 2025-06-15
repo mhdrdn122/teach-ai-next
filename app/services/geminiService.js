@@ -1,6 +1,9 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY || "AIzaSyDx55LPyLCaKNrdfBwC-QmJCVpMQDvMu0Y" );
+const genAI = new GoogleGenerativeAI(
+  process.env.REACT_APP_GEMINI_API_KEY ||
+    "AIzaSyDx55LPyLCaKNrdfBwC-QmJCVpMQDvMu0Y"
+);
 const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 /**
@@ -11,9 +14,11 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
  */
 export const getQuestionIdFromGemini = async (questions, voiceText) => {
   const prompt = `
-You are an expert in Arabic text analysis and matching. You are provided with a list of numbered questions from 1 to ${questions.length} as follows:
+You are an expert in Arabic text analysis and matching. You are provided with a list of numbered questions from 1 to ${
+    questions.length
+  } as follows:
 
-${questions.map(q => `${q.id}- ${q.question}`).join("\n")}
+${questions.map((q) => `${q.id}- ${q.question}`).join("\n")}
 
 The user has spoken the following sentence in Arabic: "${voiceText}"
 
@@ -52,6 +57,30 @@ Examples:
  * @returns {string} "صحيحة" if the answer is correct, "خاطئة" otherwise.
  */
 export const checkAnswerFromGemini = async (question, answerText) => {
+  //   const prompt = `
+
+  // You are an expert in evaluating Arabic answers with high accuracy. You are provided with the following question: "${question.question}"
+  // The correct answer is: "${question.answer}"
+
+  // The user provided the following answer: "${answerText}"
+
+  // Your task is to determine whether the user's answer is correct or incorrect. Follow these instructions strictly:
+  // 1. Compare the user's answer with the correct answer, considering meaning and context.
+  // 2. If the correct answer is a number (e.g., "2"), accept the answer as text (e.g., "اثنان", "الثاني", "رقم اثنين") or as a number ("2") as long as it represents the same value.
+  // 3. Ignore minor phrasing differences (e.g., additional words like "الجواب" or variations in word order) if the meaning is equivalent.
+  // 4. Account for potential speech-to-text errors (e.g., mispronunciations or transcription inaccuracies) by inferring the intended meaning based on semantic similarity.
+  // 5. Handle linguistic variations, such as Arabic dialects or informal phrasing, by focusing on the closest semantic match.
+  // 6. If the correct answer is a long text, check if the user's answer contains the key words or core meaning.
+  // 7. Return **exactly one word**: "صحيحة" if the answer is correct, or "خاطئة" if incorrect.
+  // 8. If the input is ambiguous or unclear, prioritize the most likely match based on semantic similarity, or return "خاطئة" if no reasonable match is found.
+
+  // Examples:
+  // - Question: "كم عدد الكواكب في المجموعة الشمسية؟", Correct answer: "8", User answer: "ثمانية" → Return "صحيحة".
+  // - Question: "ما هي عاصمة فرنسا؟", Correct answer: "باريس", User answer: "مدينة باريس" → Return "صحيحة".
+  // - Question: "ما هو 2 + 2؟", Correct answer: "4", User answer: "خمسة" → Return "خاطئة".
+  // `;
+
+  //! edited by hsn
   const prompt = `
 You are an expert in evaluating Arabic answers with high accuracy. You are provided with the following question: "${question.question}"
 The correct answer is: "${question.answer}"
@@ -61,15 +90,19 @@ The user provided the following answer: "${answerText}"
 Your task is to determine whether the user's answer is correct or incorrect. Follow these instructions strictly:
 1. Compare the user's answer with the correct answer, considering meaning and context.
 2. If the correct answer is a number (e.g., "2"), accept the answer as text (e.g., "اثنان", "الثاني", "رقم اثنين") or as a number ("2") as long as it represents the same value.
-3. Ignore minor phrasing differences (e.g., additional words like "الجواب" or variations in word order) if the meaning is equivalent.
-4. Account for potential speech-to-text errors (e.g., mispronunciations or transcription inaccuracies) by inferring the intended meaning based on semantic similarity.
-5. Handle linguistic variations, such as Arabic dialects or informal phrasing, by focusing on the closest semantic match.
-6. If the correct answer is a long text, check if the user's answer contains the key words or core meaning.
-7. Return **exactly one word**: "صحيحة" if the answer is correct, or "خاطئة" if incorrect.
-8. If the input is ambiguous or unclear, prioritize the most likely match based on semantic similarity, or return "خاطئة" if no reasonable match is found.
+3. Also, if the user's answer refers to the correct number in a conceptual way (e.g., the answer is "اثنان" and the user answer is "كرتان" or "شيئان"), accept it as correct if it clearly indicates the same quantity.
+4. Ignore minor phrasing differences (e.g., additional words like "الجواب" or variations in word order) if the meaning is equivalent.
+5. Account for potential speech-to-text errors (e.g., mispronunciations or transcription inaccuracies) by inferring the intended meaning based on semantic similarity.
+6. Handle linguistic variations, such as Arabic dialects or informal phrasing, by focusing on the closest semantic match.
+7. If the correct answer is a long text, check if the user's answer contains the key words or core meaning.
+8. Return **exactly one word**: "صحيحة" if the answer is correct, or "خاطئة" if incorrect.
+9. If the input is ambiguous or unclear, prioritize the most likely match based on semantic similarity, or return "خاطئة" if no reasonable match is found.
+10. if the the user said the 
 
 Examples:
 - Question: "كم عدد الكواكب في المجموعة الشمسية؟", Correct answer: "8", User answer: "ثمانية" → Return "صحيحة".
+- Question: "كم عدد الكواكب في المجموعة الشمسية؟", Correct answer: "8", User answer: "ثمانية كواكب" → Return "صحيحة".
+- Question: "كم عدد التفاحات؟", Correct answer: "2", User answer: "تفاحتان" → Return "صحيحة".
 - Question: "ما هي عاصمة فرنسا؟", Correct answer: "باريس", User answer: "مدينة باريس" → Return "صحيحة".
 - Question: "ما هو 2 + 2؟", Correct answer: "4", User answer: "خمسة" → Return "خاطئة".
 `;
