@@ -69,10 +69,10 @@ const useQuestionRecording = () => {
       setDetectedQuestionId(questionId);
       const questionText = data.find((q) => q.id == questionId) || {
           id: 0,
-          src: "",
+          src: "/assets/images/not.gif",
           question: "هذا السؤال غير موجود في هذا الـ chapter",
           questionVoice: "",
-          answer: "",
+          answer: " ",
           chapter: "",
           lesson: "",
         };

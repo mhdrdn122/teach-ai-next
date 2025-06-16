@@ -72,6 +72,7 @@ const App = () => {
   }
 
 
+  console.log( disable)
   return (
     <Box dir="rtl">
       <Box
@@ -106,11 +107,11 @@ const App = () => {
           />
         </Box>
 
-        <Box className="min-h-[400px] min-w-[400px] flex justify-center items-center w-full max-w-2xl">
+        <Box className="min-h-[400px]  flex justify-center items-center w-full max-w-2xl">
           <Box className="bg-gray-300 w-full min-h-[300px] rounded-2xl p-2.5 flex items-center justify-center">
             <QuestionMedia
               key={questionResult.id}
-              src={questionResult.src.length > 10 ? questionResult.src : ""}
+              src={questionResult.src.length > 10 ? questionResult?.src : ""}
               alt={questionResult.question}
               highlighted={detectedQuestionId === questionResult.id}
             />
