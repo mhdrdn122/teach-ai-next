@@ -34,6 +34,7 @@ const App = () => {
   const recording = questionRecording || answerRecording;
 
 
+
   let result;
 
   if (loadingAnswer) {
@@ -43,24 +44,29 @@ const App = () => {
         جاري التحقق من الإجابة
       </Typography>
     );
-  } else if (userAnswer) {
+  } else if (userAnswer && !loadingQuestion) {
     result = (
       <Stack direction="row-reverse" spacing={2}  >
-        {/* الإجابة: {userAnswer} */}
+        {/*  {userAnswer} */}
         <Chip label={`الإجابة: ${userAnswer}`} color="primary"
           sx={{
             fontSize: 20,
-            padding: 4
+            padding: 4,
+            marginRight: 10
+
           }} />
         <Chip
           sx={{
             fontSize: 20,
-            padding: 4
+            padding: 4,
+            marginRight: 10
+
           }} label={`النتيجة: ${answerResult}`} color={answerResult === "صحيحة" ? "success" : "error"} size="larg" />
         <Chip
           sx={{
             fontSize: 20,
-            padding: 4
+            padding: 4,
+            marginRight: 10
           }} label={`الإجابة الصحيحة: ${correctAnswer}`} color="success" size="larg" />
       </Stack >
     );

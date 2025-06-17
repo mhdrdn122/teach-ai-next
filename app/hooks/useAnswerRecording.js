@@ -30,6 +30,7 @@ const useAnswerRecording = (detectedQuestionId) => {
       ).answer;
       setCorrectAnswer(realCorrectAnswer);
       const isCorrect = await checkAnswerFromGemini(question, answerText);
+      console.log(isCorrect)
       setUserAnswer(answerText);
       setAnswerResult(isCorrect);
       setLoadingAnswer(false);

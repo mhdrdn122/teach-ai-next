@@ -63,8 +63,24 @@ export const chapter1 = [
     chapter: "",
     lesson: "",
   },
+  {
+    id: 0,
+    question: "لا يوجد مطابقة للسؤال حاول مجدداً",
+    answer: " ",
+    src: "/assets/images/not.gif",
+    chapter: "",
+    lesson: "",
+  },
 ];
 export const chapter2 = [
+  {
+    id: 0,
+    question: "لا يوجد مطابقة للسؤال حاول مجدداً",
+    answer: " ",
+    src: "/assets/images/not.gif",
+    chapter: "",
+    lesson: "",
+  },
   {
     id: 5,
     question: "كم فيل يوجد في الصورة ",
@@ -364,6 +380,14 @@ export const chapter2 = [
 ];
 
 export const chapter3 = [
+  {
+    id: 0,
+    question: "لا يوجد مطابقة للسؤال حاول مجدداً",
+    answer: " ",
+    src: "/assets/images/not.gif",
+    chapter: "",
+    lesson: "",
+  },
   {
     id: 47,
     question: "تعلم: 2 و2 = 4 ",
@@ -681,6 +705,14 @@ export const chapter3 = [
 export const chapter4 = [];
 
 export const chapter5 = [
+  {
+    id: 0,
+    question: "لا يوجد مطابقة للسؤال حاول مجدداً",
+    answer: " ",
+    src: "/assets/images/not.gif",
+    chapter: "",
+    lesson: "",
+  },
   {
     id: 126,
     question: " تعلم: اثنان زائد أربعة يساوي ستة ",
@@ -1173,6 +1205,14 @@ export const chapter5 = [
 
 export const chapter6 = [
   {
+    id: 0,
+    question: "لا يوجد مطابقة للسؤال حاول مجدداً",
+    answer: " ",
+    src: "/assets/images/not.gif",
+    chapter: "",
+    lesson: "",
+  },
+  {
     id: 187,
     question: " تعلم، الجمع عملية تبديلية ",
     answer: " ",
@@ -1544,6 +1584,14 @@ export const chapter6 = [
 
 
 export const chapter7 = [
+  {
+    id: 0,
+    question: "لا يوجد مطابقة للسؤال حاول مجدداً",
+    answer: " ",
+    src: "/assets/images/not.gif",
+    chapter: "",
+    lesson: "",
+  },
   {
     id: 233,
     question: "تعلّمْ، يوجدْ حَولنا أشياء كثيرة مختلفة الأشكال هيا بنا لنشاهدها ونتعرف عليها ",
