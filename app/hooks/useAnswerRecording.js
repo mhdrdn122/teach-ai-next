@@ -1,6 +1,6 @@
-import { useState } from "react";
+// hooks/useAnswerRecording.js
+import { useState, useCallback } from "react";
 import { toast } from "react-toastify";
-import { recognizeVoice } from "../services/voiceRecognition";
 import { checkAnswerFromGemini } from "../services/geminiService";
 import { questions } from "../data/questions";
 import {
@@ -15,22 +15,28 @@ const useAnswerRecording = (detectedQuestionId) => {
   const [loadingAnswer, setLoadingAnswer] = useState(false);
   const [recording, setRecording] = useState(false);
 
-  const startRecordingAnswer = async (successSoundRef, failureSoundRef) => {
+  const handleStartAnswerRecording = useCallback(() => {
     setRecording(true);
     setUserAnswer("");
     setCorrectAnswer("");
     setAnswerResult(null);
     setLoadingAnswer(true);
+  }, []);
 
+  const handleAnswerTextResult = useCallback(async (answerText, successSoundRef, failureSoundRef) => {
+    console.log("النص المحول للإجابة:", answerText);
     try {
-      const answerText = await recognizeVoice();
       const question = questions.find((q) => q.id === detectedQuestionId);
-      const realCorrectAnswer = questions.find(
-        (q) => q.id === detectedQuestionId
-      ).answer;
+      if (!question) {
+        toast.error("لم يتم العثور على السؤال المحدد.");
+        setLoadingAnswer(false);
+        setRecording(false);
+        return;
+      }
+      const realCorrectAnswer = question.answer;
       setCorrectAnswer(realCorrectAnswer);
       const isCorrect = await checkAnswerFromGemini(question, answerText);
-      console.log(isCorrect)
+      console.log(isCorrect);
       setUserAnswer(answerText);
       setAnswerResult(isCorrect);
       setLoadingAnswer(false);
@@ -53,10 +59,15 @@ const useAnswerRecording = (detectedQuestionId) => {
     } catch (error) {
       setLoadingAnswer(false);
       toast.error("لم يتم التعرف على الصوت، حاول مرة أخرى 🎧");
-      console.error("خطأ في التسجيل:", error);
+      console.error("خطأ في معالجة النص المحول للإجابة:", error);
     }
     setRecording(false);
-  };
+  }, [detectedQuestionId]);
+
+  
+  const handleStopAnswerRecording = useCallback(() => {
+    setRecording(false);
+  }, []);
 
   return {
     userAnswer,
@@ -64,7 +75,9 @@ const useAnswerRecording = (detectedQuestionId) => {
     loadingAnswer,
     recording,
     correctAnswer,
-    startRecordingAnswer,
+    handleStartAnswerRecording,
+    handleAnswerTextResult,     
+    handleStopAnswerRecording,  
   };
 };
 

@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { recognizeVoice } from "../services/voiceRecognition";
+// hooks/useQuestionRecording.js
+import { useContext, useEffect, useState, useCallback } from "react";
 import { getQuestionIdFromGemini } from "../services/geminiService";
 import { speakArabicText } from "../services/speechUtils";
 import { ChapterApi } from "../Context/ChapterContext";
@@ -52,19 +52,22 @@ const useQuestionRecording = () => {
     setData(chooseChapter(chapterDetails?.id));
   }, [chapterDetails?.id]);
 
-  console.log(data);
   const [detectedQuestionId, setDetectedQuestionId] = useState(null);
   const [questionResult, setQuestionResult] = useState(dataSchema);
   const [loadingQuestion, setLoadingQuestion] = useState(false);
   const [recording, setRecording] = useState(false);
   const [disable, setDisable] = useState(" ");
 
-  const startRecordingQuestion = async (questionAudioRef) => {
+  const handleStartQuestionRecording = useCallback(() => {
     setRecording(true);
     setQuestionResult(dataSchema);
     setLoadingQuestion(true);
+  }, [dataSchema]);
+
+  
+  const handleQuestionTextResult = useCallback(async (voiceText, questionAudioRef) => {
+    console.log("النص المحول للسؤال:", voiceText);
     try {
-      const voiceText = await recognizeVoice();
       const questionId = await getQuestionIdFromGemini(data, voiceText);
       setDetectedQuestionId(questionId);
       const questionText = data.find((q) => q.id == questionId) || {
@@ -76,7 +79,7 @@ const useQuestionRecording = () => {
           chapter: "",
           lesson: "",
         };
-      
+
       setDisable(questionText?.answer);
       speakArabicText(questionText?.question);
       setQuestionResult(questionText);
@@ -87,11 +90,15 @@ const useQuestionRecording = () => {
         questionAudioRef.current.play();
       }
     } catch (error) {
-      console.error("خطأ في التسجيل:", error);
+      console.error("خطأ في معالجة النص المحول للسؤال:", error);
       setLoadingQuestion(false);
     }
     setRecording(false);
-  };
+  }, [data, dataSchema]);
+
+  const handleStopQuestionRecording = useCallback(() => {
+    setRecording(false);
+  }, []);
 
   return {
     detectedQuestionId,
@@ -99,7 +106,9 @@ const useQuestionRecording = () => {
     loadingQuestion,
     recording,
     disable,
-    startRecordingQuestion,
+    handleStartQuestionRecording, 
+    handleQuestionTextResult,     
+    handleStopQuestionRecording,  
   };
 };
 

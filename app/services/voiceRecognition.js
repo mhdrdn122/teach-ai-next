@@ -1,43 +1,73 @@
+// services/voiceRecognition.js
 import { toast } from "react-toastify";
 
-// Function to recognize voice input and return the detected text
-export const recognizeVoice = () => {
+let recognitionInstance = null;
+
+export const startVoiceRecognition = () => {
   return new Promise((resolve, reject) => {
-    // Initialize the Speech Recognition API
-    const recognition = new (window.SpeechRecognition ||
+    if (!("SpeechRecognition" in window || "webkitSpeechRecognition" in window)) {
+      reject("Speech Recognition API is not supported in this browser.");
+      toast.error("متصفحك لا يدعم التعرف على الصوت.");
+      return;
+    }
+
+    if (recognitionInstance) {
+      recognitionInstance.stop();
+    }
+
+    recognitionInstance = new (window.SpeechRecognition ||
       window.webkitSpeechRecognition)();
-    recognition.lang = "ar-SA";
-    recognition.continuous = true;
-    recognition.interimResults = false;
+    recognitionInstance.lang = "ar-SA";
+    recognitionInstance.continuous = false; 
+    recognitionInstance.interimResults = false;
 
-    // Handle the result when voice recognition succeeds
-    recognition.onresult = (event) => {
-      const voiceText = event.results[0][0].transcript;
-      if (voiceText.trim()) {
-        resolve(voiceText); // Return the detected text
-      } else {
-        reject("الصوت غير واضح");
-      toast("error","الصوت غير واضح ")
+    let finalTranscript = ''; 
 
+    recognitionInstance.onresult = (event) => {
+      let interimTranscript = '';
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) {
+          finalTranscript += event.results[i][0].transcript;
+        } else {
+          interimTranscript += event.results[i][0].transcript;
+        }
       }
-      console.log(voiceText)
-
+      console.log("النص المرحلي:", interimTranscript);
     };
 
-    // Stop recognition when the mouse is released
-    const stopRecognition = () => {
-      recognition.stop();
+    recognitionInstance.onend = () => {
+      if (finalTranscript.trim()) {
+        resolve(finalTranscript.trim());
+      } else {
+        reject("الصوت غير واضح أو لم يتم التعرف على شيء.");
+        toast.error("الصوت غير واضح أو لم يتم التعرف على شيء.");
+      }
+      recognitionInstance = null; 
     };
 
-    document.addEventListener("mouseup", stopRecognition, { once: true });
-
-    // Handle any recognition errors
-    recognition.onerror = (event) => {
-      reject(`خطأ في التعرف على الصوت: ${event.error}`);
-      toast("error","خطأ في التعرف على الصوت")
+    recognitionInstance.onerror = (event) => {
+      if (event.error === 'no-speech') {
+        reject("لم يتم اكتشاف أي صوت.");
+        toast.error("لم يتم اكتشاف أي صوت.");
+      } else if (event.error === 'audio-capture') {
+        reject("مشكلة في الميكروفون أو أذونات الوصول.");
+        toast.error("مشكلة في الميكروفون أو أذونات الوصول.");
+      } else {
+        reject(`خطأ في التعرف على الصوت: ${event.error}`);
+        toast.error(`خطأ في التعرف على الصوت: ${event.error}`);
+      }
+      recognitionInstance = null;
     };
 
-    // Start voice recognition
-    recognition.start();
+    recognitionInstance.start();
+    console.log("بدء التعرف على الصوت...");
   });
+};
+
+export const stopVoiceRecognition = () => {
+  if (recognitionInstance) {
+    recognitionInstance.stop();
+    console.log("إيقاف التعرف على الصوت.");
+    recognitionInstance = null; 
+  }
 };
