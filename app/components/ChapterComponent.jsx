@@ -80,19 +80,39 @@ const ChapterComponent = () => {
                 transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
               }}
             >
-              <Box
-                component="img"
-                src={chapter.imgsrc}
-                alt={chapter.name}
-                className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full object-cover border border-white shadow-xs mb-1"
-                sx={{
-                  transition: "all 0.3s ease-in-out",
-                  "&:hover": {
-                    transform: "scale(1.1)",
-                    boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-                  },
-                }}
-              />
+              {chapter?.imgsrc ? (
+                <Box
+                  component="img"
+                  src={chapter.imgsrc}
+                  alt={chapter.name}
+                  className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full object-cover border border-white shadow-xs mb-1"
+                  sx={{
+                    transition: "all 0.3s ease-in-out",
+                    "&:hover": {
+                      transform: "scale(1.1)",
+                      boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+                    },
+                  }}
+                />
+              ) : (
+                <Box
+                  component="div"
+                  // src={chapter.imgsrc}
+                  // alt={chapter.name}
+                  className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full  flex justify-center items-center object-cover border border-white shadow-xs mb-1"
+                  sx={{
+                    transition: "all 0.3s ease-in-out",
+                    fontWeight:"700",
+                    "&:hover": {
+                      transform: "scale(1.1)",
+                      boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+                    },
+                  }}
+                >
+                  {chapter.id}
+                </Box>
+              )}
+
               <Typography
                 variant="caption"
                 className="font-medium text-center line-clamp-2"
