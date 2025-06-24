@@ -1,0 +1,12 @@
+{
+  "Index": {
+    "title": "Welcome to my website!",
+    "description": "This is a simple example using next-intl for internationalization.",
+    "changeLanguage": "Change Language",
+    "greeting": "Hello, {name}!"
+  },
+  "About": {
+    "title": "About Us",
+    "content": "We are a team that loves web development."
+  }
+}
