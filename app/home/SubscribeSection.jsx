@@ -8,10 +8,11 @@ import Image from 'next/image';
 const SubscribeSection = () => {
   return (
     <Box
+    id="subscribe"
       sx={{
         py: { xs: 8, md: 12 },
         px: { xs: 2, md: 4 },
-        backgroundColor: '#9c27b0', // لون بنفسجي داكن مشابه للتصميم
+        backgroundColor: '#9c27b0', 
         color: 'white',
         textAlign: 'center',
         position: 'relative',
@@ -21,11 +22,11 @@ const SubscribeSection = () => {
         alignItems: 'center',
         justifyContent: 'center',
       }}
-      className="container mx-auto"
+      className=" mx-auto"
       dir="rtl"
     >
-      {/* صور متناثرة */}
-      <Image
+      {/* decorative images*/}
+      {/* <Image
         src="/assets/images/decorative/star-icon.png"
         alt="Star"
         width={40}
@@ -59,7 +60,7 @@ const SubscribeSection = () => {
         width={30}
         height={30}
         style={{ position: 'absolute', bottom: '30%', right: '5%', zIndex: 0, animation: 'spin 10s linear infinite reverse' }}
-      />
+      /> */}
 
       <Typography
         variant="h3"
@@ -69,7 +70,7 @@ const SubscribeSection = () => {
           fontWeight: 'bold',
           fontSize: { xs: '2rem', md: '3rem' },
           color: 'white',
-          zIndex: 1, // تأكد من أن النص فوق الصور المتناثرة
+          zIndex: 1, 
         }}
       >
         اشترك معنا
@@ -144,39 +145,38 @@ const SubscribeSection = () => {
         <Button
           variant="contained"
           sx={{
-            backgroundColor: '#ff9800', // لون برتقالي مميز للزر
+            backgroundColor: '#ff9800', 
             color: 'white',
             '&:hover': {
-              backgroundColor: '#e68900', // لون أغمق عند التمرير
+              backgroundColor: '#e68900', 
             },
             px: 4,
             py: 1.5,
             borderRadius: '8px',
             fontWeight: 'bold',
             fontSize: '1.1rem',
-            minWidth: { xs: '100%', sm: '150px' }, // عرض مستجيب للزر
+            minWidth: { xs: '100%', sm: '150px' }, 
           }}
         >
           اشترك الآن
         </Button>
       </Box>
 
-      {/* صورة الأطفال في الأسفل على اليمين */}
       <Box sx={{
         position: 'absolute',
         bottom: 0,
-        right: { xs: 0, sm: '5%' }, // على اليمين
+        right: { xs: 0, sm: '2%' }, 
         width: { xs: '100%', sm: 'auto' },
         height: 'auto',
-        zIndex: 1, // فوق الصور المتناثرة ولكن تحت النص
-        display: 'flex',
-        justifyContent: 'flex-end', // لمحاذاة الصورة إلى اليمين
+        zIndex: 1, 
+        display: {  xs: 'none' , md: 'flex' },
+        justifyContent: 'flex-end', 
       }}>
         <Image
-          src="/assets/images/subscribe-kids.png" // تأكد من مسار هذه الصورة
+          src="/assets/images/img-hero.png" 
           alt="Kids reading"
-          width={400} // يمكن تعديل العرض
-          height={300} // يمكن تعديل الارتفاع
+          width={350}
+          height={300}
           style={{ objectFit: 'contain', maxWidth: '100%' }}
         />
       </Box>

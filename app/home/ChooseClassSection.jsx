@@ -34,6 +34,7 @@ const ChooseClassSection = () => {
 
   return (
     <Box
+    id="class"
       sx={{
         py: { xs: 8, md: 12 },
         px: { xs: 2, md: 4 },
@@ -76,7 +77,7 @@ const ChooseClassSection = () => {
       </Typography>
 
       <Box
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        className="grid grid-cols-1 justify-center  md:grid-cols-2 lg:grid-cols-3 gap-8"
         sx={{
           justifyItems: "center",
         }}
@@ -86,7 +87,7 @@ const ChooseClassSection = () => {
             key={course.id}
             sx={{
               maxWidth: 480,
-              width:400,
+              width:350,
               borderRadius: "12px",
               boxShadow: "0 8px 16px rgba(0, 0, 0, 0.1)",
               transition: "transform 0.3s ease-in-out",
@@ -148,7 +149,6 @@ const ChooseClassSection = () => {
                     color: "#495057",
                   }}
                 >
-                  {/* نجمة ذهبية واحدة */}
                   <StarIcon
                     sx={{ color: "#ffc107", fontSize: "1.2rem", mr: 0.5 }}
                   />

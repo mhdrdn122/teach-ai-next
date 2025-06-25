@@ -9,7 +9,7 @@ import Footer from './Footer'
 
 const page = () => {
   return (
-    <div>
+    <div >
         <HomeComponent />
         <ProgramComponent />
         <CommitmentSection />

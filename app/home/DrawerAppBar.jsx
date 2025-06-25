@@ -15,9 +15,18 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import Link from "next/link";
 
 const drawerWidth = 240;
-const navItems = ["الرئيسية", "من نحن", "تواصل معنا"];
+const navItems = [
+  { name: "الرئيسية", id: "" },
+  { name: " البرنامج", id: "program" },
+  { name: " الفئات", id: "class" },
+  { name: " الفريق", id: "team" },
+  { name: " الاشتارك", id: "subscribe" },
+];
+
+
 
 function DrawerAppBar(props) {
   const { window } = props;
@@ -43,14 +52,16 @@ function DrawerAppBar(props) {
       <Divider sx={{ borderColor: "rgba(255,255,255,0.3)" }} />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item.name} disablePadding>
             <ListItemButton
+              component={Link}
+              href={`#${item.id}`}
               sx={{
                 textAlign: "center",
                 "&:hover": { backgroundColor: "rgba(20,4,60,0.1)" },
               }}
             >
-              <ListItemText primary={item} />
+              <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -101,21 +112,28 @@ function DrawerAppBar(props) {
           >
             TeachAi
           </Typography>
-          <Box sx={{ display: { xs: "none", sm: "flex" }, width: { sm: "80%", md: "60%" } }}>
-            <Box sx={{ width: "80%" }}>
+          <Box
+            sx={{
+              display: { xs: "none", sm: "flex" },
+              width: { sm: "100%", md: "90%" },
+            }}
+          >
+            <Box sx={{ flex: "1" }} className="justify-center flex">
               {navItems.map((item) => (
                 <Button
-                  key={item}
+                  key={item?.name}
+                  component={Link}
+                  href={`#${item.id}`}
                   sx={{
                     color: "#fff",
                     fontSize: "1.125rem",
-                    mx: 2,
+                    mx: 1,
                     "&:hover": {
                       backgroundColor: "rgba(20,4,60,0.8)",
                     },
                   }}
                 >
-                  {item}
+                  {item.name}
                 </Button>
               ))}
             </Box>
@@ -235,7 +253,6 @@ function DrawerAppBar(props) {
               />
             </Box>
           </div>
-          {/* إضافة صورة الغيمة */}
           {/* <img
             src="/assets/images/cloud-h.png"
             alt="Cloud"

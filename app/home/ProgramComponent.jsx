@@ -14,6 +14,7 @@ import Image from "next/image";
 const ProgramComponent = () => {
   return (
     <Box
+    id="program"
       sx={{
         py: { xs: 6, md: 10 },
         px: { xs: 2, md: 4 },

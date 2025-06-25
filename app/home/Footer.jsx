@@ -9,7 +9,8 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
 const Footer = () => {
-  const navItems = ['الرئيسية', 'من نحن', 'البرنامج', 'المدربون', 'المدونة', 'تواصل معنا']; // روابط الشريط السفلي
+  const navItems = ['الرئيسية', 'من نحن', 'البرنامج', 'المدربون', 'المدونة', 'تواصل معنا'];
+   
   const socialLinks = [
     { icon: <FacebookIcon />, href: '#' },
     { icon: <TwitterIcon />, href: '#' },
@@ -21,7 +22,7 @@ const Footer = () => {
       sx={{
         py: { xs: 6, md: 8 },
         px: { xs: 2, md: 4 },
-        backgroundColor: '#14043c', // نفس اللون الغامق لشريط التنقل
+        backgroundColor: '#14043c', 
         color: 'white',
         textAlign: { xs: 'center', md: 'right' },
         position: 'relative',
@@ -39,7 +40,6 @@ const Footer = () => {
           gap: { xs: 4, md: 8 },
         }}
       >
-        {/* معلومات الشعار والشركة */}
         <Box
           sx={{
             flex: { md: 1 },
@@ -63,7 +63,6 @@ const Footer = () => {
           </Typography>
         </Box>
 
-        {/* روابط سريعة */}
         <Box sx={{ mb: { xs: 4, md: 0 } }}>
           <Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold', color: 'white' }}>
             روابط سريعة
@@ -77,7 +76,6 @@ const Footer = () => {
           </Box>
         </Box>
 
-        {/* تواصل معنا / أيقونات التواصل الاجتماعي */}
         <Box>
           <Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold', color: 'white' }}>
             تابعنا
