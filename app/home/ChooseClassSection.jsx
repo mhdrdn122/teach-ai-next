@@ -2,36 +2,30 @@
 "use client";
 
 import React from "react";
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  CardMedia,
-} from "@mui/material"; // Rating لم تعد ضرورية بنفس الشكل
+import { Box, Typography, Card, CardContent, CardMedia } from "@mui/material"; // Rating لم تعد ضرورية بنفس الشكل
 import Image from "next/image";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
-import StarIcon from "@mui/icons-material/Star";  
+import StarIcon from "@mui/icons-material/Star";
 
 const ChooseClassSection = () => {
   const classes = [
     {
       id: 1,
-      image: "/assets/images/class-read-write.jfif", 
+      image: "/assets/images/cho3.png",
       title: "تعلم القراءة والكتابة والعد",
       students: 70,
       rating: 4.5,
     },
     {
       id: 2,
-      image: "/assets/images/class-read-write.jfif", 
+      image: "/assets/images/cho3.png",
       title: "معرفة الأرض والعالم",
       students: 190,
       rating: 4.8,
     },
     {
       id: 3,
-      image: "/assets/images/class-read-write.jfif", 
+      image: "/assets/images/cho3.png",
       title: "تنمية الإبداع والمهارات",
       students: 110,
       rating: 4.7,
@@ -46,14 +40,14 @@ const ChooseClassSection = () => {
         // backgroundColor: "#ffb367",
         color: "#14043c",
         textAlign: "center",
-        position: 'relative', 
-        overflow: 'hidden',
+        position: "relative",
+        overflow: "hidden",
       }}
       className="container mx-auto"
       dir="rtl"
     >
       {/* صور متناثرة */}
-      <Image
+      {/* <Image
         src="/assets/images/decorative/stars.png"
         alt="Star"
         width={35}
@@ -66,8 +60,7 @@ const ChooseClassSection = () => {
         width={45}
         height={45}
         style={{ position: 'absolute', top: '20%', right: '10%', zIndex: 0, transform: 'rotate(15deg)' }}
-      />
-     
+      /> */}
 
       <Typography
         variant="h3"
@@ -92,7 +85,8 @@ const ChooseClassSection = () => {
           <Card
             key={course.id}
             sx={{
-              maxWidth: 380,
+              maxWidth: 480,
+              width:400,
               borderRadius: "12px",
               boxShadow: "0 8px 16px rgba(0, 0, 0, 0.1)",
               transition: "transform 0.3s ease-in-out",
@@ -104,12 +98,13 @@ const ChooseClassSection = () => {
               backgroundColor: "#ffffff",
             }}
           >
-            <CardMedia>
+              
+            <CardMedia sx={{margin:"0 auto"}} >
               <Image
                 src={course.image}
                 alt={course.title}
-                width={380}
-                height={200}
+                width={280}
+                height={100}
                 style={{
                   objectFit: "cover",
                   borderTopLeftRadius: "12px",
@@ -129,7 +124,8 @@ const ChooseClassSection = () => {
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "flex-end", // محاذاة لليمين
+                  justifyContent: "space-between",
+
                   gap: 2,
                 }}
               >
@@ -153,7 +149,9 @@ const ChooseClassSection = () => {
                   }}
                 >
                   {/* نجمة ذهبية واحدة */}
-                  <StarIcon sx={{ color: '#ffc107', fontSize: '1.2rem', mr: 0.5 }} />
+                  <StarIcon
+                    sx={{ color: "#ffc107", fontSize: "1.2rem", mr: 0.5 }}
+                  />
                   <Typography variant="body2">{course.rating}</Typography>
                 </Box>
               </Box>

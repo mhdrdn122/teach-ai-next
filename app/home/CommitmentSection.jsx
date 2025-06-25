@@ -58,19 +58,20 @@ const CommitmentSection = () => {
           flex: 1,
           display: 'flex',
           justifyContent: { xs: 'center', md: 'left' },
-          maxWidth: { xs: '100%', md: '50%' },
+          maxWidth: { xs: '100%', md: '20%' },
         }}
       >
         <Image
-          src="/assets/images/img-hero.png"
+          src="/assets/images/comm1.png"
           alt="Kid with glasses smiling"
-          width={450}
+          width={350}
           height={450}
           style={{
             maxWidth: '100%',
             height: 'auto',
             borderRadius: '12px',
-            boxShadow: '0 10px 20px rgba(0, 0, 0, 0.1)',
+            
+            // boxShadow: '0 10px 20px rgba(0, 0, 0, 0.1)',
           }}
         />
       </Box>
