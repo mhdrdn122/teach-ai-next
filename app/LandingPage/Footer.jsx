@@ -9,8 +9,14 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
 const Footer = () => {
-  const navItems = ['الرئيسية', 'من نحن', 'البرنامج', 'المدربون', 'المدونة', 'تواصل معنا'];
-   
+  // const navItems = ['الرئيسية', 'من نحن', 'البرنامج', 'المدربون', 'المدونة', 'تواصل معنا'];
+  const navItems = [
+  { name: "الرئيسية", id: "" },
+  { name: " البرنامج", id: "program" },
+  { name: " الفئات", id: "class" },
+  { name: " الفريق", id: "team" },
+  { name: " الاشتارك", id: "subscribe" },
+]; 
   const socialLinks = [
     { icon: <FacebookIcon />, href: '#' },
     { icon: <TwitterIcon />, href: '#' },
@@ -69,8 +75,8 @@ const Footer = () => {
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
             {navItems.map((item) => (
-              <Link key={item} href="#" color="inherit" underline="none" sx={{ '&:hover': { color: '#ff9800' } }}>
-                <Typography variant="body2">{item}</Typography>
+              <Link key={item.id} href={`#${item?.id}`} color="inherit" underline="none" sx={{ '&:hover': { color: '#ff9800' } }}>
+                <Typography variant="body2">{item.name}</Typography>
               </Link>
             ))}
           </Box>

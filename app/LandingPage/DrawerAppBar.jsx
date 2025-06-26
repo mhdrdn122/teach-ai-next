@@ -222,6 +222,8 @@ function DrawerAppBar(props) {
               </Typography>
               <Button
                 variant="contained"
+                component={Link}
+                href="teachai"
                 sx={{
                   backgroundColor: "#14043c",
                   color: "white",

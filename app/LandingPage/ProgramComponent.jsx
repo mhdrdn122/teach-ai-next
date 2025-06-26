@@ -10,6 +10,7 @@ import {
   Button,
 } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 
 const ProgramComponent = () => {
   return (
@@ -273,6 +274,8 @@ const ProgramComponent = () => {
 
       <Button
         variant="contained"
+        component={Link}
+        href="teachai"
         sx={{
           mt: { xs: 6, md: 8 },
           backgroundColor: "#14043c",

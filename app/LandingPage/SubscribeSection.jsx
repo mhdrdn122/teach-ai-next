@@ -8,11 +8,11 @@ import Image from 'next/image';
 const SubscribeSection = () => {
   return (
     <Box
-    id="subscribe"
+      id="subscribe"
       sx={{
         py: { xs: 8, md: 12 },
         px: { xs: 2, md: 4 },
-        backgroundColor: '#9c27b0', 
+        backgroundColor: '#9c27b0',
         color: 'white',
         textAlign: 'center',
         position: 'relative',
@@ -25,43 +25,6 @@ const SubscribeSection = () => {
       className=" mx-auto"
       dir="rtl"
     >
-      {/* decorative images*/}
-      {/* <Image
-        src="/assets/images/decorative/star-icon.png"
-        alt="Star"
-        width={40}
-        height={40}
-        style={{ position: 'absolute', top: '15%', left: '10%', zIndex: 0, animation: 'spin 15s linear infinite' }}
-      />
-      <Image
-        src="/assets/images/decorative/rocket-icon.png"
-        alt="Rocket"
-        width={70}
-        height={70}
-        style={{ position: 'absolute', top: '25%', right: '8%', zIndex: 0, transform: 'rotate(25deg)' }}
-      />
-      <Image
-        src="/assets/images/decorative/candy-icon.png"
-        alt="Candy"
-        width={50}
-        height={50}
-        style={{ position: 'absolute', bottom: '10%', left: '20%', zIndex: 0, transform: 'rotate(-10deg)' }}
-      />
-      <Image
-        src="/assets/images/decorative/cloud-bottom.png"
-        alt="Cloud"
-        width={100}
-        height={60}
-        style={{ position: 'absolute', bottom: '5%', right: '15%', zIndex: 0, transform: 'rotate(5deg)' }}
-      />
-      <Image
-        src="/assets/images/decorative/star-icon.png"
-        alt="Star"
-        width={30}
-        height={30}
-        style={{ position: 'absolute', bottom: '30%', right: '5%', zIndex: 0, animation: 'spin 10s linear infinite reverse' }}
-      /> */}
-
       <Typography
         variant="h3"
         component="h2"
@@ -70,7 +33,7 @@ const SubscribeSection = () => {
           fontWeight: 'bold',
           fontSize: { xs: '2rem', md: '3rem' },
           color: 'white',
-          zIndex: 1, 
+          zIndex: 1,
         }}
       >
         اشترك معنا
@@ -108,54 +71,53 @@ const SubscribeSection = () => {
           placeholder="أدخل بريدك الإلكتروني"
           sx={{
             flexGrow: 1,
-            backgroundColor: 'rgba(255, 255, 255, 0.2)', // خلفية شفافة قليلاً
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
             borderRadius: '8px',
             '& .MuiOutlinedInput-root': {
               '& fieldset': {
-                borderColor: 'rgba(255, 255, 255, 0.5)', // لون الحدود
+                borderColor: 'rgba(255, 255, 255, 0.5)',
               },
               '&:hover fieldset': {
-                borderColor: 'white', // لون الحدود عند التمرير
+                borderColor: 'white',
               },
               '&.Mui-focused fieldset': {
-                borderColor: 'white', // لون الحدود عند التركيز
+                borderColor: 'white',
               },
             },
             '& .MuiInputBase-input': {
-              color: 'white', // لون النص المدخل
+              color: 'white',
             },
             '& .MuiInputLabel-root': {
-                color: 'white', // لون Placeholder
+                color: 'white',
             },
             '& .MuiInputBase-input::placeholder': {
-                color: 'rgba(255, 255, 255, 0.7)', // لون Placeholder
-                opacity: 1, // Make sure placeholder is not too transparent
+                color: 'rgba(255, 255, 255, 0.7)',
+                opacity: 1,
             },
-            direction: 'rtl', // للحفاظ على اتجاه الكتابة من اليمين لليسار
-            textAlign: 'right', // لمحاذاة النص في حقل الإدخال
+            direction: 'rtl',
           }}
-          InputProps={{ // Ensure placeholder and input direction are correct
+          InputProps={{
             style: { color: 'white' },
-            inputProps: {
-                dir: 'rtl',
-                textAlign: 'right'
-            }
+            // inputProps: {
+            //   dir: 'rtl',
+            //   textAlign: 'right'
+            // }
           }}
         />
         <Button
           variant="contained"
           sx={{
-            backgroundColor: '#ff9800', 
+            backgroundColor: '#ff9800',
             color: 'white',
             '&:hover': {
-              backgroundColor: '#e68900', 
+              backgroundColor: '#e68900',
             },
             px: 4,
             py: 1.5,
             borderRadius: '8px',
             fontWeight: 'bold',
             fontSize: '1.1rem',
-            minWidth: { xs: '100%', sm: '150px' }, 
+            minWidth: { xs: '100%', sm: '150px' },
           }}
         >
           اشترك الآن
@@ -165,15 +127,15 @@ const SubscribeSection = () => {
       <Box sx={{
         position: 'absolute',
         bottom: 0,
-        right: { xs: 0, sm: '2%' }, 
+        right: { xs: 0, sm: '2%' },
         width: { xs: '100%', sm: 'auto' },
         height: 'auto',
-        zIndex: 1, 
-        display: {  xs: 'none' , md: 'flex' },
-        justifyContent: 'flex-end', 
+        zIndex: 1,
+        display: { xs: 'none', md: 'flex' },
+        justifyContent: 'flex-end',
       }}>
         <Image
-          src="/assets/images/img-hero.png" 
+          src="/assets/images/img-hero.png"
           alt="Kids reading"
           width={350}
           height={300}
