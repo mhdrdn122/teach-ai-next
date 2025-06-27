@@ -26,8 +26,6 @@ const navItems = [
   { name: " الاشتارك", id: "subscribe" },
 ];
 
-
-
 function DrawerAppBar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -39,12 +37,7 @@ function DrawerAppBar(props) {
   const drawer = (
     <Box
       onClick={handleDrawerToggle}
-      sx={{
-        textAlign: "center",
-        backgroundColor: "rgba(76,176,179,255)",
-        height: "100%",
-        color: "white",
-      }}
+      className="text-center bg-[rgba(76,176,179,255)] h-full text-white"
     >
       <Typography variant="h6" sx={{ my: 2 }}>
         TeachAi
@@ -56,22 +49,14 @@ function DrawerAppBar(props) {
             <ListItemButton
               component={Link}
               href={`#${item.id}`}
-              sx={{
-                textAlign: "center",
-                "&:hover": { backgroundColor: "rgba(20,4,60,0.1)" },
-              }}
+              className="text-center hover:bg-[rgba(20,4,60,0.1)]"
             >
               <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>
         ))}
         <ListItem disablePadding>
-          <ListItemButton
-            sx={{
-              textAlign: "center",
-              "&:hover": { backgroundColor: "rgba(20,4,60,0.1)" },
-            }}
-          >
+          <ListItemButton className="text-center hover:bg-[rgba(20,4,60,0.1)]">
             <ListItemText primary="تغيير اللغة" />
           </ListItemButton>
         </ListItem>
@@ -90,7 +75,7 @@ function DrawerAppBar(props) {
         elevation={0}
         sx={{ backgroundColor: "rgba(76,176,179,255)", direction: "rtl" }}
       >
-        <Toolbar sx={{ justifyContent: "space-between", alignItems: "center" }}>
+        <Toolbar className="justify-between items-center">
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -103,12 +88,7 @@ function DrawerAppBar(props) {
           <Typography
             variant="h6"
             component="div"
-            sx={{
-              flexGrow: 1,
-              display: { xs: "none", sm: "block" },
-              fontWeight: "bold",
-            }}
-            className="text-white text-3xl"
+            className="flex-grow hidden sm:block font-bold text-white text-3xl"
           >
             TeachAi
           </Typography>
@@ -118,7 +98,7 @@ function DrawerAppBar(props) {
               width: { sm: "100%", md: "90%" },
             }}
           >
-            <Box sx={{ flex: "1" }} className="justify-center flex">
+             <Box sx={{ flex: "1" }} className="justify-center flex">
               {navItems.map((item) => (
                 <Button
                   key={item?.name}
@@ -137,16 +117,14 @@ function DrawerAppBar(props) {
                 </Button>
               ))}
             </Box>
-            <Button
-              sx={{
-                color: "#fff",
-                fontSize: "1.125rem",
-                ml: 4,
-                "&:hover": {
-                  backgroundColor: "rgba(20,4,60,0.8)",
-                },
-              }}
-            >
+            <Button sx={{
+                    color: "#fff",
+                    fontSize: "1.125rem",
+                    mx: 1,
+                    "&:hover": {
+                      backgroundColor: "rgba(20,4,60,0.8)",
+                    },
+                  }} className="text-white text-lg ml-4 hover:bg-[rgba(20,4,60,0.8)]">
               تغيير اللغة
             </Button>
           </Box>
@@ -176,17 +154,8 @@ function DrawerAppBar(props) {
       <Box component="main" sx={{ flexGrow: 1 }}>
         <Toolbar />
         <Box
-          sx={{
-            backgroundColor: "rgba(76,176,179,255)",
-            color: "white",
-            minHeight: "calc(100vh - 64px)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            p: 3,
-            position: "relative",
-            overflow: "hidden",
-          }}
+          sx={{ backgroundColor: "rgba(76,176,179,255)" }}
+          className="text-white min-h-[calc(100vh-64px)] flex items-center justify-center p-3 relative overflow-hidden bg-[url('/assets/images/bannerbackgrond.png')] bg-cover bg-center"
         >
           <div className="container mx-auto flex flex-col md:flex-row items-center justify-between py-8 md:py-0">
             <Box
@@ -200,21 +169,13 @@ function DrawerAppBar(props) {
               <Typography
                 variant="h3"
                 component="h1"
-                sx={{
-                  fontSize: { xs: "2.25rem", md: "3rem" },
-                  fontWeight: "bold",
-                  mb: 2,
-                }}
+                className="text-4xl md:text-5xl font-bold mb-2"
               >
                 مرحباً بكم في TeachAi
               </Typography>
               <Typography
                 variant="body1"
-                sx={{
-                  fontSize: { xs: "1.125rem", md: "1.25rem" },
-                  lineHeight: "1.6",
-                  mb: 3,
-                }}
+                className="text-lg md:text-xl leading-relaxed mb-3"
               >
                 نؤمن بالدور المحوري للذكاء الاصطناعي في إثراء عملية تعليم
                 الأطفال وتطوير مهاراتهم المستقبلية. نقدم حلولاً تعليمية مبتكرة
@@ -224,19 +185,7 @@ function DrawerAppBar(props) {
                 variant="contained"
                 component={Link}
                 href="teachai"
-                sx={{
-                  backgroundColor: "#14043c",
-                  color: "white",
-                  "&:hover": {
-                    backgroundColor: "#0c0326",
-                  },
-                  px: 4,
-                  py: 1.5,
-                  borderRadius: "9999px",
-                  fontWeight: "semibold",
-                  fontSize: "1.125rem",
-                  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                }}
+                className="bg-[#14043c] text-white hover:bg-[#0c0326] px-4 py-1.5 rounded-full font-semibold text-lg shadow-md"
               >
                 اكتشف المزيد
               </Button>
@@ -255,19 +204,6 @@ function DrawerAppBar(props) {
               />
             </Box>
           </div>
-          {/* <img
-            src="/assets/images/cloud-h.png"
-            alt="Cloud"
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              width: "100%",
-              height: "auto",
-              zIndex: 1,
-              objectFit: "cover",
-            }}
-          /> */}
         </Box>
       </Box>
     </Box>

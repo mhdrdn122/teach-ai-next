@@ -11,6 +11,8 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import DecorativeImage from "./DecorativeImage";
+import { decorativeImages } from "../Constants/Constants";
 
 const ProgramComponent = () => {
   return (
@@ -27,62 +29,7 @@ const ProgramComponent = () => {
       className="container mx-auto"
     >
       {/* Decorative Images */}
-      <Image
-        src="/assets/images/decorative/rocket.png"
-        alt="Rocket"
-        width={70}
-        height={70}
-        style={{
-          position: "absolute",
-          top: "15%",
-          left: "8%",
-          zIndex: 1,
-          transform: "rotate(-20deg)",
-          display: "none",
-        }}
-      />
-      <Image
-        src="/assets/images/decorative/stars.png"
-        alt="Star"
-        width={40}
-        height={40}
-        style={{
-          position: "absolute",
-          top: "5%",
-          right: "10%",
-          zIndex: 1,
-          animation: "spin 10s linear infinite",
-          display: "none",
-        }}
-      />
-      <Image
-        src="/assets/images/decorative/rocket.png"
-        alt="Candy"
-        width={50}
-        height={50}
-        style={{
-          position: "absolute",
-          bottom: "10%",
-          left: "15%",
-          zIndex: 1,
-          transform: "rotate(30deg)",
-          display: "none",
-        }}
-      />
-      <Image
-        src="/assets/images/decorative/stars.png"
-        alt="Star"
-        width={30}
-        height={30}
-        style={{
-          position: "absolute",
-          bottom: "20%",
-          right: "8%",
-          zIndex: 1,
-          animation: "spin 8s linear infinite",
-          display: "none",
-        }}
-      />
+      <DecorativeImage images={decorativeImages} />
 
       <Typography
         variant="h3"

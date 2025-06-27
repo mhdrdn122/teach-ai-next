@@ -6,6 +6,8 @@ import { Box, Typography, Card, CardContent, CardMedia } from "@mui/material"; /
 import Image from "next/image";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import StarIcon from "@mui/icons-material/Star";
+import DecorativeImageWrapper from "./DecorativeImage";
+import { decorativeImages } from "../Constants/Constants";
 
 const ChooseClassSection = () => {
   const classes = [
@@ -47,21 +49,9 @@ const ChooseClassSection = () => {
       className="container mx-auto"
       dir="rtl"
     >
-      {/* صور متناثرة */}
-      {/* <Image
-        src="/assets/images/decorative/stars.png"
-        alt="Star"
-        width={35}
-        height={35}
-        style={{ position: 'absolute', top: '10%', left: '5%', zIndex: 0, animation: 'spin 12s linear infinite' }}
-      />
-      <Image
-        src="/assets/images/decorative/rocket.png"
-        alt="Candy"
-        width={45}
-        height={45}
-        style={{ position: 'absolute', top: '20%', right: '10%', zIndex: 0, transform: 'rotate(15deg)' }}
-      /> */}
+       {/* Decorative Images */}
+           <DecorativeImageWrapper images={decorativeImages} />
+     
 
       <Typography
         variant="h3"

@@ -1,0 +1,41 @@
+export const decorativeImages = [
+  {
+    src: "/assets/images/decorative/rocet1.png",
+    alt: "Rocket",
+    width: 40,
+    height: 40,
+    top: "15%",
+    left: "8%",
+    rotate: "-20deg",
+    animation: "spin 10s linear infinite",
+  },
+  {
+    src: "/assets/images/decorative/stars.png",
+    alt: "Star",
+    width: 40,
+    height: 40,
+    top: "5%",
+    right: "10%",
+    animation: "spin 10s linear infinite",
+  },
+  {
+    src: "/assets/images/decorative/candy3.png",
+    alt: "Candy",
+    width: 50,
+    height: 50,
+    bottom: "10%",
+    left: "15%",
+    rotate: "30deg",
+    animation: "spin 10s linear infinite",
+  },
+  {
+    src: "/assets/images/decorative/party1.png",
+    alt: "Party Star",
+    width: 30,
+    height: 30,
+    bottom: "10%",
+    right: "4%",
+    animation: "spin 10s linear infinite",
+  },
+  
+];
