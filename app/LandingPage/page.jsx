@@ -1,3 +1,4 @@
+"use client";
 import React from 'react'
 import HomeComponent from './DrawerAppBar'
 import ProgramComponent from './ProgramComponent'

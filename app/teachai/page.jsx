@@ -135,7 +135,10 @@ const App = () => {
         style={{ backgroundColor: getBackgroundColor() }}
       >
         <Typography variant="h4" component="h1" className="m-0 py-2 font-bold text-gray-900 text-3xl sm:text-4xl lg:text-5xl">
-          نظام التعرف على الأسئلة
+         {`
+         اهلا بك يا
+         ${localStorage.getItem("userName") || "عزيزي"}
+         في  نظام التعرف على الأسئلة`}
         </Typography>
 
         <ChapterComponent />

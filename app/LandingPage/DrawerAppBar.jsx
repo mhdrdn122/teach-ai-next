@@ -16,6 +16,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Link from "next/link";
+import FormDialog from "./FormDialog";
 
 const drawerWidth = 240;
 const navItems = [
@@ -23,7 +24,7 @@ const navItems = [
   { name: " البرنامج", id: "program" },
   { name: " الفئات", id: "class" },
   { name: " الفريق", id: "team" },
-  { name: " الاشتارك", id: "subscribe" },
+  { name: " الاشتراك", id: "subscribe" },
 ];
 
 function DrawerAppBar(props) {
@@ -98,7 +99,7 @@ function DrawerAppBar(props) {
               width: { sm: "100%", md: "90%" },
             }}
           >
-             <Box sx={{ flex: "1" }} className="justify-center flex">
+            <Box sx={{ flex: "1" }} className="justify-center flex">
               {navItems.map((item) => (
                 <Button
                   key={item?.name}
@@ -117,14 +118,17 @@ function DrawerAppBar(props) {
                 </Button>
               ))}
             </Box>
-            <Button sx={{
-                    color: "#fff",
-                    fontSize: "1.125rem",
-                    mx: 1,
-                    "&:hover": {
-                      backgroundColor: "rgba(20,4,60,0.8)",
-                    },
-                  }} className="text-white text-lg ml-4 hover:bg-[rgba(20,4,60,0.8)]">
+            <Button
+              sx={{
+                color: "#fff",
+                fontSize: "1.125rem",
+                mx: 1,
+                "&:hover": {
+                  backgroundColor: "rgba(20,4,60,0.8)",
+                },
+              }}
+              className="text-white text-lg ml-4 hover:bg-[rgba(20,4,60,0.8)]"
+            >
               تغيير اللغة
             </Button>
           </Box>
@@ -181,14 +185,29 @@ function DrawerAppBar(props) {
                 الأطفال وتطوير مهاراتهم المستقبلية. نقدم حلولاً تعليمية مبتكرة
                 تجمع بين المتعة والفعالية.
               </Typography>
-              <Button
+              {/* <Button
                 variant="contained"
                 component={Link}
                 href="teachai"
                 className="bg-[#14043c] text-white hover:bg-[#0c0326] px-4 py-1.5 rounded-full font-semibold text-lg shadow-md"
+                sx={{
+                  mt: { xs: 6, md: 8 },
+                  backgroundColor: "#14043c",
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#0c0326",
+                  },
+                  px: 4,
+                  py: 1.5,
+                  borderRadius: "9999px",
+                  fontWeight: "semibold",
+                  fontSize: "1.125rem",
+                  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                }}
               >
                 اكتشف المزيد
-              </Button>
+              </Button> */}
+              <FormDialog />
             </Box>
             <Box
               sx={{
