@@ -12,6 +12,8 @@ import QuestionMedia from "../components/QuestionImage";
 import ChapterComponent from "../components/ChapterComponent";
 import { ChapterApi } from "../Context/ChapterContext";
 import AudioRecorderWave from "../components/AudioRecorderWave";
+import Button from "@mui/material/Button";
+import FormDialog from "../LandingPage/FormDialog";
 
 const App = () => {
   const { successSound, failureSound, questionAudio } = useAudio();
@@ -50,9 +52,9 @@ const App = () => {
   } else if (userAnswer && !loadingQuestion) {
     resultDisplay = (
       <Stack
-        direction={{ xs: "column", sm: "row-reverse" }} 
+        direction={{ xs: "column", sm: "row-reverse" }}
         spacing={2}
-        alignItems={{ xs: "center", sm: "flex-start" }} 
+        alignItems={{ xs: "center", sm: "flex-start" }}
         justifyContent="center"
         className="w-full"
       >
@@ -60,11 +62,11 @@ const App = () => {
           label={`الإجابة: ${userAnswer}`}
           color="primary"
           sx={{
-            fontSize: { xs: 16, sm: 20 }, 
+            fontSize: { xs: 16, sm: 20 },
             padding: { xs: 2, sm: 4 },
-            minWidth: { xs: '80%', sm: 'auto' }, 
-            textAlign: 'center',
-            height: 'auto', 
+            minWidth: { xs: "80%", sm: "auto" },
+            textAlign: "center",
+            height: "auto",
           }}
           className="shadow-md"
         />
@@ -72,9 +74,9 @@ const App = () => {
           sx={{
             fontSize: { xs: 16, sm: 20 },
             padding: { xs: 2, sm: 4 },
-            minWidth: { xs: '80%', sm: 'auto' },
-            textAlign: 'center',
-            height: 'auto',
+            minWidth: { xs: "80%", sm: "auto" },
+            textAlign: "center",
+            height: "auto",
           }}
           label={`النتيجة: ${answerResult}`}
           color={answerResult === "صحيحة" ? "success" : "error"}
@@ -84,9 +86,9 @@ const App = () => {
           sx={{
             fontSize: { xs: 16, sm: 20 },
             padding: { xs: 2, sm: 4 },
-            minWidth: { xs: '80%', sm: 'auto' },
-            textAlign: 'center',
-            height: 'auto',
+            minWidth: { xs: "80%", sm: "auto" },
+            textAlign: "center",
+            height: "auto",
           }}
           label={`الإجابة الصحيحة: ${correctAnswer}`}
           color="success"
@@ -134,8 +136,14 @@ const App = () => {
         className="flex-grow text-center text-gray-800 flex flex-col items-center justify-start py-4 space-y-4 transition-colors duration-500 p-4 sm:p-6 lg:p-8"
         style={{ backgroundColor: getBackgroundColor() }}
       >
-        <Typography variant="h4" component="h1" className="m-0 py-2 font-bold text-gray-900 text-3xl sm:text-4xl lg:text-5xl">
-         {`
+        <FormDialog mode="edit" />
+
+        <Typography
+          variant="h4"
+          component="h1"
+          className="m-0 py-2 font-bold text-gray-900 text-3xl sm:text-4xl lg:text-5xl"
+        >
+          {`
          اهلا بك يا
          ${localStorage.getItem("userName") || "عزيزي"}
          في  نظام التعرف على الأسئلة`}
@@ -144,7 +152,14 @@ const App = () => {
         <ChapterComponent />
 
         {chapterDetails && (
-          <Typography variant="h6" component="h4" className="text-gray-700 text-lg sm:text-xl">
+          <Typography
+            variant="h6"
+            component="h4"
+            className="text-gray-700 text-lg sm:text-xl"
+            sx={{
+              my:2
+            }}
+          >
             الوحدة: {chapterDetails.name}
           </Typography>
         )}
@@ -154,15 +169,17 @@ const App = () => {
             onTextResult={onQuestionTextResult}
             onRecordingStarted={onQuestionRecordingStarted}
             onRecordingStopped={onQuestionRecordingStopped}
-            disabled={isAnyRecordingActive && !questionRecording} 
+            disabled={isAnyRecordingActive && !questionRecording}
             buttonText="تسجيل السؤال"
           />
           <AudioRecorderWave
             onTextResult={onAnswerTextResult}
             onRecordingStarted={onAnswerRecordingStarted}
             onRecordingStopped={onAnswerRecordingStopped}
-            disabled={isAnyRecordingActive || !detectedQuestionId || loadingQuestion}
-                        buttonText="تسجيل الإجابة"
+            disabled={
+              isAnyRecordingActive || !detectedQuestionId || loadingQuestion
+            }
+            buttonText="تسجيل الإجابة"
           />
         </Box>
 
@@ -177,19 +194,24 @@ const App = () => {
         </Box>
 
         {loadingQuestion ? (
-          <Typography className="text-lg text-gray-800 flex justify-center items-center gap-4 font-medium"
+          <Typography
+            className="text-lg text-gray-800 flex justify-center items-center gap-4 font-medium"
             sx={{
               fontSize: { xs: 16, sm: 18, md: 20 },
-              padding: 2
-            }}>
+              padding: 2,
+            }}
+          >
             <CircularProgress size={30} sx={{ color: "#1a9de6" }} />
             ...جاري معالجة السؤال
           </Typography>
         ) : (
-          <Typography className="text-lg text-gray-800 font-medium" sx={{
-            fontSize: { xs: 18, sm: 20, md: 22 },
-            padding: 2
-          }}>
+          <Typography
+            className="text-lg text-gray-800 font-medium"
+            sx={{
+              fontSize: { xs: 18, sm: 20, md: 22 },
+              padding: 2,
+            }}
+          >
             {questionResult.question}
           </Typography>
         )}

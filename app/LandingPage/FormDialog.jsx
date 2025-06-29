@@ -12,9 +12,11 @@ import { useRouter } from "next/navigation"; // Updated import for App Router
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function FormDialog() {
+export default function FormDialog({ mode }) {
   const [open, setOpen] = React.useState(false);
-  const [name, setName] = React.useState("");
+  const [name, setName] = React.useState(
+    mode != "edit" ? "" : localStorage.getItem("userName") || ""
+  );
   const router = useRouter();
 
   const handleClickOpen = () => {
@@ -23,7 +25,7 @@ export default function FormDialog() {
 
   const handleClose = () => {
     setOpen(false);
-    setName(""); // Reset name field on close
+    setName(mode != "edit" ? "" : localStorage.getItem("userName") || ""); // Reset name field on close
   };
 
   const handleChange = (e) => {
@@ -81,22 +83,22 @@ export default function FormDialog() {
         variant="outlined"
         onClick={handleClickOpen}
         sx={{
-          mt: { xs: 6, md: 8 },
+          mt: { xs: 0, md: 0 },
           backgroundColor: "#14043c",
           color: "white",
           "&:hover": {
             backgroundColor: "#0c0326",
           },
-          px: 4,
-          py: 1.5,
+          px: 2,
+          py: 1,
           borderRadius: "9999px",
           fontWeight: "semibold",
-          fontSize: "1.125rem",
+          fontSize: "1.0rem",
           boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         }}
         aria-label="اكتشف المزيد"
       >
-        اكتشف المزيد
+        {mode == "edit" ? "تعديل الاسم" : " اكتشف المزيد"}
       </Button>
       <Dialog
         open={open}
@@ -107,12 +109,13 @@ export default function FormDialog() {
           component: "form",
           onSubmit: handleSubmit,
         }}
-       
       >
         <DialogTitle>Teach-ai</DialogTitle>
-        <DialogContent  sx={{
-            width:"400px"
-        }}>
+        <DialogContent
+          sx={{
+            width: "400px",
+          }}
+        >
           <DialogContentText>يرجى إدخال الاسم</DialogContentText>
           <TextField
             autoFocus
