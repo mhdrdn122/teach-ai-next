@@ -23,7 +23,6 @@ const SubscribeSection = () => {
         justifyContent: 'center',
       }}
       className=" mx-auto"
-      dir="rtl"
     >
       <Typography
         variant="h3"
@@ -94,12 +93,11 @@ const SubscribeSection = () => {
                 color: 'rgba(255, 255, 255, 0.7)',
                 opacity: 1,
             },
-            direction: 'rtl',
+            
           }}
           InputProps={{
             style: { color: 'white' },
             // inputProps: {
-            //   dir: 'rtl',
             //   textAlign: 'right'
             // }
           }}

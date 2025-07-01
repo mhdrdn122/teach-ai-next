@@ -1,0 +1,64 @@
+{
+  "page": {
+    "title": "Hello world!"
+  },
+  "navbar": {
+    "Home": "Home",
+    "Program": "Program",
+    "Category": "Category",
+    "Team": "Team"
+  },
+  "hero": {
+    "title": "Welcome to Teach-ai",
+    "description": "We believe in the pivotal role of artificial intelligence in enriching children's education and developing their future skills. We offer innovative educational solutions that combine fun and effectiveness."
+  },
+  "formDialog": {
+    "btnText": "View More",
+    "btnTextAddName": "Get Started",
+    "btnTextEditName": "Edit name",
+    "contentDialog": "Please enter your name",
+    "labelField": "Name",
+    "btnTextClose": "Close",
+    "btnTextConfirm": "Done"
+  },
+  "program": {
+    "title": "Our innovative educational program",
+    "subTitle": "At TeachAi, we offer an integrated educational approach that combines the latest artificial intelligence technologies and interactive content to ensure an enjoyable and effective learning experience for your children. Our program is designed to develop critical thinking and future-reading skills.",
+    "cardTitle1": "Interactive learning with artificial intelligence",
+    "cardContent1": "Through AI-powered activities and games, children can explore scientific concepts in an engaging and experiential way.",
+    "cardTitle2": "Customized learning paths",
+    "cardContent2": "Our program adapts to each child's level and interests, providing personalized content that ensures maximum benefit and continuous skill development.",
+    "cardTitle3": "Comprehensive progress reports for parents",
+    "cardContent3": "Parents can track their children's progress through detailed reports that highlight strengths and areas for development."
+  },
+  "commitment": {
+    "title": "We are committed to educating all our students.",
+    "content": "We believe that high-quality education is a right for everyone. At TeachAi, we are dedicated to providing a comprehensive and supportive learning environment where every child can thrive and develop. We work to meet the individual needs of each learner, focusing on building confidence and fostering a lifelong love of learning."
+  },
+  "ChooseClassSection": {
+    "title": "Choose the class that suits your needs",
+    "cardTitle1": "Developing Creativity and Skills",
+    "cardTitle2": "Knowledge of Earth and the World",
+    "cardTitle3": "Learning to Read, Write, and Count",
+    "span": "student"
+  },
+  "team": {
+    "title": "Our Instructors",
+    "teach1": "Devon Lane",
+    "span1": "Literacy Teacher",
+    "teach2": "Dianne Russell",
+    "span2": "Literacy Teacher",
+    "teach3": "Arlene McCoy",
+    "span3": "Educational Artist",
+    "teach4": "Jay Hawkins",
+    "span4": "Preschool Teacher",
+    "teach5": "Jane Cooper",
+    "span5": "Founder & CEO"
+  },
+  "footer": {
+    "subTitle": "We offer innovative educational solutions that combine fun and effectiveness to develop your children's skills.",
+    "fastLinks": "Quick Links",
+    "span": "Follow Us",
+    "bottomText": "© 2025 TeachAi. All rights reserved."
+  }
+}

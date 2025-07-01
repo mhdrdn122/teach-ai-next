@@ -7,16 +7,20 @@ import Image from 'next/image';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import { useTranslations } from 'next-intl';
 
 const Footer = () => {
-  // const navItems = ['الرئيسية', 'من نحن', 'البرنامج', 'المدربون', 'المدونة', 'تواصل معنا'];
-  const navItems = [
-  { name: "الرئيسية", id: "" },
-  { name: " البرنامج", id: "program" },
-  { name: " الفئات", id: "class" },
-  { name: " الفريق", id: "team" },
-  { name: " الاشتارك", id: "subscribe" },
-]; 
+  
+  const t = useTranslations("navbar")
+  const t_footer = useTranslations("footer")
+
+const navItems = [
+  { name: t("Home"), id: "" },
+  { name: t("Program"), id: "program" },
+  { name: t("Category"), id: "class" },
+  { name: t("Team"), id: "team" },
+  // { name: " الاشتراك", id: "subscribe" },
+];
   const socialLinks = [
     { icon: <FacebookIcon />, href: '#' },
     { icon: <TwitterIcon />, href: '#' },
@@ -34,7 +38,6 @@ const Footer = () => {
         position: 'relative',
         overflow: 'hidden',
       }}
-      dir="rtl"
     >
       <Box
         className="container mx-auto"
@@ -65,14 +68,12 @@ const Footer = () => {
             TeachAi
           </Typography>
           <Typography variant="body2" sx={{ maxWidth: '300px', lineHeight: 1.6, mx: { xs: 'auto', md: 'unset' } }}>
-            نقدم حلولاً تعليمية مبتكرة تجمع بين المتعة والفعالية لتنمية مهارات أطفالكم.
-          </Typography>
+{t_footer("subTitle")}          </Typography>
         </Box>
 
         <Box sx={{ mb: { xs: 4, md: 0 } }}>
           <Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold', color: 'white' }}>
-            روابط سريعة
-          </Typography>
+{t_footer("fastLinks")}          </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
             {navItems.map((item) => (
               <Link key={item.id} href={`#${item?.id}`} color="inherit" underline="none" sx={{ '&:hover': { color: '#ff9800' } }}>
@@ -84,7 +85,7 @@ const Footer = () => {
 
         <Box>
           <Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold', color: 'white' }}>
-            تابعنا
+            {t_footer("span")}
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'flex-start' } }}>
             {socialLinks.map((link, index) => (
@@ -94,8 +95,8 @@ const Footer = () => {
             ))}
           </Box>
           <Typography variant="body2" sx={{ mt: 2, color: 'rgba(255,255,255,0.7)' }}>
-            © {new Date().getFullYear()} TeachAi. جميع الحقوق محفوظة.
-          </Typography>
+            © {new Date().getFullYear()} 
+{t_footer("bottomText")}          </Typography>
         </Box>
       </Box>
     </Box>

@@ -13,8 +13,10 @@ import Image from "next/image";
 import Link from "next/link";
 import DecorativeImage from "./DecorativeImage";
 import { decorativeImages } from "../Constants/Constants";
+import { useTranslations } from "next-intl";
 
 const ProgramComponent = () => {
+  const t = useTranslations("program")
   return (
     <Box
     id="program"
@@ -40,7 +42,7 @@ const ProgramComponent = () => {
           fontSize: { xs: "2rem", md: "3rem" },
         }}
       >
-        برنامجنا التعليمي المبتكر
+       {t("title")}
       </Typography>
 
       <Typography
@@ -53,13 +55,11 @@ const ProgramComponent = () => {
           lineHeight: 1.7,
         }}
       >
-        نقدم في TeachAi منهجًا تعليميًا متكاملاً يجمع بين أحدث تقنيات الذكاء
-        الاصطناعي والمحتوى التفاعلي لضمان تجربة تعلم ممتعة وفعالة لأطفالكم.
-        برنامجنا مصمم لتنمية التفكير النقدي والمهارات المستقبلية.
+       {t("subTitle")}
+        
       </Typography>
 
       <Box
-        dir="rtl"
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 text-right gap-8"
         sx={{
           justifyItems: "center",
@@ -104,14 +104,15 @@ const ProgramComponent = () => {
               component="h3"
               sx={{ mb: 1.5, fontWeight: "bold", color: "#14043c" }}
             >
-              التعلم التفاعلي بالذكاء الاصطناعي
+                     {t("cardTitle3")}
+
             </Typography>
             <Typography
               variant="body2"
               sx={{ lineHeight: 1.6, color: "#495057" }}
             >
-              من خلال الأنشطة والألعاب المعتمدة على الذكاء الاصطناعي، يتمكن
-              الأطفال من استكشاف المفاهيم العلمية بطريقة شيقة وتجريبية.
+                           {t("cardContent3")}
+              
             </Typography>
           </CardContent>
         </Card>
@@ -160,11 +161,11 @@ const ProgramComponent = () => {
               component="h3"
               sx={{ mb: 1.5, fontWeight: "bold" }}
             >
-              مسارات تعليمية مخصصة
+
+                     {t("cardTitle2")}
             </Typography>
             <Typography variant="body2" sx={{ lineHeight: 1.6 }}>
-              يتكيف برنامجنا مع مستوى كل طفل واهتماماته، مقدمًا محتوى مخصصًا
-              يضمن أقصى استفادة وتطور مستمر للمهارات.
+                           {t("cardContent2")}
             </Typography>
           </CardContent>
         </Card>
@@ -206,20 +207,20 @@ const ProgramComponent = () => {
               component="h3"
               sx={{ mb: 1.5, fontWeight: "bold", color: "#14043c" }}
             >
-              تقارير تقدم شاملة للوالدين
+                     {t("cardTitle1")}
             </Typography>
             <Typography
               variant="body2"
               sx={{ lineHeight: 1.6, color: "#495057" }}
             >
-              يمكن للوالدين متابعة تقدم أطفالهم من خلال تقارير مفصلة توضح نقاط
-              القوة والمجالات التي تحتاج إلى تطوير.
+                           {t("cardContent1")}
+
             </Typography>
           </CardContent>
         </Card>
       </Box>
 
-      <Button
+      {/* <Button
         variant="contained"
         component={Link}
         href="teachai"
@@ -239,7 +240,7 @@ const ProgramComponent = () => {
         }}
       >
         ابدأ رحلة التعلم اليوم
-      </Button>
+      </Button> */}
     </Box>
   );
 };

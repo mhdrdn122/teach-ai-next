@@ -9,6 +9,8 @@ import SubscribeSection from './SubscribeSection'
 import Footer from './Footer'
 
 const page = () => {
+
+
   return (
     <div >
         <HomeComponent />
@@ -16,7 +18,7 @@ const page = () => {
         <CommitmentSection />
         <ChooseClassSection />
         <OurTrainersSection />
-        <SubscribeSection />
+        {/* <SubscribeSection /> */}
         <Footer />
     </div>
   )

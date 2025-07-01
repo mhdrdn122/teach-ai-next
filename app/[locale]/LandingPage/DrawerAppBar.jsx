@@ -17,20 +17,26 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Link from "next/link";
 import FormDialog from "./FormDialog";
+import LocaleSwitcher from "../components/LocaleSwitcher";
+import { useTranslations } from "next-intl";
 
 const drawerWidth = 240;
-const navItems = [
-  { name: "الرئيسية", id: "" },
-  { name: " البرنامج", id: "program" },
-  { name: " الفئات", id: "class" },
-  { name: " الفريق", id: "team" },
-  { name: " الاشتراك", id: "subscribe" },
-];
+
 
 function DrawerAppBar(props) {
+const t = useTranslations("navbar")
+const t_hero = useTranslations("hero")
+
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+const navItems = [
+  { name: t("Home"), id: "" },
+  { name: t("Program"), id: "program" },
+  { name: t("Category"), id: "class" },
+  { name: t("Team"), id: "team" },
+  // { name: " الاشتراك", id: "subscribe" },
+];
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
@@ -58,7 +64,8 @@ function DrawerAppBar(props) {
         ))}
         <ListItem disablePadding>
           <ListItemButton className="text-center hover:bg-[rgba(20,4,60,0.1)]">
-            <ListItemText primary="تغيير اللغة" />
+            {/* <ListItemText primary="تغيير اللغة" /> */}
+            <LocaleSwitcher />
           </ListItemButton>
         </ListItem>
       </List>
@@ -69,12 +76,12 @@ function DrawerAppBar(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box dir="rtl" sx={{ display: "flex" }}>
+    <Box  sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
         component="nav"
         elevation={0}
-        sx={{ backgroundColor: "rgba(76,176,179,255)", direction: "rtl" }}
+        sx={{ backgroundColor: "rgba(76,176,179,255)" }}
       >
         <Toolbar className="justify-between items-center">
           <IconButton
@@ -118,19 +125,9 @@ function DrawerAppBar(props) {
                 </Button>
               ))}
             </Box>
-            <Button
-              sx={{
-                color: "#fff",
-                fontSize: "1.125rem",
-                mx: 1,
-                "&:hover": {
-                  backgroundColor: "rgba(20,4,60,0.8)",
-                },
-              }}
-              className="text-white text-lg ml-4 hover:bg-[rgba(20,4,60,0.8)]"
-            >
-              تغيير اللغة
-            </Button>
+        
+            <LocaleSwitcher />
+            
           </Box>
         </Toolbar>
       </AppBar>
@@ -157,9 +154,10 @@ function DrawerAppBar(props) {
       </nav>
       <Box component="main" sx={{ flexGrow: 1 }}>
         <Toolbar />
-        <Box
+        {/* bg-[url('/assets/images/bannerbackgrond.png')] */}
+        <Box 
           sx={{ backgroundColor: "rgba(76,176,179,255)" }}
-          className="text-white min-h-[calc(100vh-64px)] flex items-center justify-center p-3 relative overflow-hidden bg-[url('/assets/images/bannerbackgrond.png')] bg-cover bg-center"
+          className="text-white min-h-[calc(100vh-64px)] flex items-center justify-center p-3 relative overflow-hidden  bg-cover bg-center"
         >
           <div className="container mx-auto flex flex-col md:flex-row items-center justify-between py-8 md:py-0">
             <Box
@@ -175,38 +173,16 @@ function DrawerAppBar(props) {
                 component="h1"
                 className="text-4xl md:text-5xl font-bold mb-2"
               >
-                مرحباً بكم في TeachAi
+                {t_hero("title")}
               </Typography>
               <Typography
                 variant="body1"
                 className="text-lg md:text-xl leading-relaxed mb-3"
               >
-                نؤمن بالدور المحوري للذكاء الاصطناعي في إثراء عملية تعليم
-                الأطفال وتطوير مهاراتهم المستقبلية. نقدم حلولاً تعليمية مبتكرة
-                تجمع بين المتعة والفعالية.
+                {t_hero("description")}
+                
               </Typography>
-              {/* <Button
-                variant="contained"
-                component={Link}
-                href="teachai"
-                className="bg-[#14043c] text-white hover:bg-[#0c0326] px-4 py-1.5 rounded-full font-semibold text-lg shadow-md"
-                sx={{
-                  mt: { xs: 6, md: 8 },
-                  backgroundColor: "#14043c",
-                  color: "white",
-                  "&:hover": {
-                    backgroundColor: "#0c0326",
-                  },
-                  px: 4,
-                  py: 1.5,
-                  borderRadius: "9999px",
-                  fontWeight: "semibold",
-                  fontSize: "1.125rem",
-                  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                }}
-              >
-                اكتشف المزيد
-              </Button> */}
+            
               <FormDialog />
             </Box>
             <Box

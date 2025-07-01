@@ -4,38 +4,41 @@
 import React from "react";
 import { Box, Typography, Card, CardContent } from "@mui/material";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const OurTrainersSection = () => {
+    const t = useTranslations("team");
+  
   const trainers = [
     {
       id: 1,
       image: "/assets/images/team1.png", 
-      name: "جين كوبر",
-      role: "المؤسس والرئيس التنفيذي",
+      name: t("teach1"),
+      role: t("span1"),
     },
     {
       id: 2,
       image: "/assets/images/team1.png", 
-      name: "جاي هوكينز",
-      role: "معلم ما قبل المدرسة",
+      name: t("teach2"),
+      role: t("span2"),
     },
     {
       id: 3,
       image: "/assets/images/team1.png", 
-      name: "أرلين مكوي",
-      role: "فنان تعليمي",
+      name: t("teach3"),
+      role: t("span3"),
     },
     {
       id: 4,
       image: "/assets/images/team1.png", 
-      name: "ديان راسل",
-      role: "معلمة محو الأمية",
+      name: t("teach4"),
+      role: t("span4"),
     },
     {
       id: 5,
       image: "/assets/images/team1.png", 
-      name: "ديفون لين",
-      role: "معلمة محو الأمية",
+      name: t("teach5"),
+      role: t("span5"),
     },
   ];
 
@@ -52,7 +55,6 @@ const OurTrainersSection = () => {
         overflow: 'hidden',
       }}
       className="container mx-auto"
-      dir="rtl"
     >
       {/* صور متناثرة */}
       {/* <Image
@@ -94,7 +96,7 @@ const OurTrainersSection = () => {
           color: "#14043c",
         }}
       >
-        مدربونا
+        {t("title")}
       </Typography>
 
       <Box

@@ -5,8 +5,11 @@ import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import DecorativeImageWrapper from "./DecorativeImage";
 import { decorativeImages } from "../Constants/Constants";
+import { useTranslations } from "next-intl";
 
 const CommitmentSection = () => {
+    const t = useTranslations("commitment")
+  
   return (
     <Box
       sx={{
@@ -22,7 +25,6 @@ const CommitmentSection = () => {
         position: "relative",
       }}
       className="container mx-auto"
-      dir="rtl"
     >
       {/* Decorative Images */}
       <DecorativeImageWrapper images={decorativeImages} />
@@ -45,7 +47,8 @@ const CommitmentSection = () => {
             lineHeight: 1.2,
           }}
         >
-          نحن ملتزمون بتعليم جميع طلابنا
+          {t("title")}
+
         </Typography>
         <Typography
           variant="body1"
@@ -55,10 +58,9 @@ const CommitmentSection = () => {
             color: "#495057",
           }}
         >
-          نؤمن بأن التعليم عالي الجودة حق للجميع. في TeachAi، نكرس جهودنا لتوفير
-          بيئة تعليمية شاملة وداعمة حيث يمكن لكل طفل أن يزدهر ويتطور. نعمل على
-          تلبية الاحتياجات الفردية لكل متعلم، مع التركيز على بناء الثقة وتعزيز
-          حب التعلم مدى الحياة.
+          {
+            t("content")
+          }
         </Typography>
       </Box>
 

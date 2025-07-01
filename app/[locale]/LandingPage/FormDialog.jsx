@@ -11,12 +11,18 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useRouter } from "next/navigation"; // Updated import for App Router
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function FormDialog({ mode }) {
   const [open, setOpen] = React.useState(false);
   const [name, setName] = React.useState(
     mode != "edit" ? "" : localStorage.getItem("userName") || ""
   );
+  const t = useTranslations("formDialog")
+  const lang = useLocale()
+  console.log(lang)
+
+  
   const router = useRouter();
 
   const handleClickOpen = () => {
@@ -98,13 +104,12 @@ export default function FormDialog({ mode }) {
         }}
         aria-label="اكتشف المزيد"
       >
-        {mode == "edit" ? "تعديل الاسم" : " اكتشف المزيد"}
+        {mode == "edit" || lang == "en" ?  "Edit name" : "اكتشف المزيد"}
       </Button>
       <Dialog
         open={open}
         onClose={handleClose}
         maxWidth="md"
-        dir="rtl"
         PaperProps={{
           component: "form",
           onSubmit: handleSubmit,
@@ -116,14 +121,14 @@ export default function FormDialog({ mode }) {
             width: "400px",
           }}
         >
-          <DialogContentText>يرجى إدخال الاسم</DialogContentText>
+          <DialogContentText>  {t("contentDialog")}</DialogContentText>
           <TextField
             autoFocus
             required
             margin="dense"
             id="name"
             name="name"
-            label="الاسم"
+            label={t("labelField")}
             type="text"
             fullWidth
             variant="standard"
@@ -134,7 +139,7 @@ export default function FormDialog({ mode }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} aria-label="إغلاق">
-            إغلاق
+            {t("btnTextClose")}
           </Button>
           <Button
             variant="contained"
@@ -147,7 +152,8 @@ export default function FormDialog({ mode }) {
             }}
             aria-label="تم"
           >
-            تم
+            {t("btnTextConfirm")}
+
           </Button>
         </DialogActions>
       </Dialog>

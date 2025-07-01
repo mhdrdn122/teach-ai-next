@@ -8,27 +8,30 @@ import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import StarIcon from "@mui/icons-material/Star";
 import DecorativeImageWrapper from "./DecorativeImage";
 import { decorativeImages } from "../Constants/Constants";
+import { useTranslations } from "next-intl";
 
 const ChooseClassSection = () => {
+  const t = useTranslations("ChooseClassSection");
+
   const classes = [
     {
       id: 1,
       image: "/assets/images/cho3.png",
-      title: "تعلم القراءة والكتابة والعد",
+      title: t("cardTitle1"),
       students: 70,
       rating: 4.5,
     },
     {
       id: 2,
       image: "/assets/images/cho3.png",
-      title: "معرفة الأرض والعالم",
+      title: t("cardTitle2"),
       students: 190,
       rating: 4.8,
     },
     {
       id: 3,
       image: "/assets/images/cho3.png",
-      title: "تنمية الإبداع والمهارات",
+      title: t("cardTitle3"),
       students: 110,
       rating: 4.7,
     },
@@ -36,7 +39,7 @@ const ChooseClassSection = () => {
 
   return (
     <Box
-    id="class"
+      id="class"
       sx={{
         py: { xs: 8, md: 12 },
         px: { xs: 2, md: 4 },
@@ -47,11 +50,9 @@ const ChooseClassSection = () => {
         overflow: "hidden",
       }}
       className="container mx-auto"
-      dir="rtl"
     >
-       {/* Decorative Images */}
-           <DecorativeImageWrapper images={decorativeImages} />
-     
+      {/* Decorative Images */}
+      <DecorativeImageWrapper images={decorativeImages} />
 
       <Typography
         variant="h3"
@@ -63,7 +64,7 @@ const ChooseClassSection = () => {
           color: "#14043c",
         }}
       >
-        اختر الفئة التي تناسب احتياجك
+        {t("title")}{" "}
       </Typography>
 
       <Box
@@ -77,7 +78,7 @@ const ChooseClassSection = () => {
             key={course.id}
             sx={{
               maxWidth: 480,
-              width:350,
+              width: 350,
               borderRadius: "12px",
               boxShadow: "0 8px 16px rgba(0, 0, 0, 0.1)",
               transition: "transform 0.3s ease-in-out",
@@ -89,8 +90,7 @@ const ChooseClassSection = () => {
               backgroundColor: "#ffffff",
             }}
           >
-              
-            <CardMedia sx={{margin:"0 auto"}} >
+            <CardMedia sx={{ margin: "0 auto" }}>
               <Image
                 src={course.image}
                 alt={course.title}
@@ -129,7 +129,9 @@ const ChooseClassSection = () => {
                 >
                   <PeopleOutlineIcon sx={{ mr: 0.5, fontSize: "1.2rem" }} />
                   <Typography variant="body2">
-                    {course.students} طالب
+                    {course.students} {" "}
+        {t("span")}
+
                   </Typography>
                 </Box>
                 <Box

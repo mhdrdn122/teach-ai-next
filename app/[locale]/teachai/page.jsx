@@ -131,7 +131,7 @@ const App = () => {
   };
 
   return (
-    <Box dir="rtl" className="min-h-screen flex flex-col">
+    <Box  className="min-h-screen flex flex-col">
       <Box
         className="flex-grow text-center text-gray-800 flex flex-col items-center justify-start py-4 space-y-4 transition-colors duration-500 p-4 sm:p-6 lg:p-8"
         style={{ backgroundColor: getBackgroundColor() }}
