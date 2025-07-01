@@ -55,6 +55,48 @@
     "teach5": "Jane Cooper",
     "span5": "Founder & CEO"
   },
+  
+  "vision": {
+    "title": "Our Vision and Future Aspirations",
+    "subtitle": "Striving to create a better educational world for future generations",
+    "goals": [
+      {
+        "title": "Personalized Education for Every Child",
+        "description": "We aim to develop AI systems capable of understanding each child's individual needs and delivering fully customized educational content."
+      },
+      {
+        "title": "Integrating Technology with Education",
+        "description": "Our goal is to create a learning environment that combines the latest AI technologies with modern educational principles."
+      },
+      {
+        "title": "Expanding Access",
+        "description": "We strive to make smart education available to every child regardless of geographic location or economic status."
+      },
+      {
+        "title": "Preparing the Future Generation",
+        "description": "We aspire to prepare a generation capable of keeping pace with technological developments while maintaining core human values."
+      }
+    ],
+    "stats": [
+      {
+        "value": "100,000+",
+        "label": "Students benefiting from our programs"
+      },
+      {
+        "value": "50+",
+        "label": "Experts in our team"
+      },
+      {
+        "value": "98%",
+        "label": "Parent satisfaction rate"
+      },
+      {
+        "value": "20+",
+        "label": "Countries we reach"
+      }
+    ]
+  }
+,
   "footer": {
     "subTitle": "We offer innovative educational solutions that combine fun and effectiveness to develop your children's skills.",
     "fastLinks": "Quick Links",

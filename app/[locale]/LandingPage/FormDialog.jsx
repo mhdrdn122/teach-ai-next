@@ -8,7 +8,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useRouter } from "next/navigation"; // Updated import for App Router
+import { useRouter } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLocale, useTranslations } from "next-intl";
@@ -16,13 +16,10 @@ import { useLocale, useTranslations } from "next-intl";
 export default function FormDialog({ mode }) {
   const [open, setOpen] = React.useState(false);
   const [name, setName] = React.useState(
-    mode != "edit" ? "" : localStorage.getItem("userName") || ""
+    mode !== "edit" ? "" : localStorage.getItem("userName") || ""
   );
-  const t = useTranslations("formDialog")
-  const lang = useLocale()
-  console.log(lang)
-
-  
+  const t = useTranslations("formDialog");
+  const lang = useLocale();
   const router = useRouter();
 
   const handleClickOpen = () => {
@@ -31,7 +28,7 @@ export default function FormDialog({ mode }) {
 
   const handleClose = () => {
     setOpen(false);
-    setName(mode != "edit" ? "" : localStorage.getItem("userName") || ""); // Reset name field on close
+    setName(mode !== "edit" ? "" : localStorage.getItem("userName") || "");
   };
 
   const handleChange = (e) => {
@@ -42,7 +39,7 @@ export default function FormDialog({ mode }) {
     e.preventDefault();
 
     if (!name.trim()) {
-      toast.error("الرجاء إدخال اسمك.", {
+      toast.error(t("errorNameRequired"), {
         position: "top-center",
         autoClose: 2000,
         hideProgressBar: false,
@@ -50,13 +47,14 @@ export default function FormDialog({ mode }) {
         pauseOnHover: true,
         draggable: true,
         theme: "light",
+        rtl: lang === "ar",
       });
       return;
     }
 
     try {
       localStorage.setItem("userName", name.trim());
-      toast.success("تم حفظ الاسم بنجاح!", {
+      toast.success(t("successNameSaved"), {
         position: "top-center",
         autoClose: 2000,
         hideProgressBar: false,
@@ -64,13 +62,14 @@ export default function FormDialog({ mode }) {
         pauseOnHover: true,
         draggable: true,
         theme: "light",
+        rtl: lang === "ar",
         onClose: () => {
-          router.push("/teachai"); // Redirect after toast
+          router.push("/teachai");
         },
       });
       handleClose();
     } catch (error) {
-      toast.error("حدث خطأ أثناء حفظ الاسم. الرجاء المحاولة مرة أخرى.", {
+      toast.error(t("errorSavingName"), {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -78,6 +77,7 @@ export default function FormDialog({ mode }) {
         pauseOnHover: true,
         draggable: true,
         theme: "light",
+        rtl: lang === "ar",
       });
       console.error("Local storage error:", error);
     }
@@ -86,42 +86,62 @@ export default function FormDialog({ mode }) {
   return (
     <React.Fragment>
       <Button
-        variant="outlined"
+        variant="contained"
         onClick={handleClickOpen}
         sx={{
-          mt: { xs: 0, md: 0 },
-          backgroundColor: "#14043c",
+          backgroundColor: "#4cb0b3",
           color: "white",
           "&:hover": {
-            backgroundColor: "#0c0326",
+            backgroundColor: "#389c9f",
           },
-          px: 2,
-          py: 1,
-          borderRadius: "9999px",
-          fontWeight: "semibold",
-          fontSize: "1.0rem",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          px: 3,
+          py: 1.5,
+          borderRadius: "8px",
+          fontWeight: "bold",
+          fontSize: "1rem",
+          boxShadow: "0 2px 8px rgba(76, 176, 179, 0.3)",
+          textTransform: "none",
+          minWidth: "150px",
         }}
-        aria-label="اكتشف المزيد"
+        aria-label={mode === "edit" ? t("editName") : t("discoverMore")}
       >
-        {mode == "edit" || lang == "en" ?  "Edit name" : "اكتشف المزيد"}
+        {mode === "edit" ? t("btnTextEditName") : t("btnText")}
       </Button>
+
       <Dialog
         open={open}
         onClose={handleClose}
-        maxWidth="md"
+        maxWidth="sm"
+        fullWidth
         PaperProps={{
           component: "form",
           onSubmit: handleSubmit,
+          sx: {
+            borderRadius: "12px",
+            direction: lang === "ar" ? "rtl" : "ltr",
+          },
         }}
       >
-        <DialogTitle>Teach-ai</DialogTitle>
-        <DialogContent
+        <DialogTitle
           sx={{
-            width: "400px",
+            backgroundColor: "#4cb0b3",
+
+            color: "white",
+            fontSize: "1.25rem",
+            fontWeight: "bold",
+            py: 2,
+            mb:2
+            
           }}
         >
-          <DialogContentText>  {t("contentDialog")}</DialogContentText>
+          TeachAi
+        </DialogTitle>
+
+        <DialogContent sx={{ py: 3  }}>
+          <DialogContentText sx={{ mb: 3, color: "#495057" }}>
+            {t("contentDialog")}
+          </DialogContentText>
+
           <TextField
             autoFocus
             required
@@ -131,41 +151,65 @@ export default function FormDialog({ mode }) {
             label={t("labelField")}
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
             value={name}
             onChange={handleChange}
-            inputProps={{ "aria-label": "الاسم" }}
+            inputProps={{
+              "aria-label": t("labelField"),
+              style: {
+                borderRadius: "8px",
+              },
+            }}
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "8px",
+              },
+            }}
           />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} aria-label="إغلاق">
+
+        <DialogActions sx={{ px: 3, py: 2 }}>
+          <Button
+            onClick={handleClose}
+            sx={{
+              color: "#495057",
+              "&:hover": {
+                backgroundColor: "rgba(0, 0, 0, 0.04)",
+              },
+            }}
+          >
             {t("btnTextClose")}
           </Button>
+
           <Button
             variant="contained"
             type="submit"
             sx={{
-              backgroundColor: "#14043c",
+              backgroundColor: "#4cb0b3",
+              color: "white",
+              borderRadius: "8px",
+              px: 3,
               "&:hover": {
-                backgroundColor: "#0c0326",
+                backgroundColor: "#389c9f",
               },
             }}
-            aria-label="تم"
           >
             {t("btnTextConfirm")}
-
           </Button>
         </DialogActions>
       </Dialog>
+
       <ToastContainer
         position="top-center"
         autoClose={3000}
         hideProgressBar={false}
+        newestOnTop
         closeOnClick
-        pauseOnHover
+        pauseOnFocusLoss
         draggable
+        pauseOnHover
         theme="light"
-        rtl // Enable RTL for ToastContainer
+        rtl={lang === "ar"}
       />
     </React.Fragment>
   );

@@ -5,7 +5,7 @@ import ProgramComponent from './LandingPage/ProgramComponent'
 import CommitmentSection from './LandingPage/CommitmentSection'
 import ChooseClassSection from './LandingPage/ChooseClassSection'
 import OurTrainersSection from './LandingPage/OurTrainersSection'
-import SubscribeSection from './LandingPage/SubscribeSection'
+import VisionSection from './LandingPage/VisionSection'
 import Footer from './LandingPage/Footer'
 import { useLocale, useTranslations } from 'next-intl'
 
@@ -24,7 +24,7 @@ const page = () => {
         <CommitmentSection />
         <ChooseClassSection />
         <OurTrainersSection />
-        {/* <SubscribeSection /> */}
+        <VisionSection />
         <Footer />
     </div>
   )

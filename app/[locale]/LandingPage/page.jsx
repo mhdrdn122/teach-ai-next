@@ -5,7 +5,7 @@ import ProgramComponent from './ProgramComponent'
 import CommitmentSection from './CommitmentSection'
 import ChooseClassSection from './ChooseClassSection'
 import OurTrainersSection from './OurTrainersSection'
-import SubscribeSection from './SubscribeSection'
+import SubscribeSection from './VisionSection'
 import Footer from './Footer'
 
 const page = () => {

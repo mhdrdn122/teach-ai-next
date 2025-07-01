@@ -220,27 +220,6 @@ const ProgramComponent = () => {
         </Card>
       </Box>
 
-      {/* <Button
-        variant="contained"
-        component={Link}
-        href="teachai"
-        sx={{
-          mt: { xs: 6, md: 8 },
-          backgroundColor: "#14043c",
-          color: "white",
-          "&:hover": {
-            backgroundColor: "#0c0326",
-          },
-          px: 4,
-          py: 1.5,
-          borderRadius: "9999px",
-          fontWeight: "semibold",
-          fontSize: "1.125rem",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        ابدأ رحلة التعلم اليوم
-      </Button> */}
     </Box>
   );
 };
