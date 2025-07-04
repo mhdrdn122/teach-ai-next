@@ -15,56 +15,46 @@ const ChapterComponent = () => {
       className="w-full max-w-4xl mx-auto py-4 relative overflow-hidden"
       sx={{
         position: "relative",
-        "&:hover .nav-button": {
-          opacity: 1,
-        },
+        paddingX: { xs: "32px", sm: "40px", md: "50px" },
       }}
     >
       <Swiper
         modules={[Navigation]}
-        spaceBetween={12}
-        slidesPerView="auto"
         navigation={{
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
+          nextEl: ".swiper-button-next-custom",
+          prevEl: ".swiper-button-prev-custom",
         }}
         breakpoints={{
           0: {
+            slidesPerView: 3,
+            spaceBetween: 16,
+          },
+          480: {
             slidesPerView: 4,
-            spaceBetween: 8,
+            spaceBetween: 16,
           },
           600: {
             slidesPerView: 5,
-            spaceBetween: 10,
+            spaceBetween: 16,
           },
           900: {
             slidesPerView: 6,
-            spaceBetween: 12,
+            spaceBetween: 20,
           },
           1200: {
             slidesPerView: 7,
-            spaceBetween: 12,
+            spaceBetween: 24,
           },
         }}
-        className="chapter-swiper "
-        style={{
-          padding: "0 32px",
-          overflow: "visible",
-        }}
+        className="chapter-swiper"
       >
         {chapters.map((chapter) => (
-          <SwiperSlide
-            key={chapter.id}
-            style={{
-              width: "auto",
-              height: "auto",
-            }}
-          >
+          <SwiperSlide key={chapter.id} style={{ height: "auto" }}>
             <Box
               onClick={() => handleSelectChapter(chapter)}
               className={`
-                flex flex-col items-center justify-center p-2 rounded-xl cursor-pointer 
-                border transition-all duration-200 ease-in-out 
+                flex flex-col items-center justify-center p-2 text-4xl rounded-xl cursor-pointer
+                border transition-all duration-200 ease-in-out
                 hover:shadow-sm transform hover:-translate-y-1
                 ${
                   selectedChapterId === chapter.id
@@ -73,11 +63,12 @@ const ChapterComponent = () => {
                 }
               `}
               sx={{
-                minWidth: { xs: "64px", sm: "72px", md: "80px" },
-                height: { xs: "84px", sm: "88px", md: "92px" },
+                minWidth: { xs: "80px", sm: "90px", md: "100px" },
+                height: { xs: "90px", sm: "94px", md: "100px" },
                 mx: "auto",
                 backdropFilter: "blur(4px)",
                 transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+                backgroundColor: chapter.bgColor,
               }}
             >
               {chapter?.imgsrc ? (
@@ -97,12 +88,10 @@ const ChapterComponent = () => {
               ) : (
                 <Box
                   component="div"
-                  // src={chapter.imgsrc}
-                  // alt={chapter.name}
-                  className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full  flex justify-center items-center object-cover border border-white shadow-xs mb-1"
+                  className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full flex justify-center items-center object-cover border border-white shadow-xs mb-1"
                   sx={{
                     transition: "all 0.3s ease-in-out",
-                    fontWeight:"700",
+                    fontWeight: "700",
                     "&:hover": {
                       transform: "scale(1.1)",
                       boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
@@ -115,9 +104,9 @@ const ChapterComponent = () => {
 
               <Typography
                 variant="caption"
-                className="font-medium text-center line-clamp-2"
+                className="font-medium text-4xl text-center line-clamp-2"
                 sx={{
-                  fontSize: { xs: "0.65rem", sm: "0.7rem", md: "0.75rem" },
+                  fontSize: { xs: "0.85rem", sm: "0.8rem", md: "0.9rem" },
                   lineHeight: { xs: "1rem", sm: "1.1rem" },
                   color:
                     selectedChapterId === chapter.id
@@ -133,16 +122,16 @@ const ChapterComponent = () => {
         ))}
       </Swiper>
 
-      {/* Custom Navigation Buttons */}
       {chapters.length > 4 && (
         <>
           <Box
-            className="swiper-button-prev nav-button absolute left-0 top-1/2 transform -translate-y-1/2 bg-white hover:bg-gray-50 shadow-md rounded-full w-7 h-7 flex items-center justify-center z-10 cursor-pointer"
+            className="swiper-button-prev-custom nav-button absolute left-0 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 shadow-md rounded-full w-7 h-7 flex items-center justify-center z-10 cursor-pointer"
             sx={{
-              opacity: 0,
+              opacity: 1,
               transition: "opacity 0.3s ease",
-              left: { xs: "4px", sm: "8px" },
+              left: { xs: "8px", sm: "12px", md: "15px" },
               "&::after": { display: "none" },
+              ".MuiBox-root:hover &": { opacity: 1 },
             }}
           >
             <svg
@@ -161,12 +150,13 @@ const ChapterComponent = () => {
             </svg>
           </Box>
           <Box
-            className="swiper-button-next nav-button absolute right-0 top-1/2 transform -translate-y-1/2 bg-white hover:bg-gray-50 shadow-md rounded-full w-7 h-7 flex items-center justify-center z-10 cursor-pointer"
+            className="swiper-button-next-custom nav-button absolute right-0 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 shadow-md rounded-full w-7 h-7 flex items-center justify-center z-10 cursor-pointer"
             sx={{
-              opacity: 0,
+              opacity: 1,
               transition: "opacity 0.3s ease",
-              right: { xs: "4px", sm: "8px" },
+              right: { xs: "8px", sm: "12px", md: "15px" },
               "&::after": { display: "none" },
+              ".MuiBox-root:hover &": { opacity: 1 },
             }}
           >
             <svg
