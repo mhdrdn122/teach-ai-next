@@ -14,6 +14,9 @@ import { ChapterApi } from "../Context/ChapterContext";
 import AudioRecorderWave from "../components/AudioRecorderWave";
 import Button from "@mui/material/Button";
 import FormDialog from "../LandingPage/FormDialog";
+import LocaleSwitcher from "../components/LocaleSwitcher";
+import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 
 const App = () => {
   const { successSound, failureSound, questionAudio } = useAudio();
@@ -39,6 +42,7 @@ const App = () => {
   const { chapterDetails, getBackgroundColor } = useContext(ChapterApi);
 
   const [isAnyRecordingActive, setIsAnyRecordingActive] = useState(false);
+  const t = useTranslations("teach-ai")
 
   let resultDisplay;
 
@@ -46,7 +50,7 @@ const App = () => {
     resultDisplay = (
       <Typography className="text-lg text-gray-800 flex justify-center items-center gap-4 font-medium">
         <CircularProgress size={30} sx={{ color: "#1a9de6" }} />
-        جاري التحقق من الإجابة
+        {t("loading-answer")}
       </Typography>
     );
   } else if (userAnswer && !loadingQuestion) {
@@ -59,7 +63,7 @@ const App = () => {
         className="w-full"
       >
         <Chip
-          label={`الإجابة: ${userAnswer}`}
+          label={`${t("answer2")}: ${userAnswer}`}
           color="primary"
           sx={{
             fontSize: { xs: 16, sm: 20 },
@@ -78,8 +82,8 @@ const App = () => {
             textAlign: "center",
             height: "auto",
           }}
-          label={`النتيجة: ${answerResult}`}
-          color={answerResult === "صحيحة" ? "success" : "error"}
+          label={`${t("result-answer")}: ${answerResult}`}
+          color={answerResult === `${t("correct")}` ? "success" : "error"}
           className="shadow-md"
         />
         <Chip
@@ -90,7 +94,7 @@ const App = () => {
             textAlign: "center",
             height: "auto",
           }}
-          label={`الإجابة الصحيحة: ${correctAnswer}`}
+          label={`${t("right-answer")} ${correctAnswer}`}
           color="success"
           className="shadow-md"
         />
@@ -136,7 +140,10 @@ const App = () => {
         className="flex-grow text-center text-gray-800 flex flex-col items-center justify-start py-4 space-y-4 transition-colors duration-500 p-4 sm:p-6 lg:p-8"
         style={{ backgroundColor: getBackgroundColor() }}
       >
-        <FormDialog mode="edit" />
+        <div className="flex  items-center justify-between w-full">
+          <FormDialog mode="edit" />
+        <LocaleSwitcher/>
+        </div>
 
         <Typography
           variant="h4"
@@ -144,9 +151,10 @@ const App = () => {
           className="m-0 py-2 font-bold text-gray-900 text-3xl sm:text-4xl lg:text-5xl"
         >
           {`
-         اهلا بك يا
-         ${localStorage.getItem("userName") || "عزيزي"}
-         في  نظام التعرف على الأسئلة`}
+         ${t("title-part1")}
+         ${localStorage.getItem("userName") || t("dear")}
+         ${t("title-part2")}
+         `}
         </Typography>
 
         <ChapterComponent />
@@ -160,7 +168,7 @@ const App = () => {
               my:2
             }}
           >
-            الوحدة: {chapterDetails.name}
+            {t("unit")}: {chapterDetails.name}
           </Typography>
         )}
 
@@ -170,7 +178,7 @@ const App = () => {
             onRecordingStarted={onQuestionRecordingStarted}
             onRecordingStopped={onQuestionRecordingStopped}
             disabled={isAnyRecordingActive && !questionRecording}
-            buttonText="تسجيل السؤال"
+            buttonText={t("question")}
           />
           <AudioRecorderWave
             onTextResult={onAnswerTextResult}
@@ -179,7 +187,7 @@ const App = () => {
             disabled={
               isAnyRecordingActive || !detectedQuestionId || loadingQuestion
             }
-            buttonText="تسجيل الإجابة"
+            buttonText={t("answer")}
           />
         </Box>
 
@@ -202,7 +210,7 @@ const App = () => {
             }}
           >
             <CircularProgress size={30} sx={{ color: "#1a9de6" }} />
-            ...جاري معالجة السؤال
+            {t("loading-question")}
           </Typography>
         ) : (
           <Typography

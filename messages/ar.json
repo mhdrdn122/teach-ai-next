@@ -99,6 +99,26 @@
     "fastLinks":"روابط سريعة",
     "span":"تابعنا",
     "bottomText": "© 2025 TeachAi. جميع الحقوق محفوظة."
+  },
+   "teach-ai": {
+    "title-part1": "مرحبا بك يا",
+    "title-part2": "في نظام التعرف على الاسئلة",
+    "dear": "عزيزي",
+    "unit":"وحدة",
+    "answer": "تسجيل الإجابة",
+    "question": "تسجيل السؤال",
+    "record-start": "بدأ التسجيل",
+    "record-close": "ايقاف التسجيل",
+    "record-time": "مدة التسجيل",
+    "second": "ثانية" ,
+     "answer2": "الإجابة",
+    "result-answer": "النتيجة",
+    "correct":"صحيحة",
+    "right-answer": "الإجابة الصحيحة",
+    "loading-question" : "جاري معالجة السؤال ...",
+    "loading-answer" : "جاري معالجة الإجابة ..."
+
+
   }
  
 }

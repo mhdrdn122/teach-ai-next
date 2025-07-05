@@ -103,7 +103,7 @@ export default function FormDialog({ mode }) {
           textTransform: "none",
           minWidth: "150px",
         }}
-        aria-label={mode === "edit" ? t("editName") : t("discoverMore")}
+        // aria-label={mode === "edit" ? t("editName") : t("discoverMore")}
       >
         {mode === "edit" ? t("btnTextEditName") : t("btnText")}
       </Button>

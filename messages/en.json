@@ -102,5 +102,23 @@
     "fastLinks": "Quick Links",
     "span": "Follow Us",
     "bottomText": "© 2025 TeachAi. All rights reserved."
+  },
+  "teach-ai": {
+    "title-part1": "Welcome",
+    "title-part2": "In the question recognition system",
+    "dear": "Dear",
+    "unit":"Unit",
+    "answer": "Record the answer",
+    "question": "Record the question",
+    "record-start": "Start Record",
+    "record-close": "Close Record",
+    "record-time": "Time Record",
+    "second": "second",
+    "answer2": "answer",
+    "result-answer": "Result",
+    "correct":"Correct",
+    "right-answer": "The Right Answer",
+    "loading-question" : "The question is being addressed...",
+    "loading-answer" : "Answer is being checked..."
   }
 }

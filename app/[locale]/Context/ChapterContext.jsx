@@ -11,43 +11,43 @@ const chaptersData = [
     id: 1,
     name: "Chapter 1",
     // imgsrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfFhlQEw6PSx3BF6SapgxqFZsxLB0HUyk5pg&s",
-    bgColor: "#90CAF9", // أزرق أغمق قليلاً
+    bgColor: "#90CAF9",  
   },
   {
     id: 2,
     name: "Chapter 2",
     // imgsrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTui84v6Im0h-2eYfzUVfcjvGueEmO4u3f6Hw&s",
-    bgColor: "#A5D6A7", // أخضر أغمق قليلاً
+    bgColor: "#A5D6A7", 
   },
   {
     id: 3,
     name: "Chapter 3",
     // imgsrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvJmVXglGUb7kKlhtn-fqnkd4cqeFlvRPqjg&s",
-    bgColor: "#FFECB3", // أصفر/ذهبي أغمق قليلاً
+    bgColor: "#FFECB3", 
   },
   {
     id: 4,
     name: "Chapter 4",
     imgsrc: "",
-    bgColor: "#FFAB91", // برتقالي/وردي أغمق قليلاً
+    bgColor: "#FFAB91",  
   },
   {
     id: 5,
     name: "Chapter 5",
     imgsrc: "",
-    bgColor: "#CE93D8", // بنفسجي أغمق قليلاً
+    bgColor: "#CE93D8",  
   },
   {
     id: 6,
     name: "Chapter 6",
     imgsrc: "",
-    bgColor: "#F8BBD0", // وردي أغمق قليلاً
+    bgColor: "#F8BBD0", 
   },
   {
     id: 7,
     name: "Chapter 7",
     imgsrc: "",
-    bgColor: "#9FA8DA", // بنفسجي مزرق أغمق قليلاً
+    bgColor: "#9FA8DA", 
   },
 ];
 

@@ -12,11 +12,11 @@ const ChapterComponent = () => {
 
   return (
     <Box
-      className="w-full max-w-4xl mx-auto py-4 relative overflow-hidden"
-      sx={{
-        position: "relative",
-        paddingX: { xs: "32px", sm: "40px", md: "50px" },
-      }}
+      className="w-full xs:px-[32px] sm:px-[40px] md:px-[50px]  relative max-w-4xl mx-auto py-4 overflow-hidden"
+      // sx={{
+      //   // position: "relative",
+      //   paddingX: { xs: "32px", sm: "40px", md: "50px" },
+      // }}
     >
       <Swiper
         modules={[Navigation]}
@@ -49,13 +49,18 @@ const ChapterComponent = () => {
         className="chapter-swiper"
       >
         {chapters.map((chapter) => (
-          <SwiperSlide key={chapter.id} style={{ height: "auto" }}>
+          <SwiperSlide key={chapter.id} className="h-auto">
             <Box
               onClick={() => handleSelectChapter(chapter)}
               className={`
                 flex flex-col items-center justify-center p-2 text-4xl rounded-xl cursor-pointer
                 border transition-all duration-200 ease-in-out
                 hover:shadow-sm transform hover:-translate-y-1
+                xs:min-w-[80px] sm:min-w-[90px]  md:min-w-[100px]
+                xs:min-h-[90px] sm:min-h-[94px]  md:min-h-[100px]
+                mx-auto
+                backdrop-filter: blur(4px) 
+                     
                 ${
                   selectedChapterId === chapter.id
                     ? "border-indigo-500 bg-indigo-50/70 text-indigo-700 shadow-indigo-sm"
@@ -63,11 +68,11 @@ const ChapterComponent = () => {
                 }
               `}
               sx={{
-                minWidth: { xs: "80px", sm: "90px", md: "100px" },
-                height: { xs: "90px", sm: "94px", md: "100px" },
-                mx: "auto",
-                backdropFilter: "blur(4px)",
-                transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+                // minWidth: { xs: "80px", sm: "90px", md: "100px" },
+                // height: { xs: "90px", sm: "94px", md: "100px" },
+                // mx: "auto",
+                // backdropFilter: "blur(4px)",
+                // transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
                 backgroundColor: chapter.bgColor,
               }}
             >

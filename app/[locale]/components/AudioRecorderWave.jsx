@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 import RecordPlugin from 'wavesurfer.js/dist/plugins/record.esm.js';
 import { startVoiceRecognition, stopVoiceRecognition } from '../services/voiceRecognition';
+import { useTranslations } from 'next-intl';
 
 const AudioRecorderWave = ({ onTextResult, onRecordingStarted, onRecordingStopped, disabled, buttonText }) => {
   const waveformRef = useRef(null);
@@ -13,6 +14,7 @@ const AudioRecorderWave = ({ onTextResult, onRecordingStarted, onRecordingStoppe
   const [isRecording, setIsRecording] = useState(false);
   const [audioUrl, setAudioUrl] = useState(null); 
   const [duration, setDuration] = useState(0);
+  const t = useTranslations("teach-ai")
 
   const createWaveSurfer = () => {
     if (wavesurferRef.current) {
@@ -113,7 +115,7 @@ const AudioRecorderWave = ({ onTextResult, onRecordingStarted, onRecordingStoppe
             flex items-center justify-center gap-2
           `}
         >
-          <span className="text-2xl">🎙️</span> بدء التسجيل
+          <span className="text-2xl">🎙️</span> {t("record-start")}
         </button>
       ) : (
         <button
@@ -124,12 +126,12 @@ const AudioRecorderWave = ({ onTextResult, onRecordingStarted, onRecordingStoppe
             flex items-center justify-center gap-2
           "
         >
-          <span className="text-2xl">⏹️</span> إيقاف التسجيل
+          <span className="text-2xl">⏹️</span>{t("record-close")}
         </button>
       )}
 
       {isRecording && (
-        <p className="mt-4 text-green-600 font-semibold text-md sm:text-lg">مدة التسجيل: {duration} ثانية</p>
+        <p className="mt-4 text-green-600 font-semibold text-md sm:text-lg">{t("record-time")} : {duration} {t("second")}</p>
       )}
 
       {/*
