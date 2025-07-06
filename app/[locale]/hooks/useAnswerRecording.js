@@ -71,6 +71,7 @@ const useAnswerRecording = (detectedQuestionId) => {
 
   return {
     userAnswer,
+    setUserAnswer,
     answerResult,
     loadingAnswer,
     recording,

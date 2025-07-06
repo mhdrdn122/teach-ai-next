@@ -38,6 +38,7 @@ const App = () => {
     handleStartAnswerRecording,
     handleAnswerTextResult,
     handleStopAnswerRecording,
+    setUserAnswer
   } = useAnswerRecording(detectedQuestionId);
   const { chapterDetails, getBackgroundColor } = useContext(ChapterApi);
 
@@ -60,6 +61,7 @@ const App = () => {
         spacing={2}
         alignItems={{ xs: "center", sm: "flex-start" }}
         justifyContent="center"
+        gap={"10px"}
         className="w-full"
       >
         <Chip
@@ -105,11 +107,13 @@ const App = () => {
   }
 
   const onQuestionRecordingStarted = () => {
+    setUserAnswer("")
     setIsAnyRecordingActive(true);
     handleStartQuestionRecording();
   };
 
   const onQuestionTextResult = (text) => {
+
     handleQuestionTextResult(text, questionAudio);
     setIsAnyRecordingActive(false);
   };

@@ -60,7 +60,7 @@ const ProgramComponent = () => {
       </Typography>
 
       <Box
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 text-right gap-8"
+        className="grid grid-cols-1 flex gap-2 md:grid-cols-2 lg:grid-cols-3 text-right gap-2"
         sx={{
           justifyItems: "center",
           textAlign: { xs: "center", md: "right" },
