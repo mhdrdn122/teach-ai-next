@@ -1,20 +1,29 @@
 // components/AudioRecorderWave.js
-'use client';
+"use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import WaveSurfer from 'wavesurfer.js';
-import RecordPlugin from 'wavesurfer.js/dist/plugins/record.esm.js';
-import { startVoiceRecognition, stopVoiceRecognition } from '../services/voiceRecognition';
-import { useTranslations } from 'next-intl';
+import React, { useEffect, useRef, useState } from "react";
+import WaveSurfer from "wavesurfer.js";
+import RecordPlugin from "wavesurfer.js/dist/plugins/record.esm.js";
+import {
+  startVoiceRecognition,
+  stopVoiceRecognition,
+} from "../services/voiceRecognition";
+import { useTranslations } from "next-intl";
 
-const AudioRecorderWave = ({ onTextResult, onRecordingStarted, onRecordingStopped, disabled, buttonText }) => {
+const AudioRecorderWave = ({
+  onTextResult,
+  onRecordingStarted,
+  onRecordingStopped,
+  buttonText,
+}) => {
   const waveformRef = useRef(null);
   const wavesurferRef = useRef(null);
   const recordPluginRef = useRef(null);
   const [isRecording, setIsRecording] = useState(false);
-  const [audioUrl, setAudioUrl] = useState(null); 
+  const [audioUrl, setAudioUrl] = useState(null);
   const [duration, setDuration] = useState(0);
-  const t = useTranslations("teach-ai")
+  const [disabled, setDisabled] = useState(false);
+  const t = useTranslations("teach-ai");
 
   const createWaveSurfer = () => {
     if (wavesurferRef.current) {
@@ -23,11 +32,11 @@ const AudioRecorderWave = ({ onTextResult, onRecordingStarted, onRecordingStoppe
 
     const wavesurfer = WaveSurfer.create({
       container: waveformRef.current,
-      waveColor: '#4fc3f7',
-      progressColor: '#0288d1',
+      waveColor: "#4fc3f7",
+      progressColor: "#0288d1",
       height: 100,
       cursorWidth: 0,
-      hideScrollbar: true, 
+      hideScrollbar: true,
     });
 
     const record = wavesurfer.registerPlugin(
@@ -39,10 +48,9 @@ const AudioRecorderWave = ({ onTextResult, onRecordingStarted, onRecordingStoppe
       })
     );
 
-    record.on('record-end', (blob) => {
-    });
+    record.on("record-end", (blob) => {});
 
-    record.on('record-progress', (ms) => {
+    record.on("record-progress", (ms) => {
       setDuration(Math.floor(ms / 1000));
     });
 
@@ -59,13 +67,12 @@ const AudioRecorderWave = ({ onTextResult, onRecordingStarted, onRecordingStoppe
   }, []);
 
   const startRecording = async () => {
-    if (disabled) return;
-
+    setDisabled(true);
     setAudioUrl(null);
     setDuration(0);
 
     try {
-      if (onRecordingStarted) onRecordingStarted(); 
+      if (onRecordingStarted) onRecordingStarted();
       setIsRecording(true);
 
       const devices = await RecordPlugin.getAvailableAudioDevices();
@@ -77,10 +84,9 @@ const AudioRecorderWave = ({ onTextResult, onRecordingStarted, onRecordingStoppe
         onTextResult(text);
       }
       setIsRecording(false);
-      if (onRecordingStopped) onRecordingStopped(); 
-
+      if (onRecordingStopped) onRecordingStopped();
     } catch (error) {
-      console.error('حدث خطأ أثناء بدء التسجيل أو التعرف على الصوت:', error);
+      console.error("حدث خطأ أثناء بدء التسجيل أو التعرف على الصوت:", error);
       if (recordPluginRef.current?.isRecording()) {
         recordPluginRef.current.stopRecording();
       }
@@ -91,6 +97,8 @@ const AudioRecorderWave = ({ onTextResult, onRecordingStarted, onRecordingStoppe
   };
 
   const stopRecording = () => {
+    setDisabled(false);
+
     if (recordPluginRef.current?.isRecording()) {
       recordPluginRef.current.stopRecording();
     }
@@ -101,37 +109,56 @@ const AudioRecorderWave = ({ onTextResult, onRecordingStarted, onRecordingStoppe
 
   return (
     <div className="flex flex-col items-center justify-center p-2 sm:p-4 bg-white rounded-lg shadow-lg w-full max-w-sm mx-auto transition-all duration-300 ease-in-out">
-      <h3 className="text-lg sm:text-xl font-bold mb-3 text-gray-800">{buttonText}</h3>
+      <h3 className="text-lg sm:text-xl font-bold mb-3 text-gray-800">
+        {buttonText}
+      </h3>
 
-      <div className="w-full h-24 mb-4" ref={waveformRef} />
-
-      {!isRecording ? (
-        <button
-          onClick={startRecording}
-          disabled={disabled}
-          className={`
+      <div className="w-full  h-24 mb-4" ref={waveformRef} />
+      <div className="flex gap-3 ">
+        {!isRecording ? (
+          <button
+            onClick={startRecording}
+            disabled={disabled}
+            className={`
             px-6 py-3 rounded-full text-white font-semibold text-lg transition-all duration-300
-            ${disabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 shadow-md hover:shadow-lg'}
+            ${
+              disabled
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 shadow-md hover:shadow-lg"
+            }
             flex items-center justify-center gap-2
           `}
-        >
-          <span className="text-2xl">🎙️</span> {t("record-start")}
-        </button>
-      ) : (
-        <button
-          onClick={stopRecording}
-          className="
+          >
+            <span className="text-2xl">🎙️</span> {t("record-start")}
+          </button>
+        ) : (
+          <button
+            onClick={stopRecording}
+            className="
             px-6 py-3 rounded-full text-white font-semibold text-lg bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800
             shadow-md hover:shadow-lg transition-all duration-300
             flex items-center justify-center gap-2
           "
+          >
+            <span className="text-2xl">⏹️</span>
+            {t("record-close")}
+          </button>
+        )}
+
+        <button
+          className="            px-6 py-3 rounded-full text-white font-semibold text-lg bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800
+"
+          onClick={() => setDisabled(false)}
         >
-          <span className="text-2xl">⏹️</span>{t("record-close")}
+                      {t("Retry")}
+
         </button>
-      )}
+      </div>
 
       {isRecording && (
-        <p className="mt-4 text-green-600 font-semibold text-md sm:text-lg">{t("record-time")} : {duration} {t("second")}</p>
+        <p className="mt-4 text-green-600 font-semibold text-md sm:text-lg">
+          {t("record-time")} : {duration} {t("second")}
+        </p>
       )}
 
       {/*
