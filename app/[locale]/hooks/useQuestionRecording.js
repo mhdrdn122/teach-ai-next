@@ -79,16 +79,17 @@ const useQuestionRecording = () => {
           chapter: "",
           lesson: "",
         };
+        // console.log(questionText)
 
       setDisable(questionText?.answer);
       speakArabicText(questionText?.question);
       setQuestionResult(questionText);
       setLoadingQuestion(false);
 
-      if (questionAudioRef.current && questionText.questionVoice) {
-        questionAudioRef.current.src = questionText.questionVoice;
-        questionAudioRef.current.play();
-      }
+      // if (questionAudioRef.current && questionText.questionVoice) {
+      //   questionAudioRef.current.src = questionText.questionVoice;
+      //   questionAudioRef.current.play();
+      // }
     } catch (error) {
       console.error("خطأ في معالجة النص المحول للسؤال:", error);
       setLoadingQuestion(false);

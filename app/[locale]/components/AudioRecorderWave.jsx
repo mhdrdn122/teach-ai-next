@@ -67,7 +67,7 @@ const AudioRecorderWave = ({
   }, []);
 
   const startRecording = async () => {
-    setDisabled(true);
+    // setDisabled(true);
     setAudioUrl(null);
     setDuration(0);
 
@@ -83,8 +83,8 @@ const AudioRecorderWave = ({
       if (onTextResult) {
         onTextResult(text);
       }
-      setIsRecording(false);
-      if (onRecordingStopped) onRecordingStopped();
+      // setIsRecording(false);
+      // if (onRecordingStopped) onRecordingStopped();
     } catch (error) {
       console.error("حدث خطأ أثناء بدء التسجيل أو التعرف على الصوت:", error);
       if (recordPluginRef.current?.isRecording()) {
@@ -115,11 +115,14 @@ const AudioRecorderWave = ({
 
       <div className="w-full  h-24 mb-4" ref={waveformRef} />
       <div className="flex gap-3 ">
-        {!isRecording ? (
-          <button
-            onClick={startRecording}
-            disabled={disabled}
-            className={`
+
+
+        <button
+          onMouseDown={startRecording}
+          onMouseUp={stopRecording}
+
+          // disabled={disabled}
+          className={`
             px-6 py-3 rounded-full text-white font-semibold text-lg transition-all duration-300
             ${
               disabled
@@ -128,31 +131,11 @@ const AudioRecorderWave = ({
             }
             flex items-center justify-center gap-2
           `}
-          >
-            <span className="text-2xl">🎙️</span> {t("record-start")}
-          </button>
-        ) : (
-          <button
-            onClick={stopRecording}
-            className="
-            px-6 py-3 rounded-full text-white font-semibold text-lg bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800
-            shadow-md hover:shadow-lg transition-all duration-300
-            flex items-center justify-center gap-2
-          "
-          >
-            <span className="text-2xl">⏹️</span>
-            {t("record-close")}
-          </button>
-        )}
-
-        <button
-          className="            px-6 py-3 rounded-full text-white font-semibold text-lg bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800
-"
-          onClick={() => setDisabled(false)}
         >
-                      {t("Retry")}
-
+          <span className="text-2xl">🎙️</span> {t("record-start")}
         </button>
+
+      
       </div>
 
       {isRecording && (
