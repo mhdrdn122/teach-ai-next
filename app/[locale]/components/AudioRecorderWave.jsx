@@ -107,6 +107,18 @@ const AudioRecorderWave = ({
     if (onRecordingStopped) onRecordingStopped();
   };
 
+  const handleStart = (e) => {
+    e.preventDefault();
+    // if (!disabled)
+       startRecording();
+  };
+
+  const handleEnd = (e) => {
+    e.preventDefault();
+    // if (!disabled)
+       stopRecording();
+  };
+
   return (
     <div className="flex flex-col items-center justify-center p-2 sm:p-4 bg-white rounded-lg shadow-lg w-full max-w-sm mx-auto transition-all duration-300 ease-in-out">
       <h3 className="text-lg sm:text-xl font-bold mb-3 text-gray-800">
@@ -115,12 +127,11 @@ const AudioRecorderWave = ({
 
       <div className="w-full  h-24 mb-4" ref={waveformRef} />
       <div className="flex gap-3 ">
-
-
         <button
-          onMouseDown={startRecording}
-          onMouseUp={stopRecording}
-
+          onMouseDown={handleStart}
+          onMouseUp={handleEnd}
+          onTouchStart={handleStart}
+          onTouchEnd={handleEnd}
           // disabled={disabled}
           className={`
             px-6 py-3 rounded-full text-white font-semibold text-lg transition-all duration-300
@@ -134,8 +145,6 @@ const AudioRecorderWave = ({
         >
           <span className="text-2xl">🎙️</span> {t("record-start")}
         </button>
-
-      
       </div>
 
       {isRecording && (

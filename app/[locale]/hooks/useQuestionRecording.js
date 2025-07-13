@@ -86,10 +86,11 @@ const useQuestionRecording = () => {
       setQuestionResult(questionText);
       setLoadingQuestion(false);
 
-      // if (questionAudioRef.current && questionText.questionVoice) {
-      //   questionAudioRef.current.src = questionText.questionVoice;
-      //   questionAudioRef.current.play();
-      // }
+      if (questionAudioRef.current && questionText.questionVoice) {
+        console.log("test")
+        questionAudioRef.current.src = questionText.questionVoice;
+        questionAudioRef.current.play();
+      }
     } catch (error) {
       console.error("خطأ في معالجة النص المحول للسؤال:", error);
       setLoadingQuestion(false);
