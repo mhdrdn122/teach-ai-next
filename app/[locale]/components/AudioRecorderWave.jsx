@@ -23,6 +23,7 @@ const AudioRecorderWave = ({
   const [audioUrl, setAudioUrl] = useState(null);
   const [duration, setDuration] = useState(0);
   const [disabled, setDisabled] = useState(false);
+  const [text , setText] = useState("")
   const t = useTranslations("teach-ai");
 
   const createWaveSurfer = () => {
@@ -80,9 +81,9 @@ const AudioRecorderWave = ({
       await recordPluginRef.current.startRecording({ deviceId: defaultDevice });
 
       const text = await startVoiceRecognition();
-      if (onTextResult) {
-        onTextResult(text);
-      }
+      console.log(text)
+      setText(text)
+      
       // setIsRecording(false);
       // if (onRecordingStopped) onRecordingStopped();
     } catch (error) {
@@ -105,6 +106,9 @@ const AudioRecorderWave = ({
     stopVoiceRecognition();
     setIsRecording(false);
     if (onRecordingStopped) onRecordingStopped();
+    if (onTextResult) {
+        onTextResult(text);
+      }
   };
 
   const handleStart = (e) => {
