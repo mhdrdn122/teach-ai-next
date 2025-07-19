@@ -1,6 +1,6 @@
 @import "tailwindcss";
-html{
-    scroll-behavior: smooth !important;
+html {
+  scroll-behavior: smooth !important;
 }
 
 /* .swiper-button-prev ,
@@ -8,3 +8,15 @@ html{
     background-color: red;
     display: block !important;
 } */
+
+.swiper {
+  height: 200px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  overflow: initial !important;
+}
+
+.swiper-slide{
+    margin-top: 50px !important;
+}

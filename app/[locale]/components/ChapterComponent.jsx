@@ -13,10 +13,7 @@ const ChapterComponent = () => {
   return (
     <Box
       className="w-full xs:px-[32px] sm:px-[40px] md:px-[50px]  relative max-w-4xl mx-auto py-4 overflow-hidden"
-      // sx={{
-      //   // position: "relative",
-      //   paddingX: { xs: "32px", sm: "40px", md: "50px" },
-      // }}
+     
     >
       <Swiper
         modules={[Navigation]}
@@ -63,7 +60,7 @@ const ChapterComponent = () => {
                      
                 ${
                   selectedChapterId === chapter.id
-                    ? "border-indigo-500 bg-indigo-50/70 text-indigo-700 shadow-indigo-sm"
+                    ? "border-indigo-500 bg-indigo-50/70 text-indigo-700 scale-120 shadow-indigo-sm"
                     : "border-gray-100 bg-white/80 text-gray-600 hover:bg-gray-50/50"
                 }
               `}

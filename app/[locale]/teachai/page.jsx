@@ -161,7 +161,9 @@ const App = () => {
          `}
         </Typography>
 
+
         <ChapterComponent />
+
 
         {chapterDetails && (
           <Typography
