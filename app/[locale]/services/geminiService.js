@@ -2,7 +2,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(
   process.env.REACT_APP_GEMINI_API_KEY ||
-    "AIzaSyDx55LPyLCaKNrdfBwC-QmJCVpMQDvMu0Y"
+    "AIzaSyDkaTpBukvj6Uu3vdtUavM4DOc59gslACQ"
 );
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); // Changed model to 1.5-flash for potentially better understanding of nuances.
 
@@ -43,10 +43,8 @@ Examples:
 
   try {
     const result = await model.generateContent(prompt);
-    console.log(result);
-    const answer = result.response.text().trim();
-    console.log(answer);
-
+     const answer = result.response.text().trim();
+ 
     const questionId = parseInt(answer, 10);
     return isNaN(questionId) ? 35 : questionId;
   } catch (error) {
@@ -104,10 +102,8 @@ export const checkAnswerFromGemini = async (question, answerText) => {
 
   try {
     const result = await model.generateContent(prompt);
-    console.log(result);
-    const reply = result.response.text().trim();
-    console.log(reply);
-
+     const reply = result.response.text().trim();
+ 
     return reply === "صحيحة" ? "صحيحة" : "خاطئة";
   } catch (error) {
     console.error(

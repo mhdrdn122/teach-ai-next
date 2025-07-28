@@ -39,8 +39,7 @@ export default async function RootLayout({ children, params }) {
 
 
 const direction = locale === 'ar' ? 'rtl' : 'ltr';
-console.log(direction);
-  return (
+   return (
     <NextIntlClientProvider locale={locale}>
       <ChapterContext>
         <html lang={locale} dir={direction} className={`${geistSans.variable} ${geistMono.variable}`}>

@@ -24,8 +24,7 @@ const speakArabicText = (text, options = {}) => {
       utterance.voice = arabicVoice;
     }
 
-    console.log(utterance);
-
+ 
     utterance.onend = () => {
       resolve("Speech finished");
     };
