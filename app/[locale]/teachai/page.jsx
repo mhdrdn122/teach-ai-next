@@ -14,7 +14,6 @@ import ChapterComponent from "../components/ChapterComponent";
 import ResultDisplay from "../components/ResultDisplay";
 import FormDialog from "../LandingPage/FormDialog";
 import LocaleSwitcher from "../components/LocaleSwitcher";
-import { questions } from "../data/questions";
 import {
   chapter1,
   chapter2,
@@ -45,16 +44,17 @@ const chooseChapter = (id) => {
       return null;
   }
 };
+
 const App = () => {
   const { chapterDetails, getBackgroundColor } = useContext(ChapterApi);
   const t = useTranslations("teach-ai");
   const { successSoundRef, failureSoundRef, questionAudioRef } =
     useAudioPlayer();
+
   const {
-    recording: questionRecording,
-    loadingQuestion: loadingQuestion,
-    resultQuestion: questionResult,
-    disable,
+    isRecordingActive: isQuestionRecordingActive,
+    isLoadingQuestion,
+    questionResult,
     startRecording: startQuestionRecording,
     stopRecording: stopQuestionRecording,
   } = useRecording(
@@ -62,20 +62,23 @@ const App = () => {
     chooseChapter(chapterDetails?.id),
     questionAudioRef
   );
+
   const {
-    recording: answerRecording,
-    loadingAnswer: loadingAnswer,
-    resultAnswer,
+    isRecordingActive: isAnswerRecordingActive,
+    isLoadingAnswer,
+    answerResult,
+    disableAnswerButton,
     startRecording: startAnswerRecording,
     stopRecording: stopAnswerRecording,
   } = useRecording(
     "answer",
-    { detectedQuestionId: questionResult?.id, questions:chooseChapter(chapterDetails?.id) },
+    { detectedQuestionId: questionResult?.id, questions: chooseChapter(chapterDetails?.id) },
     null,
     successSoundRef,
     failureSoundRef
   );
- 
+
+  const anyRecordingActive = isQuestionRecordingActive || isAnswerRecordingActive;
 
   return (
     <Box className="min-h-screen flex flex-col">
@@ -116,13 +119,13 @@ const App = () => {
             onRecordingStarted={startQuestionRecording}
             onRecordingStopped={stopQuestionRecording}
             buttonText={t("question")}
-            disabled={questionRecording || answerRecording}
+            disabled={  false}
           />
           <AudioRecorderWave
             onRecordingStarted={startAnswerRecording}
             onRecordingStopped={stopAnswerRecording}
             buttonText={t("answer")}
-            disabled={disable || questionRecording || answerRecording}
+            disabled={ disableAnswerButton}
           />
         </Box>
 
@@ -136,7 +139,7 @@ const App = () => {
           />
         </Box>
 
-        {loadingQuestion ? (
+        {isLoadingQuestion ? (
           <Typography
             className="text-lg text-gray-800 flex justify-center items-center gap-4 font-medium"
             sx={{ fontSize: { xs: 16, sm: 18, md: 20 }, padding: 2 }}
@@ -154,11 +157,11 @@ const App = () => {
         )}
 
         <ResultDisplay
-          loadingAnswer={loadingAnswer}
-          loadingQuestion={loadingQuestion}
-          userAnswer={resultAnswer?.userAnswer}
-          answerResult={resultAnswer?.isCorrect}
-          correctAnswer={resultAnswer?.correctAnswer}
+          isLoadingAnswer={isLoadingAnswer}
+          isLoadingQuestion={isLoadingQuestion}
+          userAnswer={answerResult?.userAnswer}
+          answerResult={answerResult?.isCorrect}
+          correctAnswer={answerResult?.correctAnswer}
         />
       </Box>
 

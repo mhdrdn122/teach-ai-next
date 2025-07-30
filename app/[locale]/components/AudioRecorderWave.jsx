@@ -10,8 +10,10 @@ const AudioRecorderWave = ({ onRecordingStarted, onRecordingStopped, buttonText,
 
   const handleStart = (e) => {
     e.preventDefault();
-    onRecordingStarted();
-    startWaveRecording();
+    if (!disabled) {
+      onRecordingStarted();
+      startWaveRecording();
+    }
   };
 
   const handleEnd = (e) => {
@@ -19,6 +21,7 @@ const AudioRecorderWave = ({ onRecordingStarted, onRecordingStopped, buttonText,
     stopWaveRecording();
     onRecordingStopped();
   };
+  console.log("disabled : ", disabled )
 
   return (
     <div className="flex flex-col items-center justify-center p-2 sm:p-4 bg-white rounded-lg shadow-lg w-full max-w-sm mx-auto">
@@ -32,7 +35,7 @@ const AudioRecorderWave = ({ onRecordingStarted, onRecordingStopped, buttonText,
           onTouchEnd={handleEnd}
           disabled={disabled}
           className={`
-            px-6 py-3 rounded-full text-white font-semibold text-lg
+            px-6 py-3 rounded-full cursor-pointer text-white font-semibold text-lg
             ${disabled ? "bg-gray-400 cursor-not-allowed" : "bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800"}
           `}
         >

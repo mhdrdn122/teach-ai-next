@@ -67,6 +67,7 @@ export const startVoiceRecognition = () => {
 };
 
 export const stopVoiceRecognition = () => {
+  console.log("test")
   if (recognitionInstance) {
     recognitionInstance.stop();
     console.log("إيقاف التعرف على الصوت.");

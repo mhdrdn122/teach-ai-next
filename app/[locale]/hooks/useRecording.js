@@ -22,46 +22,65 @@ const useRecording = (
   successSoundRef,
   failureSoundRef
 ) => {
-  const [recording, setRecording] = useState(false);
-  const [loadingQuestion, setLoadingQuestion] = useState(false);
-  const [loadingAnswer, setLoadingAnswer] = useState(false);
+  const [isRecordingActive, setIsRecordingActive] = useState(false);
+  const [isLoadingQuestion, setIsLoadingQuestion] = useState(false);
+  const [isLoadingAnswer, setIsLoadingAnswer] = useState(false);
 
-  const [resultQuestion, setResultQuestion] = useState(null);
-  const [resultAnswer, setResultAnswer] = useState(null);
+  const [questionResult, setQuestionResult] = useState(null);
+  const [answerResult, setAnswerResult] = useState(null);
 
-  const [disable, setDisable] = useState(true);
+  const [disableAnswerButton, setDisableAnswerButton] = useState(true);
+
+  const stopRecording = useCallback(() => {
+    setIsRecordingActive(false);
+    stopVoiceRecognition();
+  }, []);
 
   const startRecording = useCallback(async () => {
-    setRecording(true);
-      setResultAnswer(null);
-    setResultQuestion(null);
-
-setLoadingAnswer(true)
-    setLoadingQuestion(true);
+    setIsRecordingActive(true);
+    setAnswerResult(null); // Clear previous answer result when a new recording starts
 
     try {
-      const text = await startVoiceRecognition();
       if (type === "question") {
+        setQuestionResult(null); // Clear previous question result
+        setIsLoadingQuestion(true);
+        setDisableAnswerButton(true); // Disable answer button until a question is detected
 
-        const questionId = await getQuestionIdFromGemini(data, text);
-        const question = data.find((q) => q.id === questionId) || {
-          id: 0,
-          src: "/assets/images/not.gif",
-          question: "هذا السؤال غير موجود",
-          answer: "",
-        };
-        setResultQuestion(question);
-        setDisable(!question.answer);
-        speakArabicText(question.question);
-        if (questionAudioRef.current && question.questionVoice) {
-          questionAudioRef.current.src = question.questionVoice;
+        const text = await startVoiceRecognition();
+        let detectedQuestion = null;
+        if (text) {
+          const questionId = await getQuestionIdFromGemini(data, text);
+          detectedQuestion = data.find((q) => q.id === questionId);
+        }
+
+        if (!detectedQuestion) {
+          detectedQuestion = {
+            id: 0,
+            src: "/assets/images/not.gif",
+            question: "هذا السؤال غير موجود",
+            answer: "",
+          };
+          toast.error("لم يتم العثور على السؤال.");
+        }
+
+        setQuestionResult(detectedQuestion);
+        speakArabicText(detectedQuestion.question);
+
+        if (questionAudioRef.current && detectedQuestion.questionVoice) {
+          questionAudioRef.current.src = detectedQuestion.questionVoice;
           questionAudioRef.current.play();
         }
+
+        setDisableAnswerButton(!detectedQuestion.answer);
+
       } else if (type === "answer") {
-  
+        setIsLoadingAnswer(true);
         const question = data.questions.find(
           (q) => q.id === data.detectedQuestionId
         );
+        setDisable(question && !question.answer);
+
+
         if (!question) {
           handleError(
             new Error("Question not found"),
@@ -69,12 +88,15 @@ setLoadingAnswer(true)
           );
           return;
         }
+
+        const text = await startVoiceRecognition();
         const isCorrect = await checkAnswerFromGemini(question, text);
-        setResultAnswer({
-          userAnswer: text,
+        setAnswerResult({
+          userAnswer: text || " ",
           isCorrect,
           correctAnswer: question.answer,
         });
+
         if (isCorrect === "صحيحة") {
           toast.success("إجابة صحيحة! 🎉");
           successSoundRef.current?.play();
@@ -87,30 +109,34 @@ setLoadingAnswer(true)
       }
     } catch (error) {
       handleError(error, "خطأ في التعرف على الصوت.");
+      setIsRecordingActive(false);
+      setIsLoadingQuestion(false);
+      setIsLoadingAnswer(false);
+      setDisableAnswerButton(true);
+      stopVoiceRecognition();
     } finally {
-      setRecording(false);
-      setLoadingAnswer(false);
-      setLoadingQuestion(false);
-
+      setIsRecordingActive(false);
+      setIsLoadingQuestion(false);
+      setIsLoadingAnswer(false);
     }
   }, [type, data, questionAudioRef, successSoundRef, failureSoundRef]);
 
-  const stopRecording = useCallback(() => {
-    setRecording(false);
-    stopVoiceRecognition();
-  }, []);
-
   useEffect(() => {
-    setResultAnswer(null);
-  }, [loadingQuestion]);
+    if (type === "answer" && data && data.detectedQuestionId && data.questions) {
+      const question = data.questions.find(q => q.id === data.detectedQuestionId);
+      setDisableAnswerButton(!question?.answer);
+    } else if (type === "question") {
+      setDisableAnswerButton(true);
+    }
+  }, [type, data]);
 
   return {
-    recording,
-    loadingAnswer,
-    loadingQuestion,
-    resultAnswer,
-    resultQuestion,
-    disable,
+    isRecordingActive,
+    isLoadingAnswer,
+    isLoadingQuestion,
+    answerResult,
+    questionResult,
+    disableAnswerButton,
     startRecording,
     stopRecording,
   };
