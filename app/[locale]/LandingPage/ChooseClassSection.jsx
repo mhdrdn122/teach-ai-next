@@ -21,20 +21,20 @@ const ChooseClassSection = () => {
       students: 70,
       rating: 4.5,
     },
-    {
-      id: 2,
-      image: "/assets/images/cho3.png",
-      title: t("cardTitle2"),
-      students: 190,
-      rating: 4.8,
-    },
-    {
-      id: 3,
-      image: "/assets/images/cho3.png",
-      title: t("cardTitle3"),
-      students: 110,
-      rating: 4.7,
-    },
+    // {
+    //   id: 2,
+    //   image: "/assets/images/cho3.png",
+    //   title: t("cardTitle2"),
+    //   students: 190,
+    //   rating: 4.8,
+    // },
+    // {
+    //   id: 3,
+    //   image: "/assets/images/cho3.png",
+    //   title: t("cardTitle3"),
+    //   students: 110,
+    //   rating: 4.7,
+    // },
   ];
 
   return (
@@ -130,7 +130,7 @@ const ChooseClassSection = () => {
                   <PeopleOutlineIcon sx={{ mr: 0.5, fontSize: "1.2rem" }} />
                   <Typography variant="body2">
                     {course.students} {" "}
-        {t("span")}
+                    {t("span")}
 
                   </Typography>
                 </Box>
