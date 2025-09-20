@@ -78,7 +78,7 @@ const useRecording = (
         const question = data.questions.find(
           (q) => q.id === data.detectedQuestionId
         );
-        setDisable(question && !question.answer);
+        setDisableAnswerButton(question && !question.answer);
 
 
         if (!question) {
