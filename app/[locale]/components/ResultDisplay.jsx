@@ -1,7 +1,10 @@
 import { Stack, Chip, Typography, CircularProgress } from "@mui/material";
 import { useTranslations } from "next-intl";
 
-const ResultDisplay = ({ isLoadingAnswer, isLoadingQuestion, userAnswer, answerResult, correctAnswer }) => {
+const ResultDisplay = ({ isLoadingAnswer, isLoadingQuestion
+  // , userAnswer, answerResult, correctAnswer ,
+  , answerResult
+}) => {
   const t = useTranslations("teach-ai");
 
   if (isLoadingAnswer) {
@@ -13,7 +16,7 @@ const ResultDisplay = ({ isLoadingAnswer, isLoadingQuestion, userAnswer, answerR
     );
   }
 
-  if (userAnswer && !isLoadingAnswer && !isLoadingQuestion) {
+  if (answerResult?.userAnswer && !isLoadingAnswer && !isLoadingQuestion) {
     return (
       <Stack
         direction={{ xs: "column", sm: "row-reverse" }}
@@ -24,20 +27,20 @@ const ResultDisplay = ({ isLoadingAnswer, isLoadingQuestion, userAnswer, answerR
         className="w-full"
       >
         <Chip
-          label={`${t("answer2")}: ${userAnswer}`}
+          label={`${t("answer2")}: ${answerResult?.userAnswer}`}
           color="primary"
           sx={{ fontSize: { xs: 16, sm: 20 }, padding: { xs: 2, sm: 4 }, minWidth: { xs: "80%", sm: "auto" }, textAlign: "center", height: "auto" }}
           className="shadow-md"
         />
         <Chip
-          label={`${t("result-answer")}: ${answerResult}`}
-          color={answerResult === t("correct") ? "success" : "error"}
+          label={`${t("result-answer")}: ${answerResult?.isCorrect}`}
+          color={answerResult?.isCorrect === t("correct") ? "success" : "error"}
           sx={{ fontSize: { xs: 16, sm: 20 }, padding: { xs: 2, sm: 4 }, minWidth: { xs: "80%", sm: "auto" }, textAlign: "center", height: "auto" }}
           className="shadow-md"
         />
-        {answerResult !== t("correct") && correctAnswer && (
+        {answerResult?.answerResult !== t("correct") && answerResult?.correctAnswer && (
           <Chip
-            label={`${t("right-answer")}: ${correctAnswer}`}
+            label={`${t("right-answer")}: ${answerResult?.correctAnswer}`}
             color="success"
             sx={{ fontSize: { xs: 16, sm: 20 }, padding: { xs: 2, sm: 4 }, minWidth: { xs: "80%", sm: "auto" }, textAlign: "center", height: "auto" }}
             className="shadow-md"

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Box, CircularProgress, Typography } from "@mui/material";
@@ -57,6 +57,7 @@ const App = () => {
     questionResult,
     startRecording: startQuestionRecording,
     stopRecording: stopQuestionRecording,
+    resetAnswerResult
   } = useRecording(
     "question",
     chooseChapter(chapterDetails?.id),
@@ -72,13 +73,23 @@ const App = () => {
     stopRecording: stopAnswerRecording,
   } = useRecording(
     "answer",
-    { detectedQuestionId: questionResult?.id, questions: chooseChapter(chapterDetails?.id) },
+    {
+      detectedQuestionId: questionResult?.id, questions: chooseChapter(chapterDetails?.id)
+      // ,questionChanged: questionResult?.id 
+
+    },
     null,
     successSoundRef,
     failureSoundRef
   );
 
   const anyRecordingActive = isQuestionRecordingActive || isAnswerRecordingActive;
+
+  console.log(answerResult)
+
+  // userAnswer = answerResult?.userAnswer
+  // answerResult = answerResult?.isCorrect
+  // correctAnswer = answerResult?.correctAnswer
 
   return (
     <Box className="min-h-screen flex flex-col">
@@ -96,9 +107,8 @@ const App = () => {
           component="h1"
           className="m-0 py-2 font-bold text-gray-900 text-3xl sm:text-4xl lg:text-5xl"
         >
-          {`${t("title-part1")} ${
-            localStorage.getItem("userName") || t("dear")
-          } ${t("title-part2")}`}
+          {`${t("title-part1")} ${localStorage.getItem("userName") || t("dear")
+            } ${t("title-part2")}`}
         </Typography>
 
         <ChapterComponent />
@@ -116,16 +126,18 @@ const App = () => {
 
         <Box className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-6 w-full max-w-4xl px-4">
           <AudioRecorderWave
-            onRecordingStarted={startQuestionRecording}
+            onRecordingStarted={
+              startQuestionRecording
+            }
             onRecordingStopped={stopQuestionRecording}
             buttonText={t("question")}
-            disabled={  false}
+          // disabled={  false}
           />
           <AudioRecorderWave
             onRecordingStarted={startAnswerRecording}
             onRecordingStopped={stopAnswerRecording}
             buttonText={t("answer")}
-            disabled={ disableAnswerButton}
+            disabled={disableAnswerButton}
           />
         </Box>
 
@@ -159,9 +171,8 @@ const App = () => {
         <ResultDisplay
           isLoadingAnswer={isLoadingAnswer}
           isLoadingQuestion={isLoadingQuestion}
-          userAnswer={answerResult?.userAnswer}
-          answerResult={answerResult?.isCorrect}
-          correctAnswer={answerResult?.correctAnswer}
+          answerResult={answerResult}
+
         />
       </Box>
 

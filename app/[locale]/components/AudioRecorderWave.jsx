@@ -21,7 +21,6 @@ const AudioRecorderWave = ({ onRecordingStarted, onRecordingStopped, buttonText,
     stopWaveRecording();
     onRecordingStopped();
   };
-  console.log("disabled : ", disabled )
 
   return (
     <div className="flex flex-col items-center justify-center p-2 sm:p-4 bg-white rounded-lg shadow-lg w-full max-w-sm mx-auto">
