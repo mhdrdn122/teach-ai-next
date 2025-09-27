@@ -2,9 +2,10 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(
   process.env.REACT_APP_GEMINI_API_KEY ||
-    "AIzaSyDkaTpBukvj6Uu3vdtUavM4DOc59gslACQ"
+    // "AIzaSyDkaTpBukvj6Uu3vdtUavM4DOc59gslACQ"
+    "AIzaSyANfsQog89n2di_mhAWtM6hGcxecixKxqg"
 );
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); // Changed model to 1.5-flash for potentially better understanding of nuances.
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" }); // Changed model to 1.5-flash for potentially better understanding of nuances.
 
 /**
  * Identifies the question ID from a list of questions based on the user's spoken text.
@@ -43,8 +44,8 @@ Examples:
 
   try {
     const result = await model.generateContent(prompt);
-     const answer = result.response.text().trim();
- 
+    const answer = result.response.text().trim();
+
     const questionId = parseInt(answer, 10);
     return isNaN(questionId) ? 35 : questionId;
   } catch (error) {
@@ -102,8 +103,8 @@ export const checkAnswerFromGemini = async (question, answerText) => {
 
   try {
     const result = await model.generateContent(prompt);
-     const reply = result.response.text().trim();
- 
+    const reply = result.response.text().trim();
+
     return reply === "صحيحة" ? "صحيحة" : "خاطئة";
   } catch (error) {
     console.error(
