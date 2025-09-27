@@ -41,7 +41,9 @@ const useWaveSurfer = () => {
       const defaultDevice = devices[0]?.deviceId;
       await recordPluginRef.current.startRecording({ deviceId: defaultDevice });
     } catch (error) {
-      handleError(error, "خطأ في بدء التسجيل.");
+        toast.error(error);
+      
+      // handleError(error, "خطأ في بدء التسجيل.");
     }
   };
 

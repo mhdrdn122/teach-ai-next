@@ -14,6 +14,7 @@ import { hasLocale } from 'next-intl';
 // نفترض إنو عندك ملف i18n/routing.js بيحتوي على مصفوفة اللغات المدعومة
 // رح أقدملك مثال لهذا الملف بالأسفل.
 import { routing } from '@/i18n/routing';
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,13 +39,25 @@ export default async function RootLayout({ children, params }) {
   }
 
 
-const direction = locale === 'ar' ? 'rtl' : 'ltr';
-   return (
+  const direction = locale === 'ar' ? 'rtl' : 'ltr';
+  return (
     <NextIntlClientProvider locale={locale}>
       <ChapterContext>
         <html lang={locale} dir={direction} className={`${geistSans.variable} ${geistMono.variable}`}>
           <body>
             {children}
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={true}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
           </body>
         </html>
       </ChapterContext>

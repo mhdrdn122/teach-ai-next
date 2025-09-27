@@ -42,7 +42,7 @@ const QuestionMedia = ({ src, alt, highlighted }) => {
       ) : (
         <Box
           component="img"
-          src={src}
+          src={src || "/"}
           alt={alt}
           sx={{margin:"0 auto"}}
           className={`${commonMediaClasses} aspect-[4/3] m-auto max-w-[600px]`} 

@@ -1,9 +1,8 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+
 const genAI = new GoogleGenerativeAI(
-  process.env.REACT_APP_GEMINI_API_KEY ||
-    // "AIzaSyDkaTpBukvj6Uu3vdtUavM4DOc59gslACQ"
-    "AIzaSyANfsQog89n2di_mhAWtM6hGcxecixKxqg"
+  `${process.env.NEXT_PUBLIC_GEMINI_API_KEY}`
 );
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" }); // Changed model to 1.5-flash for potentially better understanding of nuances.
 
