@@ -58,6 +58,7 @@ const TextQuestion = ({ text }) => {
     <>
       <Typography sx={{ fontSize: { xs: 18, sm: 20, md: 22 }, p: 2 }}>
         {!loading ? text : "جاري التحدث..."}
+        <button onClick={() => playTTS("مرحبا") }>تحدث الان </button>
       </Typography>
     </>
   )

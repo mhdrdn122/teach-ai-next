@@ -48,12 +48,33 @@ async function getAccessToken() {
  * API Route: Converts input text into speech using Google Cloud TTS.
  * - Expects: { text: "string" } in POST body.
  * - Returns: { audioContent: "base64-encoded mp3" }.
+ * - Includes protection against empty or invalid JSON body.
  */
 export async function POST(req) {
   try {
-    const { text } = await req.json();
+    // Safely read body
+    const bodyText = await req.text();
+
+    if (!bodyText) {
+      return Response.json({ error: "No JSON body provided" }, { status: 400 });
+    }
+
+    let text;
+    try {
+      const parsed = JSON.parse(bodyText);
+      text = parsed.text;
+    } catch {
+      return Response.json({ error: "Invalid JSON body" }, { status: 400 });
+    }
+
+    if (!text || text.trim() === "") {
+      return Response.json({ error: "No text provided" }, { status: 400 });
+    }
+
+    // Get Google access token
     const token = await getAccessToken();
 
+    // Call Google TTS API
     const res = await fetch(
       "https://texttospeech.googleapis.com/v1/text:synthesize",
       {
