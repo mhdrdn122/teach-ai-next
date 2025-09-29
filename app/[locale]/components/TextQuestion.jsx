@@ -45,20 +45,15 @@ const TextQuestion = ({ text }) => {
    * Effect: Trigger TTS when `text` changes (excluding first render).
    */
   useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      return;
-    }
-    if (text && text.trim() !== "") {
-      playTTS(text);
-    }
-  }, [text]);
+  if (text && text.trim() !== "") {
+    playTTS(text);
+  }
+}, [text]);
 
   return (
     <>
       <Typography sx={{ fontSize: { xs: 18, sm: 20, md: 22 }, p: 2 }}>
         {!loading ? text : "جاري التحدث..."}
-        <button onClick={() => playTTS("مرحبا") }>تحدث الان </button>
       </Typography>
     </>
   )
