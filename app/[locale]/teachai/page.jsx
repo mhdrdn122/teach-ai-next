@@ -23,6 +23,7 @@ import {
   chapter6,
   chapter7,
 } from "../data/questions_by_chapter";
+import TextQuestion from "../components/TextQuestion";
 
 const chooseChapter = (id) => {
   switch (id) {
@@ -83,13 +84,7 @@ const App = () => {
     failureSoundRef
   );
 
-  const anyRecordingActive = isQuestionRecordingActive || isAnswerRecordingActive;
-
-  console.log(answerResult)
-
-  // userAnswer = answerResult?.userAnswer
-  // answerResult = answerResult?.isCorrect
-  // correctAnswer = answerResult?.correctAnswer
+ 
 
   return (
     <Box className="min-h-screen flex flex-col">
@@ -126,12 +121,10 @@ const App = () => {
 
         <Box className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-6 w-full max-w-4xl px-4">
           <AudioRecorderWave
-            onRecordingStarted={
-              startQuestionRecording
-            }
+            onRecordingStarted={startQuestionRecording}
             onRecordingStopped={stopQuestionRecording}
             buttonText={t("question")}
-          // disabled={  false}
+          disabled={  false}
           />
           <AudioRecorderWave
             onRecordingStarted={startAnswerRecording}
@@ -159,14 +152,11 @@ const App = () => {
             <CircularProgress size={30} sx={{ color: "#1a9de6" }} />
             {t("loading-question")}
           </Typography>
-        ) : (
-          <Typography
-            className="text-lg text-gray-800 font-medium"
-            sx={{ fontSize: { xs: 18, sm: 20, md: 22 }, padding: 2 }}
-          >
-            {questionResult?.question}
-          </Typography>
-        )}
+        ) : 
+        
+
+          <TextQuestion text={questionResult?.question} />
+        }
 
         <ResultDisplay
           isLoadingAnswer={isLoadingAnswer}
@@ -188,7 +178,7 @@ const App = () => {
       />
       <audio ref={questionAudioRef} preload="auto" />
 
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </Box>
   );
 };

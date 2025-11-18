@@ -199,7 +199,7 @@ export default function FormDialog({ mode }) {
         </DialogActions>
       </Dialog>
 
-      <ToastContainer
+      {/* <ToastContainer
         position="top-center"
         autoClose={3000}
         hideProgressBar={false}
@@ -210,7 +210,7 @@ export default function FormDialog({ mode }) {
         pauseOnHover
         theme="light"
         rtl={lang === "ar"}
-      />
+      /> */}
     </React.Fragment>
   );
 }

@@ -34,6 +34,11 @@ const useRecording = (
   successSoundRef,
   failureSoundRef
 ) => {
+
+
+
+
+
   // State for tracking recording status
   const [isRecordingActive, setIsRecordingActive] = useState(false);
   
@@ -57,7 +62,6 @@ const useRecording = (
 
   // Starts recording for either a question or an answer
   const startRecording = useCallback(async () => {
-    console.log("=============================================="); // Debugging separator
     setIsRecordingActive(true);
     setAnswerResult(null); // Clear previous answer result at the start of recording
 
@@ -78,6 +82,7 @@ const useRecording = (
           const questionId = await getQuestionIdFromGemini(data, text);
           detectedQuestion = data.find((q) => q.id === questionId);
         }
+        //  handlePlay(detectedQuestion?.question);
 
         // Handle case where question is not found
         if (!detectedQuestion) {
@@ -92,7 +97,7 @@ const useRecording = (
 
         // Update question result and play audio feedback
         setQuestionResult(detectedQuestion);
-        speakArabicText(detectedQuestion.question);
+        // speakArabicText(detectedQuestion.question);
 
         // Play question audio if available
         if (questionAudioRef.current && detectedQuestion.questionVoice) {
@@ -199,7 +204,6 @@ const useRecording = (
   }, [type, data?.detectedQuestionId]);
 
   // Debugging: Log answerResult for both hooks
-  console.log(`[${type} hook] answerResult:`, answerResult);
 
   // Reset answer result programmatically
   const resetAnswerResult = useCallback(() => {
