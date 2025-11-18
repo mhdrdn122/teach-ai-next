@@ -1,5 +1,3 @@
-
-
 export const chapter1 = [
   {
     id: 0,
@@ -10,7 +8,6 @@ export const chapter1 = [
     lesson: "",
   },
   {
-
     id: 1,
     question: "اختر اللون المناسب وضعه في الفراغ ليشكل نمط لوني صحيح؟",
     answer: "أزرق",
@@ -717,10 +714,8 @@ export const chapter3 = [
   },
 ];
 
-export const chapter4 = [];
-
-export const chapter5 = [
-    {
+export const chapter4 = [
+  {
     id: 0,
     question: "لا يوجد مطابقة للسؤال حاول مجدداً",
     answer: " ",
@@ -728,7 +723,342 @@ export const chapter5 = [
     chapter: "",
     lesson: "",
   },
-  
+
+  {
+    id: 86,
+    question: "تعلم، لوحة العشرة الممتلئة وغير الممتلئة",
+    answer: " ",
+    src: "/assets/images/Unit_4/lesson1/86.png",
+    chapter: "الرابعة",
+    lesson: "الأول",
+  },
+  {
+    id: 87,
+    question: "هيا بنا نتعرف على شكل العدد عشرة",
+    answer: " ",
+    src: "/assets/images/Unit_4/lesson1/87.png",
+    chapter: "الرابعة",
+    lesson: "الأول",
+  },
+  {
+    id: 88,
+    question: "المثال الأول: ما عدد الكرات الموجودة في الصورة التالية؟",
+    answer: "ثمانية",
+    src: "/assets/images/Unit_4/lesson1/88.png",
+    chapter: "الرابعة",
+    lesson: "الأول",
+  },
+  {
+    id: 89,
+    question: "المثال الثاني: ما عدد الوردات الموجودة في الصورة التالية؟",
+    answer: "تسعة",
+    src: "/assets/images/Unit_4/lesson1/89.png",
+    chapter: "الرابعة",
+    lesson: "الأول",
+  },
+  {
+    id: 90,
+    question: " المثال الثالث: كم عدد الأوراق الموجودة في الصورة التالية؟",
+    answer: "عشرة",
+    src: "/assets/images/Unit_4/lesson1/90.png",
+    chapter: "الرابعة",
+    lesson: "الأول",
+  },
+  {
+    id: 91,
+    question: "المثال الأول: أكمل لوحة العشرة بالعدد المناسب لتصبح ممتلئة",
+    answer: "اثنان",
+    src: "/assets/images/Unit_4/lesson1/91.png",
+    chapter: "الرابعة",
+    lesson: "الأول",
+  },
+  {
+    id: 92,
+    question: "المثال الثاني: أكمل لوحة العشرة بالعدد المناسب لتصبح ممتلئة",
+    answer: "واحد",
+    src: "/assets/images/Unit_4/lesson1/92.png",
+    chapter: "الرابعة",
+    lesson: "الأول",
+  },
+  {
+    id: 93,
+    question: "المثال الأول: اذكر عدد الموزات الموجودة في الصورة",
+    answer: "سبعة",
+    src: "/assets/images/Unit_4/lesson1/93.png",
+    chapter: "الرابعة",
+    lesson: "الأول",
+  },
+  {
+    id: 94,
+    question: "المثال الثاني: اذكر عدد الإجاص الموجود في الصورة",
+    answer: "تسعة",
+    src: "/assets/images/Unit_4/lesson1/94.png",
+    chapter: "الرابعة",
+    lesson: "الأول",
+  },
+  {
+    id: 95,
+    question: "المثال الثالث: اذكر عدد البرتقالات الموجودة في الصورة",
+    answer: "عشرة",
+    src: "/assets/images/Unit_4/lesson1/95.png",
+    chapter: "الرابعة",
+    lesson: "الأول",
+  },
+  {
+    id: 96,
+    question: "تعلم، 5 و5 = 10",
+    answer: " ",
+    src: "/assets/images/Unit_4/lesson2/96.png",
+    chapter: "الرابعة",
+    lesson: "الثاني",
+  },
+  {
+    id: 97,
+    question: "مكونات العدد عشرة",
+    answer: " ",
+    src: "/assets/images/Unit_4/lesson2/97.png",
+    chapter: "الرابعة",
+    lesson: "الثاني",
+  },
+  {
+    id: 98,
+    question: "المثال الأول: لاحظ الصورة واذكر المكون الصحيح للعدد عشرة",
+    answer: "واحد وتسعة",
+    src: "/assets/images/Unit_4/lesson2/98.png",
+    chapter: "الرابعة",
+    lesson: "الثاني",
+  },
+  {
+    id: 99,
+    question: "المثال الثاني: لاحظ الصورة واذكر المكون الصحيح للعدد عشرة",
+    answer: "ثلاثة وسبعة",
+    src: "/assets/images/Unit_4/lesson2/99.png",
+    chapter: "الرابعة",
+    lesson: "الثاني",
+  },
+  {
+    id: 100,
+    question: "المثال الثالث: لاحظ الصورة واذكر المكون الصحيح للعدد عشرة",
+    answer: "اثنان وثمانية",
+    src: "/assets/images/Unit_4/lesson2/100.png",
+    chapter: "الرابعة",
+    lesson: "الثاني",
+  },
+  {
+    id: 101,
+    question: "المثال الرابع: لاحظ الصورة واذكر المكون الصحيح للعدد عشرة",
+    answer: "ستة وأربعة",
+    src: "/assets/images/Unit_4/lesson2/101.png",
+    chapter: "الرابعة",
+    lesson: "الثاني",
+  },
+  {
+    id: 102,
+    question: "تعلم، درج الأعداد ",
+    answer: " ",
+    src: "/assets/images/Unit_4/lesson3/102.png",
+    chapter: "الرابعة",
+    lesson: "الثالث",
+  },
+  {
+    id: 103,
+    question: "العد التصاعدي",
+    answer: " ",
+    src: "/assets/images/Unit_4/lesson3/103.png",
+    chapter: "الرابعة",
+    lesson: "الثالث",
+  },
+  {
+    id: 104,
+    question: "العد التنازلي",
+    answer: " ",
+    src: "/assets/images/Unit_4/lesson3/104.png",
+    chapter: "الرابعة",
+    lesson: "الثالث",
+  },
+  {
+    id: 105,
+    question: "عد الهدايا الموجودة في الصورة تصاعدياً",
+    answer:
+      "واحد – اثنان – ثلاثة – أربعة – خمسة – ستة – سبعة – ثمانية – تسعة – عشرة",
+    src: "/assets/images/Unit_4/lesson3/105.png",
+    chapter: "الرابعة",
+    lesson: "الثالث",
+  },
+  {
+    id: 106,
+    question: "عد السيارات الموجودة في الصورة تنازلياً",
+    answer:
+      "عشرة – تسعة – ثمانية – سبعة – ستة – خمسة – أربعة – ثلاثة – اثنان - واحد",
+    src: "/assets/images/Unit_4/lesson3/106.png",
+    chapter: "الرابعة",
+    lesson: "الثالث",
+  },
+  {
+    id: 107,
+    question: "تعلم، 10 و1 =11",
+    answer: " ",
+    src: "/assets/images/Unit_4/lesson4/107.png",
+    chapter: "الرابعة",
+    lesson: "الرابع",
+  },
+  {
+    id: 108,
+    question: "هيا بنا نتعرف على شكل العدد أحد عشر",
+    answer: " ",
+    src: "/assets/images/Unit_4/lesson4/108.png",
+    chapter: "الرابعة",
+    lesson: "الرابع",
+  },
+  {
+    id: 109,
+    question: "تعلم، 10 و2 = 12",
+    answer: " ",
+    src: "/assets/images/Unit_4/lesson4/109.png",
+    chapter: "الرابعة",
+    lesson: "الرابع",
+  },
+  {
+    id: 110,
+    question: "هيا بنا نتعرف على شكل العدد اثنى عشر",
+    answer: " ",
+    src: "/assets/images/Unit_4/lesson4/110.png",
+    chapter: "الرابعة",
+    lesson: "الرابع",
+  },
+  {
+    id: 111,
+    question: "المثال الأول: كم عدد السمايلات الموجودة في الصورة؟",
+    answer: "أحد عشر",
+    src: "/assets/images/Unit_4/lesson4/111.png",
+    chapter: "الرابعة",
+    lesson: "الرابع",
+  },
+  {
+    id: 112,
+    question: "المثال الثاني: كم عدد السمايلات الموجودة في الصورة؟",
+    answer: "اثنى عشر",
+    src: "/assets/images/Unit_4/lesson4/112.png",
+    chapter: "الرابعة",
+    lesson: "الرابع",
+  },
+  {
+    id: 113,
+    question: "المثال الثالث: كم عدد السمايلات الموجودة في الصورة؟",
+    answer: "عشرة",
+    src: "/assets/images/Unit_4/lesson4/113.png",
+    chapter: "الرابعة",
+    lesson: "الرابع",
+  },
+  {
+    id: 114,
+    question: "كم عدد الشجرات الموجودة في الصورة؟",
+    answer: "أحد عشر",
+    src: "/assets/images/Unit_4/lesson4/114.png",
+    chapter: "الرابعة",
+    lesson: "الرابع",
+  },
+  {
+    id: 115,
+    question: "كم عدد الهدايا الموجودة في الصورة؟",
+    answer: "عشرة",
+    src: "/assets/images/Unit_4/lesson4/115.png",
+    chapter: "الرابعة",
+    lesson: "الرابع",
+  },
+  {
+    id: 116,
+    question: "كم عدد الطابات الموجودة في الصورة؟",
+    answer: "اثنى عشر",
+    src: "/assets/images/Unit_4/lesson4/116.png",
+    chapter: "الرابعة",
+    lesson: "الرابع",
+  },
+  {
+    id: 117,
+    question: "تعلم، 9 و2 = 11 ",
+    answer: " ",
+    src: "/assets/images/Unit_4/lesson5/117.png",
+    chapter: "الرابعة",
+    lesson: "الخامس",
+  },
+  {
+    id: 118,
+    question: "مكونات العدد أحد عشر ",
+    answer: " ",
+    src: "/assets/images/Unit_4/lesson5/118.png",
+    chapter: "الرابعة",
+    lesson: "الخامس",
+  },
+  {
+    id: 119,
+    question: "تعلم، 9 و3 = 12",
+    answer: " ",
+    src: "/assets/images/Unit_4/lesson5/119.png",
+    chapter: "الرابعة",
+    lesson: "الخامس",
+  },
+  {
+    id: 120,
+    question: "مكونات العدد اثنى عشر ",
+    answer: " ",
+    src: "/assets/images/Unit_4/lesson5/120.png",
+    chapter: "الرابعة",
+    lesson: "الخامس",
+  },
+  {
+    id: 121,
+    question: "المثال الأول: لاحظ الصورة واذكر المكون الصحيح للعدد أحد عشر",
+    answer: "واحد وعشرة",
+    src: "/assets/images/Unit_4/lesson5/121.png",
+    chapter: "الرابعة",
+    lesson: "الخامس",
+  },
+  {
+    id: 122,
+    question: "المثال الثاني: لاحظ الصورة واذكر المكون الصحيح للعدد أحد عشر",
+    answer: "أحد عشر وصفر",
+    src: "/assets/images/Unit_4/lesson5/122.png",
+    chapter: "الرابعة",
+    lesson: "الخامس",
+  },
+  {
+    id: 123,
+    question: "المثال الأول: لاحظ الصورة واذكر المكون الصحيح للعدد إثنى عشر",
+    answer: "ستة وستة",
+    src: "/assets/images/Unit_4/lesson5/123.png",
+    chapter: "الرابعة",
+    lesson: "الخامس",
+  },
+  {
+    id: 124,
+    question: "المثال الثاني: لاحظ الصورة واذكر المكون الصحيح للعدد إثنى عشر",
+    answer: "أحد عشر وواحد",
+    src: "/assets/images/Unit_4/lesson5/124.png",
+    chapter: "الرابعة",
+    lesson: "الخامس",
+  },
+  {
+    id: 125,
+    question:
+      " تنافس ستة لاعبين في المجموعة الأولى مع خمسة لاعبين في المجموعة الثانية بلعبة شد الحبل ما عددهم جميعاً؟",
+    answer: "أحد عشر",
+    src: "/assets/images/Unit_4/lesson5/125.png",
+    chapter: "الرابعة",
+    lesson: "الخامس",
+  },
+];
+
+export const chapter5 = [
+  {
+    id: 0,
+    question: "لا يوجد مطابقة للسؤال حاول مجدداً",
+    answer: " ",
+    src: "/assets/images/not.gif",
+    chapter: "",
+    lesson: "",
+  },
+
   {
     id: 126,
     question: " تعلم: اثنان زائد أربعة يساوي ستة ",
@@ -1227,7 +1557,7 @@ export const chapter5 = [
 ];
 
 export const chapter6 = [
-    {
+  {
     id: 0,
     question: "لا يوجد مطابقة للسؤال حاول مجدداً",
     answer: " ",
@@ -1626,7 +1956,7 @@ export const chapter6 = [
 ];
 
 export const chapter7 = [
-    {
+  {
     id: 0,
     question: "لا يوجد مطابقة للسؤال حاول مجدداً",
     answer: " ",
