@@ -1,36 +1,60 @@
 "use client"
-import { Typography, Button } from '@mui/material'
-import React, { useEffect, useRef } from 'react' 
-import { synthesizeText } from './ttsClient'
+import { Typography } from '@mui/material'
+import React, { useEffect, useRef, useState } from 'react'
 
+/**
+ * Component: TextQuestion
+ * - Renders a text on screen.
+ * - Automatically sends text to the backend (Google TTS API via /api/tts).
+ * - Plays back the generated speech as audio.
+ */
 const TextQuestion = ({ text }) => {
-  console.log(text)
-  const isInitialMount = useRef(true); 
+  const isInitialMount = useRef(true); // Prevent TTS on first render
+  const [loading, setLoading] = useState(false); // Loading state while fetching TTS audio
 
-  const handlePlay = async (txt) => {
-    const audioContent = await synthesizeText(txt);
-    if (audioContent) {
-      const audio = new Audio("data:audio/mp3;base64," + audioContent);
-      audio.play();
+  /**
+   * Call backend API to synthesize speech from text.
+   * Plays audio if conversion succeeds.
+   */
+  async function playTTS(text) {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+
+      const data = await res.json();
+      setLoading(false);
+
+      if (data.audioContent) {
+        // Convert Base64 audio into playable mp3
+        const audio = new Audio("data:audio/mp3;base64," + data.audioContent);
+        audio.play();
+      } else {
+        console.error("TTS Error:", data.error);
+      }
+    } catch (error) {
+      console.error("TTS Request Failed:", error);
+      setLoading(false);
     }
   }
 
+  /**
+   * Effect: Trigger TTS when `text` changes (excluding first render).
+   */
   useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false; 
-      return; 
-    }
-    
-    handlePlay(text) 
-    
-  }, [text])
-  
+  if (text && text.trim() !== "") {
+    playTTS(text);
+  }
+}, [text]);
+
   return (
     <>
       <Typography sx={{ fontSize: { xs: 18, sm: 20, md: 22 }, p: 2 }}>
-        {text}
+        {!loading ? text : "جاري التحدث..."}
       </Typography>
-      {/* <Button onClick={() => handlePlay("مرحبا")}>تشغيل الصوت يدويًا</Button> */}
     </>
   )
 }
